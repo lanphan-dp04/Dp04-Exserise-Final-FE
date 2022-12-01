@@ -3,6 +3,10 @@ import Login from "./app/views/login/Login";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./app/views/homepage/Homepage";
 import { history } from "./app/helpers/history";
+import logo from "./logo.svg";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Container from "./app/index";
 
 function App() {
   return (
@@ -13,6 +17,7 @@ function App() {
           <Route path="/login" element={<Login />} />
         </Routes>
       </BrowserRouter>
+      <Container />
     </div>
   );
 }
