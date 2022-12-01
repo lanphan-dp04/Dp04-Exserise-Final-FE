@@ -2,16 +2,28 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import "./Register.scss";
 import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import "./Register.scss";
 
 const ERROR_EMAIL = {
   required: "Email Address is required",
   pattern: "Please include an '@' in the email address ",
 };
+const ERROR_FULLNAME = {
+  required: "Fullname is required",
+};
+const ERROR_PASSWORD = {
+  required: "Password is required",
+};
 
 export default function Register() {
   let { id } = useParams();
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const {
     register,
     handleSubmit,
@@ -34,22 +46,25 @@ export default function Register() {
 
   return (
     <div className="container-register">
-      <div className="main-register">
+      {/* <Button variant="primary" onClick={handleShow}>
+        Launch demo modal
+      </Button> */}
+      <div className="main-register" show={show} onHide={handleClose}>
         <form className="form-group container" onSubmit={handleSubmit(onSubmit)}>
           <h2 className="text-center text-create-user">Create an User</h2>
           <div className="form-name ">
-            {/* <label className="form-lable" htmlFor="inputFullname">
+            <label className="form-lable" htmlFor="inputFullname">
               Full Name
-            </label> */}
+            </label>
             <input
-              required
-              className="form-control"
+              className="form-control input-name"
               type="text"
               name="fullname"
               id="fullname"
-              placeholder="Fullname..."
+              placeholder="Enter full name..."
               {...register("fullname", {
-                required: true,
+                required: ERROR_FULLNAME?.required, 
+                message: "Fullname is required",
                 minLength: {
                   value: 4,
                   message: "Min length is 8",
@@ -59,13 +74,12 @@ export default function Register() {
             <p className="color-err">{errors.fullname?.message}</p>
           </div>
           <div className="form-name">
-            {/* <label className="form-lable" htmlFor="inputEmail">
+            <label className="form-lable" htmlFor="inputEmail">
               Email
-            </label> */}
+            </label>
             <input
-              required
-              className="form-control"
-              placeholder="username@gmail.com"
+              className="form-control input-name"
+              placeholder="Enter email..."
               id="email"
               ref={() => register({ name: "email" })}
               {...register("email", {
@@ -81,17 +95,17 @@ export default function Register() {
           <div className="form-name">
             {!id && (
               <>
-                {/* <label className="form-lable" htmlFor="inputPassword4">
+                <label className="form-lable" htmlFor="inputPassword4">
                   Password
-                </label> */}
+                </label>
                 <input
                   type="password"
                   name="password"
-                  className={`form-control`}
+                  className="form-control input-name"
                   id="inputPassword"
                   placeholder="Enter Password..."
                   {...register("password", {
-                    required: true,
+                    required: ERROR_PASSWORD?.required,
                     minLength: {
                       value: 8,
                       message: "Min length is 8",
@@ -102,25 +116,22 @@ export default function Register() {
               </>
             )}
           </div>
-          {/* <div className="form-name">
-            <select
-              className=" form-control custom-select" id="inputGroupSelect04"
-              {...register("gender")}
-            >
-              <option value="0">User</option>
-              <option value="1">master</option>
-            </select>
-          </div> */}
-          <Form.Select aria-label="Default select example"
-            {...register("gender")}>
-            <option value="user">User</option>
-            <option value="master">master</option>
-          </Form.Select>
+          <div className="form-name">
+            <label className="form-lable" htmlFor="inputPassword4">Gender</label>
+            <Form.Select aria-label="Default select example" id="role" className="input-name"
+              {...register("role")}>
+              <option value="user">User</option>
+              <option value="master">Master</option>
+            </Form.Select></div>
+          <div className="form-name">
+            <div></div>
+            <div></div>
+          </div>
           <div className="content-btn">
-            <button className="btn btn-primary" type="submit">
+            <button className="btn btn-success" type="submit">
               Add
             </button>
-            <button className="btn btn-primary">
+            <button className="btn btn-secondary" onClick={handleClose}>
               Close
             </button>
           </div>

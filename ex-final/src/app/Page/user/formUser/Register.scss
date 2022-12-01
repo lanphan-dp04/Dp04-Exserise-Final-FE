@@ -1,19 +1,16 @@
-
 .container-register {
     width: 100%;
     height: 100vh;
+
     // background-image: linear-gradient(170deg, #b86bd6 , #53e3a6);
-    background-color:  rgb(69, 103, 188);
-    
-    .main-register{
-        padding: 40px 20%;
+    .main-register {
+        padding: 40px 25%;
     }
-    
-    .form-group{
+
+    .form-group {
         box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.3);
         background-color: whitesmoke;
-        padding: 50px 20%;
-        border: 2px #d3a9a9 solid;
+        padding: 50px 7%;
         border-radius: 5px;
         display: flex;
         flex-wrap: wrap;
@@ -28,12 +25,12 @@
 }
 
 .form-lable {
-    font-weight: 400;
+    font-weight: 500;
     margin-bottom: 5px;
-    font-size: 18px;
+    font-size: 16px;
 }
 
-.color-err{ 
+.color-err {
     color: red;
 }
 
@@ -45,15 +42,41 @@
 }
 
 .btn {
-    width: 20%;
+    width: 25%;
     margin-top: 50px;
     border: none;
     border-radius: 10px;
     margin-left: 10px;
 }
+
 .text-create-user {
     width: 100%;
-    color: #53e3a6;
     font-size: 40px;
     margin-bottom: 60px;
+    font-weight: 700;
+    color: orangered;
+}
+
+.input-name {
+    border: none;
+    outline: none !important;
+    border-radius: 0;
+    box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.4);
+    font-size: 14px;
+}
+
+.input-name:focus {
+    outline: 0 none !important;
+}
+
+@media only screen and (max-width: 1024px) {
+    .container-register .main-register {
+        padding: 40px 20%;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .container-register .main-register {
+        padding: 40px 10%;
+    }
 }
