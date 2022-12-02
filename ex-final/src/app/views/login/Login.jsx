@@ -1,18 +1,15 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate, link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../redux/action/apiRequest";
-import "./login.css";
-import PropTypes from "prop-types";
-import { redirect } from "react-router-dom";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import "./login.css";
 
 export default function Login({ setToken }) {
-  const [username, setUserName] = useState("");
+  const [email, setEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -21,7 +18,7 @@ export default function Login({ setToken }) {
     e.preventDefault();
 
     const newUser = {
-      username: username,
+      email: email,
       password: userPassword,
     };
 
@@ -38,15 +35,16 @@ export default function Login({ setToken }) {
           />
           <h1 className="header-login-title">Login to your account</h1>
         </div>
-        <form className="form-login" onSubmit={handleLogin}>
+        <div className="js-err-login"></div>
+        <form className="form-login" onSubmit={handleLogin} >
           <div className="input-group">
-            <label htmlFor="username">Username</label>
+            <label htmlFor="email">Email</label>
             <input
               type="text"
-              id="username"
-              name="username"
-              placeholder="Type your username"
-              onChange={(e) => setUserName(e.target.value)}
+              id="email"
+              name="email"
+              placeholder="Type your email"
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
@@ -61,7 +59,7 @@ export default function Login({ setToken }) {
               required
             />
           </div>
-          <button className="button-login">Login</button>
+          <button type="submit" className="button-login">Login</button>
         </form>
 
         <h3 className="signup-header">Log in with</h3>

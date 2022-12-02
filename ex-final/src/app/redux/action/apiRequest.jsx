@@ -1,23 +1,44 @@
 import axios from "axios";
 import { loginFailed, loginStart, loginSuccess } from "../reducers/authSlice";
 
+const handleErrorLogin = () => {
+  const notiError = document.querySelector('.desc-error-login');
+  if(notiError) {
+    notiError.remove();
+  }
+  const pErrorLogin = document.createElement('p');
+  pErrorLogin.classList.add('desc-error-login');
+  pErrorLogin.textContent = 'You entered the wrong email or password !!!';
+
+  document.querySelector('.js-err-login').appendChild(pErrorLogin);
+}
+
 export const loginUser = async (user, dispatch, navigate) => {
   dispatch(loginStart());
   try {
     const res = await axios.post(
-      "https://6361ddfc7521369cd05fab83.mockapi.io/api/user",
+      "http://localhost:5000/login",
       user
     );
-    console.log("test", res.data);
-
-    const token = res.data.token;
-    localStorage.setItem("token", token);
-
-    dispatch(loginSuccess(res.data));
-
-    navigate("/");
+    if(res) {
+      const token = res.data;
+      const user =  await axios.get(
+        "http://localhost:5000/user", { headers: {"authorization" : `Bearer ${token}`} });
+      localStorage.setItem("token", token);
+      dispatch(loginSuccess(user.data));
+      switch(user.data.role) {
+        case 0:
+          navigate("/admin");
+          break;
+        default:
+          navigate("/");
+      }
+    }
   } catch (error) {
     dispatch(loginFailed());
-    console.log("error", error);
+    if((error.response.status) === 401) {
+      // 
+      handleErrorLogin()
+    }
   }
 };
