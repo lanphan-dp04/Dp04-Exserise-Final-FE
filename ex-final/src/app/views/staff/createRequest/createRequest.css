@@ -84,3 +84,27 @@ label {
     bottom: 5px;
     right: 5px;
 }
+
+@media screen and (max-width: 992px) {
+    .createquest-form {
+        gap: 20px;
+    }
+
+    .left-form{
+        margin: 0;
+    }
+    .right-form{
+        margin: 0;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .createquest-form {
+        display: block;
+    }
+
+    .right-form {
+        margin-top: 10px;
+        padding: 20px 20px 50px 20px;
+    }
+}

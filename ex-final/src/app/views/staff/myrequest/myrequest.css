@@ -35,3 +35,9 @@
 }
 
 tr:nth-child(even) {background-color: rgb(255 180 105);}
+
+@media screen and (max-width: 768px) {
+    .header-staff {
+        display: block;
+    }
+}
