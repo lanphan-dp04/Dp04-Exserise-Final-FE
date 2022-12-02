@@ -1,0 +1,42 @@
+
+.header-staff {
+    margin: 20px;
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.header-staff h2 {
+    color: rgb(119, 110, 99);
+    padding-left: 60px;
+    margin: 20px 0;
+}
+
+.header-staff-nav a {
+    display: inline-block;
+    margin-right: 15px;
+    padding-right: 15px;
+    text-decoration: none;
+    color: rgb(92, 85, 85);
+}
+
+.header-staff-nav a:hover {
+    color: rgb(59, 19, 218);
+}
+
+.table-myrequest {
+    text-align: center;
+    vertical-align: middle;
+    margin: 40px 20px;
+}
+
+.table-title {
+    background-color:orange;
+}
+
+tr:nth-child(even) {background-color: rgb(240, 191, 77);}
+
+@media screen and (max-width: 768px) {
+    .header-staff {
+        display: block;
+    }
+}

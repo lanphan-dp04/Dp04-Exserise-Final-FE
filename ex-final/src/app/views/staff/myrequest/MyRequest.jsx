@@ -1,27 +1,18 @@
-import React from "react";
-import { redirect } from "react-router-dom";
-import hasJWT from "../../utils/hasJWT";
-import axios from "axios";
-import { useState, useEffect } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-
 import Table from "react-bootstrap/Table";
-import Search from "../../components/Search";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./myrequest.css";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
-import "../staff/myrequest/myrequest.css";
-import Form from "react-bootstrap/Form";
-import "../staff/createRequest/createRequest.css";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import Form from "react-bootstrap/Form";
 
-export default function Homepage() {
-  if (hasJWT() === false) {
-    redirect("/login");
-  }
+function MyRequest() {
+  const [listDayOff, setListDayOff] = useState([]);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [listDayOff, setListDayOff] = useState([]);
 
   useEffect(() => {
     const api = "https://636dab7a91576e19e32cef5d.mockapi.io/joinUs";
@@ -40,18 +31,12 @@ export default function Homepage() {
     <div className="container">
       <div className="header-staff">
         <div className="header-staff-nav">
-          <h2>Day Off Request</h2>
+          <h2>My Request</h2>
           <a href="/">Home</a>
           <a href="#" type="button" onClick={handleShow}>
             Create Request
           </a>
           <a href="/myrequest">My Request</a>
-        </div>
-        {/* <div>
-          <CreateRequest />
-        </div> */}
-        <div className="search">
-          <Search />
         </div>
       </div>
 
@@ -121,8 +106,8 @@ export default function Homepage() {
           </Button>
         </Modal.Footer>
       </Modal>
-
-      <div>{/* <Pagin /> */}</div>
     </div>
   );
 }
+
+export default MyRequest;
