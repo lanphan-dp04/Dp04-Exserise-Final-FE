@@ -36,7 +36,7 @@ export default function Login({ setToken }) {
           <h1 className="header-login-title">Login to your account</h1>
         </div>
         <div className="js-err-login"></div>
-        <form className="form-login" onSubmit={handleLogin} >
+        <form className="form-login" onSubmit={handleLogin}>
           <div className="input-group">
             <label htmlFor="email">Email</label>
             <input
@@ -59,7 +59,9 @@ export default function Login({ setToken }) {
               required
             />
           </div>
-          <button type="submit" className="button-login">Login</button>
+          <button type="submit" className="button-login">
+            Login
+          </button>
         </form>
 
         <h3 className="signup-header">Log in with</h3>
