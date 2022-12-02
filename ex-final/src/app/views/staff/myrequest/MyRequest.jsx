@@ -1,19 +1,10 @@
-import React from "react";
-import { redirect } from "react-router-dom";
-import hasJWT from "../../utils/hasJWT";
-
 import Table from "react-bootstrap/Table";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../staff/myrequest/myrequest.css";
+import "./myrequest.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Search from "../../components/Search";
 
-export default function Homepage() {
-  if (hasJWT() === false) {
-    redirect("/login");
-  }
-
+function MyRequest() {
   const [listDayOff, setListDayOff] = useState([]);
 
   useEffect(() => {
@@ -33,13 +24,10 @@ export default function Homepage() {
     <div className="container">
       <div className="header-staff">
         <div className="header-staff-nav">
-          <h2>Day Off Request</h2>
+          <h2>My Request</h2>
           <a href="/">Home</a>
           <a href="/createrequest">Create Request</a>
           <a href="/myrequest">My Request</a>
-        </div>
-        <div className="search">
-          <Search />
         </div>
       </div>
 
@@ -71,8 +59,8 @@ export default function Homepage() {
           })}
         </tbody>
       </Table>
-
-      <div>{/* <Pagin /> */}</div>
     </div>
   );
 }
+
+export default MyRequest;

@@ -1,0 +1,11 @@
+/* search css */
+.form-control {
+    width: 70%;
+    display: inline-block;
+    margin-right: 5px;
+    vertical-align: bottom;
+}
+
+.form-inline {
+    margin-top: 65px;
+}
