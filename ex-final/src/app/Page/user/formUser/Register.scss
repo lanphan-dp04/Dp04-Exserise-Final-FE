@@ -9,7 +9,7 @@
 
     .form-group {
         box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.3);
-        background-color: whitesmoke;
+        background-color: white;
         padding: 50px 7%;
         border-radius: 5px;
         display: flex;
@@ -42,10 +42,9 @@
 }
 
 .btn {
-    width: 25%;
+    width: 12%;
     margin-top: 50px;
     border: none;
-    border-radius: 10px;
     margin-left: 10px;
 }
 
@@ -54,7 +53,7 @@
     font-size: 40px;
     margin-bottom: 60px;
     font-weight: 700;
-    color: orangered;
+    color: rgb(0, 0, 0);
 }
 
 .input-name {
@@ -63,10 +62,13 @@
     border-radius: 0;
     box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.4);
     font-size: 14px;
+    outline: 0 none !important;
+    background: whitesmoke;
 }
 
 .input-name:focus {
     outline: 0 none !important;
+    background: #f7f7f7;
 }
 
 @media only screen and (max-width: 1024px) {

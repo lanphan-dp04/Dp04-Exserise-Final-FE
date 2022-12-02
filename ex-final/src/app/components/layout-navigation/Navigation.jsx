@@ -7,9 +7,6 @@ export default function Navigation() {
     <div className="header">
       <ul>
         <li>
-          <NavLink to="/">Home</NavLink>
-        </li>
-        <li>
           <NavLink to="/user/list">Product List</NavLink>
         </li>
         <li>
