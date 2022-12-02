@@ -1,19 +1,26 @@
 import React from "react";
 import { redirect } from "react-router-dom";
 import hasJWT from "../../utils/hasJWT";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import Table from "react-bootstrap/Table";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "../staff/myrequest/myrequest.css";
-import { useState, useEffect } from "react";
-import axios from "axios";
 import Search from "../../components/Search";
+
+import "../staff/myrequest/myrequest.css";
+import Form from "react-bootstrap/Form";
+import "../staff/createRequest/createRequest.css";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
 export default function Homepage() {
   if (hasJWT() === false) {
     redirect("/login");
   }
-
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const [listDayOff, setListDayOff] = useState([]);
 
   useEffect(() => {
@@ -35,9 +42,14 @@ export default function Homepage() {
         <div className="header-staff-nav">
           <h2>Day Off Request</h2>
           <a href="/">Home</a>
-          <a href="/createrequest">Create Request</a>
+          <a href="#" type="button" onClick={handleShow}>
+            Create Request
+          </a>
           <a href="/myrequest">My Request</a>
         </div>
+        {/* <div>
+          <CreateRequest />
+        </div> */}
         <div className="search">
           <Search />
         </div>
@@ -71,6 +83,44 @@ export default function Homepage() {
           })}
         </tbody>
       </Table>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Day Off Request</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="createquest-form">
+            <div className="left-form">
+              <label htmlFor="">Type Request</label>
+              <Form.Select className="col-5">
+                <option>Work From Home</option>
+                <option value="1">Day Off</option>
+                <option value="2">Working OutSide</option>
+              </Form.Select>
+
+              <label htmlFor="">Start day</label>
+              <input type="date" />
+
+              <label htmlFor="">End day</label>
+              <input type="date" />
+
+              <label htmlFor="">Quantily</label>
+              <input type="number" step="0.5" />
+
+              <label htmlFor="">Reason</label>
+              <textarea type="text" />
+            </div>
+          </div>{" "}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Send Request
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
       <div>{/* <Pagin /> */}</div>
     </div>

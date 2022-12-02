@@ -20,8 +20,7 @@
 }
 
 .header-staff-nav a:hover {
-    font-size: 20px;
-    color: rgb(130, 89, 15);
+    color: rgb(59, 19, 218);
 }
 
 .table-myrequest {
@@ -34,7 +33,7 @@
     background-color:orange;
 }
 
-tr:nth-child(even) {background-color: rgb(255 180 105);}
+tr:nth-child(even) {background-color: rgb(240, 191, 77);}
 
 @media screen and (max-width: 768px) {
     .header-staff {
