@@ -3,12 +3,12 @@ import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Form from 'react-bootstrap/Form';
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
+import { Link, useNavigate } from "react-router-dom";
 import "./Register.scss";
+import Button from "react-bootstrap/esm/Button";
 
 const ERROR_EMAIL = {
-  required: "Email Address is required",
+  required: "Email address is required",
   pattern: "Please include an '@' in the email address ",
 };
 const ERROR_FULLNAME = {
@@ -17,13 +17,13 @@ const ERROR_FULLNAME = {
 const ERROR_PASSWORD = {
   required: "Password is required",
 };
+const ERROR_PHONENUMBER = {
+  required: "Password is required",
+};
 
 export default function Register() {
   let { id } = useParams();
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  let history = useNavigate();
   const {
     register,
     handleSubmit,
@@ -34,10 +34,11 @@ export default function Register() {
   const onSubmit = (data, e) => {
     e.preventDefault();
     axios
-      .post("https://62d16e83d4eb6c69e7dd4ff6.mockapi.io/User", data)
+      .post("http://localhost:5000/user/create", data)
       .then((response) => {
         console.log(response.data);
         e.target.reset();
+        alert("Saved successfully.");
       })
       .catch((error) => {
         console.log(error.data);
@@ -46,36 +47,58 @@ export default function Register() {
 
   return (
     <div className="container-register">
-      {/* <Button variant="primary" onClick={handleShow}>
-        Launch demo modal
-      </Button> */}
-      <div className="main-register" show={show} onHide={handleClose}>
+      <div className="main-register">
         <form className="form-group container" onSubmit={handleSubmit(onSubmit)}>
           <h2 className="text-center text-create-user">Create an User</h2>
           <div className="form-name ">
             <label className="form-lable" htmlFor="inputFullname">
-              Full Name
+              Full Name <span className="text-color-red">*</span>
             </label>
             <input
               className="form-control input-name"
               type="text"
-              name="fullname"
-              id="fullname"
-              placeholder="Enter full name..."
-              {...register("fullname", {
-                required: ERROR_FULLNAME?.required, 
+              name="userName"
+              id="userName"
+              placeholder="Enter user name..."
+              {...register("userName", {
+                required: ERROR_FULLNAME?.required,
                 message: "Fullname is required",
                 minLength: {
-                  value: 4,
+                  value: 8,
                   message: "Min length is 8",
                 },
               })}
             />
-            <p className="color-err">{errors.fullname?.message}</p>
+            <p className="color-err">{errors.userName?.message}</p>
           </div>
           <div className="form-name">
+            {!id && (
+              <>
+                <label className="form-lable" htmlFor="inputPassword4">
+                  Password <span className="text-color-red">*</span>
+                </label>
+                <input
+                  type="password"
+                  name="password"
+                  className="form-control input-name"
+                  id="inputPassword"
+                  placeholder="Enter password..."
+                  {...register("password", {
+                    required: ERROR_PASSWORD?.required,
+                    minLength: {
+                      value: 6,
+                      message: "Min length is 6",
+                    },
+                  })}
+                ></input>
+                <p className="color-err">{errors.password?.message}</p>
+              </>
+            )}
+          </div>
+          
+          <div className="form-name">
             <label className="form-lable" htmlFor="inputEmail">
-              Email
+              Email <span className="text-color-red">*</span>
             </label>
             <input
               className="form-control input-name"
@@ -92,48 +115,46 @@ export default function Register() {
               {errors.email?.type === "pattern" ? ERROR_EMAIL?.pattern : ""}
             </p>
           </div>
-          <div className="form-name">
-            {!id && (
-              <>
-                <label className="form-lable" htmlFor="inputPassword4">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  name="password"
-                  className="form-control input-name"
-                  id="inputPassword"
-                  placeholder="Enter Password..."
-                  {...register("password", {
-                    required: ERROR_PASSWORD?.required,
-                    minLength: {
-                      value: 8,
-                      message: "Min length is 8",
-                    },
-                  })}
-                ></input>
-                <p className="color-err">{errors.password?.message}</p>
-              </>
-            )}
+          <div className="form-name ">
+            <label className="form-lable" htmlFor="inputFullname">
+              Number Phone <span className="text-color-red">*</span>
+            </label>
+            <input
+              className="form-control input-name"
+              type="text"
+              name="phoneNumber"
+              id="phoneNumber"
+              placeholder="Enter number phone..."
+              {...register("phoneNumber", {
+                required: ERROR_PHONENUMBER?.required,
+                message: "Number is required",
+                minLength: {
+                  value: 10,
+                  message: "Min length is 10",
+                },
+                maxLength: {
+                  value: 10,
+                  message: "Max length is 10",
+                },
+              })}
+            />
+            <p className="color-err">{errors.phoneNumber?.message}</p>
           </div>
           <div className="form-name">
-            <label className="form-lable" htmlFor="inputPassword4">Gender</label>
-            <Form.Select aria-label="Default select example" id="role" className="input-name"
+            <label className="form-lable" htmlFor="inputPassword4">Role</label>
+            <Form.Select aria-label="Default select example" type="Number" name="role" id="role" className="input-name"
               {...register("role")}>
-              <option value="user">User</option>
-              <option value="master">Master</option>
-            </Form.Select></div>
-          <div className="form-name">
-            <div></div>
-            <div></div>
+              <option value="0">User</option>
+              <option value="1">Master</option>
+            </Form.Select>
           </div>
           <div className="content-btn">
             <button className="btn btn-success" type="submit">
               Add
             </button>
-            <button className="btn btn-secondary" onClick={handleClose}>
-              Close
-            </button>
+            <Link className="link-btn" to={`/list`}>
+              <Button variant="primary">Back</Button>{' '}
+            </Link>
           </div>
         </form>
       </div>
