@@ -40,12 +40,20 @@ function CreateRequest() {
           </div>{" "}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <button
+            className="close-button"
+            variant="secondary"
+            onClick={handleClose}
+          >
             Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
+          </button>
+          <button
+            className="sendrequest-button"
+            variant="primary"
+            onClick={handleClose}
+          >
             Send Request
-          </Button>
+          </button>
         </Modal.Footer>
       </Modal>
     </div>
