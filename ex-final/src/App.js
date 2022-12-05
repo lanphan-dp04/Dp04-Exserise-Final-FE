@@ -18,29 +18,34 @@ function App() {
 
   return (
     <div className="App">
-      <Layout>
-        <Sider
-          breakpoint="lg"
-          collapsedWidth="0"
-          onBreakpoint={(broken) => {
-            console.log(broken);
-          }}
-          onCollapse={(collapsed, type) => {
-            console.log(collapsed, type);
-          }}
-        >
-          <div className="logo" />
-          <MenuSider />
-        </Sider>
+      <BrowserRouter>
+        {/* login */}
+        <Routes>
+          <Route path="/login" element={<Login />} />
+        </Routes>
+
+        {/* layout page */}
         <Layout>
-          <Header />
-          <Content>
-            <div>
-              <BrowserRouter>
+          <Sider
+            breakpoint="lg"
+            collapsedWidth="0"
+            onBreakpoint={(broken) => {
+              console.log(broken);
+            }}
+            onCollapse={(collapsed, type) => {
+              console.log(collapsed, type);
+            }}
+          >
+            <div className="logo" />
+            <MenuSider />
+          </Sider>
+          <Layout>
+            <Header />
+            <Content>
+              <div>
                 <Routes history={history}>
                   <Route path="/" element={<Home />} />
                   <Route path="/myrequest" element={<MyRequest />} />
-                  <Route path="/login" element={<Login />} />
                   <Route path="user" element={<User />}>
                     <Route index element={<Register />} />
                     <Route path="form" element={<Register />} />
@@ -48,19 +53,19 @@ function App() {
                   </Route>
                   <Route path="/" element={<Home />} />
                 </Routes>
-              </BrowserRouter>
-            </div>
-          </Content>
+              </div>
+            </Content>
 
-          <Footer
-            style={{
-              textAlign: "center",
-            }}
-          >
-            Ant Design ©2018 Created by Ant UED
-          </Footer>
+            <Footer
+              style={{
+                textAlign: "center",
+              }}
+            >
+              Ant Design ©2018 Created by Ant UED
+            </Footer>
+          </Layout>
         </Layout>
-      </Layout>
+      </BrowserRouter>
     </div>
   );
 }
