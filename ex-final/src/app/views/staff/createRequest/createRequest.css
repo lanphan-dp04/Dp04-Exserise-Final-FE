@@ -4,6 +4,11 @@
 
 }
 
+.btn {
+    width: auto !important;
+}
+
+
 label {
     display: block;
     font-weight: 500;

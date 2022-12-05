@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Table from "react-bootstrap/Table";
-import Search from "../../components/Search";
+import Search from "../../components/search/Search";
 
 import "../staff/myrequest/myrequest.css";
 import Form from "react-bootstrap/Form";
@@ -63,8 +63,8 @@ export default function Homepage() {
             <th className="col-2">Time day off</th>
             <th className="col-1">Duration</th>
             <th className="col-3">Reason</th>
-            <th className="col-2">Approver</th>
             <th className="col-2">Status</th>
+            <th className="col-2">Note</th>
           </tr>
         </thead>
         <tbody>
@@ -76,8 +76,8 @@ export default function Homepage() {
                 <td>{item.timeDayOff}</td>
                 <td>{item.Duration}</td>
                 <td>{item.approver}</td>
-                <td>{item.requestTime}</td>
                 <td>{item.status}</td>
+                <td>{item.note}</td>
               </tr>
             );
           })}

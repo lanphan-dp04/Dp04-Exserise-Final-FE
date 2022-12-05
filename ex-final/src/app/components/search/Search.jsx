@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import "../views/homepage/homepage.css";
+import "./search.css";
 
 export default function Search(props) {
   const [search, setSearch] = useState();
@@ -25,7 +25,10 @@ export default function Search(props) {
           value={search}
           onChange={handleOnChange}
         />
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+        <button
+          class="btn-search btn btn-outline-success my-2 my-sm-0"
+          type="submit"
+        >
           Search
         </button>
       </form>
