@@ -5,6 +5,16 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faSquareCheck,
+  faRectangleXmark,
+  faSquarePen,
+  faRotateLeft,
+  faCircleArrowLeft,
+  faSquareCaretLeft,
+} from "@fortawesome/free-solid-svg-icons";
+
 import Table from "react-bootstrap/Table";
 import Search from "../../components/search/Search";
 
@@ -41,11 +51,11 @@ export default function Homepage() {
       <div className="header-staff">
         <div className="header-staff-nav">
           <h2>Day Off Request</h2>
-          <a href="/">Home</a>
+          <a href="/">Requests</a>
           <a href="#" type="button" onClick={handleShow}>
             Create Request
           </a>
-          <a href="/myrequest">My Request</a>
+          <a href="/myrequest">Day Off</a>
         </div>
         {/* <div>
           <CreateRequest />
@@ -59,12 +69,12 @@ export default function Homepage() {
         <thead>
           <tr className="table-title">
             <th className="col-index">No </th>
-            <th className="col-2">Request Type </th>
+            <th className="col-2">Requester</th>
             <th className="col-2">Time day off</th>
-            <th className="col-1">Duration</th>
-            <th className="col-3">Reason</th>
+            <th className="col-1">Quantify</th>
             <th className="col-2">Status</th>
-            <th className="col-2">Note</th>
+            <th className="col-3">Reason</th>
+            <th className="col-2">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -72,12 +82,28 @@ export default function Homepage() {
             return (
               <tr>
                 <td>{item.id}</td>
-                <td>{item.requestTIme}</td>
+                <td>{item.name}</td>
                 <td>{item.timeDayOff}</td>
-                <td>{item.Duration}</td>
-                <td>{item.approver}</td>
+                <td>{item.Quantify}</td>
                 <td>{item.status}</td>
-                <td>{item.note}</td>
+                <td>{item.approver}</td>
+                <td>
+                  <a>
+                    <FontAwesomeIcon
+                      // className="icon-approve"
+                      icon={faSquareCheck}
+                    />
+                  </a>
+                  <a>
+                    <FontAwesomeIcon icon={faRectangleXmark} />
+                  </a>
+                  <a>
+                    <FontAwesomeIcon icon={faSquarePen} />
+                  </a>
+                  <a>
+                    <FontAwesomeIcon icon={faSquareCaretLeft} />
+                  </a>
+                </td>
               </tr>
             );
           })}

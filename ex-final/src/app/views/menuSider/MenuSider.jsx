@@ -7,6 +7,7 @@ import {
   SettingOutlined,
 } from "@ant-design/icons";
 import { Menu } from "antd";
+import Homepage from "../homepage/Homepage";
 function getItem(label, key, icon, children, type) {
   return {
     key,
@@ -19,7 +20,8 @@ function getItem(label, key, icon, children, type) {
 const items = [
   getItem("Account", "sub1", <MailOutlined />, [
     getItem("Dashboard", "1"),
-    getItem("Requests", "2"),
+    getItem("Requests", <Homepage />),
+    ,
     getItem("Days off", "3"),
     // getItem("Option 4", "4"),
   ]),

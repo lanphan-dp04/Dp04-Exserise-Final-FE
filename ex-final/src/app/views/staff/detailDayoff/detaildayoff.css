@@ -1,0 +1,24 @@
+.layout-detaildayoff {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: 40% 60%;
+}
+
+.layout-detaildayoff h4 {
+    margin-top: 20px;
+
+}
+
+.detail-dayoff table tr th {
+    margin-top: 30px;
+    padding: 20px 30px;
+}
+
+tr:nth-child(even) {
+    background-color: none;
+}
+/* histories */
+.histories {
+    border-left: solid 1px;
+    padding-left: 20px;
+}

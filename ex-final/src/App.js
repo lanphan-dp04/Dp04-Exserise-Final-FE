@@ -12,6 +12,7 @@ import ListUser from "./app/Page/user/listUser/ListUser";
 import { Layout, Menu } from "antd";
 import MenuSider from "./app/views/menuSider/MenuSider";
 import Header from "./app/views/header/Header";
+import DetailDayoff from "./app/views/staff/detailDayoff/DetailDayoff";
 
 function App() {
   const { Content, Footer, Sider } = Layout;
@@ -46,6 +47,8 @@ function App() {
                 <Routes history={history}>
                   <Route path="/" element={<Home />} />
                   <Route path="/myrequest" element={<MyRequest />} />
+                  <Route path="/detail-dayoff" element={<DetailDayoff />} />
+
                   <Route path="user" element={<User />}>
                     <Route index element={<Register />} />
                     <Route path="form" element={<Register />} />
