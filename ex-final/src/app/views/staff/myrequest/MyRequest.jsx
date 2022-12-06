@@ -4,15 +4,8 @@ import "./myrequest.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import Form from "react-bootstrap/Form";
-
 function MyRequest() {
   const [listDayOff, setListDayOff] = useState([]);
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   useEffect(() => {
     const api = "https://636dab7a91576e19e32cef5d.mockapi.io/joinUs";
@@ -32,11 +25,9 @@ function MyRequest() {
       <div className="header-staff">
         <div className="header-staff-nav">
           <h2>Day Off</h2>
-          <a href="/">Requests</a>
-          <a href="#" type="button" onClick={handleShow}>
-            Create Request
-          </a>
-          <a href="/myrequest">Day Off</a>
+          <a href="/request">Requests</a>
+          <a href="/create-request">Create Request</a>
+          <a href="/dayoff">Day Off</a>
         </div>
       </div>
 
@@ -76,44 +67,6 @@ function MyRequest() {
           })}
         </tbody>
       </Table>
-
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Day Off Request</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div className="createquest-form">
-            <div className="left-form">
-              <label htmlFor="">Type Request</label>
-              <Form.Select className="col-5">
-                <option>Work From Home</option>
-                <option value="1">Day Off</option>
-                <option value="2">Working OutSide</option>
-              </Form.Select>
-
-              <label htmlFor="">Start day</label>
-              <input type="date" />
-
-              <label htmlFor="">End day</label>
-              <input type="date" />
-
-              <label htmlFor="">Quantily</label>
-              <input type="number" step="0.5" />
-
-              <label htmlFor="">Reason</label>
-              <textarea type="text" />
-            </div>
-          </div>{" "}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Send Request
-          </Button>
-        </Modal.Footer>
-      </Modal>
     </div>
   );
 }
