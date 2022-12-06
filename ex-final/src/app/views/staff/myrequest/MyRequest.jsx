@@ -31,12 +31,12 @@ function MyRequest() {
     <div className="container">
       <div className="header-staff">
         <div className="header-staff-nav">
-          <h2>My Request</h2>
-          <a href="/">Home</a>
+          <h2>Day Off</h2>
+          <a href="/">Requests</a>
           <a href="#" type="button" onClick={handleShow}>
             Create Request
           </a>
-          <a href="/myrequest">My Request</a>
+          <a href="/myrequest">Day Off</a>
         </div>
       </div>
 
@@ -44,12 +44,12 @@ function MyRequest() {
         <thead>
           <tr className="table-title">
             <th className="col-index">No </th>
-            <th className="col-2">Request Type </th>
+            <th className="col-2">Requester </th>
             <th className="col-2">Time day off</th>
-            <th className="col-1">Duration</th>
+            <th className="col-1">Quantify</th>
             <th className="col-3">Reason</th>
-            <th className="col-2">Approver</th>
             <th className="col-2">Status</th>
+            <th className="col-2">Detail</th>
           </tr>
         </thead>
         <tbody>
@@ -57,12 +57,20 @@ function MyRequest() {
             return (
               <tr>
                 <td>{item.id}</td>
-                <td>{item.requestTIme}</td>
+                <td>{item.name}</td>
                 <td>{item.timeDayOff}</td>
-                <td>{item.Duration}</td>
-                <td>{item.approver}</td>
+                <td>{item.quantify}</td>
                 <td>{item.requestTime}</td>
                 <td>{item.status}</td>
+                <td>
+                  <a
+                    href="/detail-dayoff"
+                    className="button-viewdetail"
+                    type="button"
+                  >
+                    View
+                  </a>
+                </td>
               </tr>
             );
           })}

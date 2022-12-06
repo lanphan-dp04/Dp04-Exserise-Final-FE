@@ -2,6 +2,9 @@
     background: none;
 }
 
+a {
+    text-decoration: none;
+}
 /* logo css */
 .box-logo img{
     width: 100px;

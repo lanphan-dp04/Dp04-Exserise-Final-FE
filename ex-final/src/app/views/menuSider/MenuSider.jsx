@@ -7,6 +7,10 @@ import {
   SettingOutlined,
 } from "@ant-design/icons";
 import { Menu } from "antd";
+import Homepage from "../homepage/Homepage";
+import MyRequest from "../staff/myrequest/MyRequest";
+import { Link } from "react-router-dom";
+
 function getItem(label, key, icon, children, type) {
   return {
     key,
@@ -17,23 +21,88 @@ function getItem(label, key, icon, children, type) {
   };
 }
 const items = [
-  getItem("Account", "sub1", <MailOutlined />, [
-    getItem("Dashboard", "1"),
-    getItem("Requests", "2"),
-    getItem("Days off", "3"),
-    // getItem("Option 4", "4"),
-  ]),
-  getItem("Manager", "sub2", <AppstoreOutlined />, [
-    getItem("Members", "5"),
-    getItem("Groups", "6"),
-    getItem("Notification", "sub3", null, [
-      getItem("slack", "7"),
-      getItem("Brouwser", "8"),
-    ]),
-  ]),
-  getItem("Administation", "sub4", <SettingOutlined />, [
-    getItem("Workspaces", "9"),
-  ]),
+  // getItem("Account", "sub1", <MailOutlined />, [
+  //   getItem("Dashboard", "1"),
+  //   getItem("Requests", <Homepage />),
+  //   ,
+  //   getItem("Days off", "3"),
+  //   // getItem("Option 4", "4"),
+  // ]),
+  // getItem("Manager", "sub2", <AppstoreOutlined />, [
+  //   getItem("Members", "5"),
+  //   getItem("Groups", "6"),
+  //   getItem("Notification", "sub3", null, [
+  //     getItem("slack", "7"),
+  //     getItem("Brouwser", "8"),
+  //   ]),
+  // ]),
+  // getItem("Administation", "sub4", <SettingOutlined />, [
+  //   getItem("Workspaces", "9"),
+  // ]),
+
+  {
+    key: "account",
+    icon: "",
+    label: "Account",
+    children: [
+      {
+        key: "account1",
+        label: <Link to="/dashboard">Dashboard</Link>,
+      },
+      {
+        key: "account2",
+        label: <Link to="/request">Request</Link>,
+      },
+      {
+        key: "account3",
+        label: <Link to="/dayoff">Day Off</Link>,
+      },
+    ],
+  },
+  {
+    key: "manager",
+    icon: "",
+    label: "Manager",
+    children: [
+      {
+        key: "manager1",
+        label: <Link to="/members">Members</Link>,
+      },
+      {
+        key: "manager2",
+        label: <Link to="/group">Groups</Link>,
+      },
+      {
+        key: "manager3",
+        label: <Link to="/notifications">Notifications</Link>,
+        children: [
+          {
+            key: "manager3-1",
+            label: <Link to="/noti-slack">Slack</Link>,
+          },
+          {
+            key: "manager3-2",
+            label: <Link to="/noti-browser">Browser</Link>,
+          },
+        ],
+      },
+      {
+        key: "manager4",
+        label: <Link to="/sync">Sync</Link>,
+      },
+    ],
+  },
+  {
+    key: "admin",
+    icon: "",
+    label: "Administation",
+    children: [
+      {
+        key: "admin1",
+        label: <Link to="/administation">Administation</Link>,
+      },
+    ],
+  },
 ];
 const MenuSider = () => {
   const [theme, setTheme] = useState("dark");
