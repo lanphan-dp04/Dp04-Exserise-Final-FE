@@ -4,9 +4,7 @@ import Login from "./app/views/login/Login";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Admin from "./app/views/admin/Admin";
 
-
 function App() {
-
   return (
     <div className="App">
       <BrowserRouter>

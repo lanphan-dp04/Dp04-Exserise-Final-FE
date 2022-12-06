@@ -8,7 +8,7 @@ import {
 } from "@ant-design/icons";
 import { Menu } from "antd";
 import Homepage from "../homepage/Homepage";
-import MyRequest from "../staff/myrequest/MyRequest";
+import MyRequest from "../staff/dayoff/DayOff";
 import { Link } from "react-router-dom";
 
 function getItem(label, key, icon, children, type) {

@@ -1,63 +1,84 @@
 import React from "react";
-import Form from "react-bootstrap/Form";
-import "./createRequest.css";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import { useState, useEffect } from "react";
-
-function CreateRequest() {
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  //   const handleShow = () => setShow(true);
+// import { PlusOutlined } from "@ant-design/icons";
+import {
+  Form,
+  Input,
+  Button,
+  Radio,
+  Select,
+  DatePicker,
+  InputNumber,
+} from "antd";
+const { RangePicker } = DatePicker;
+const { TextArea } = Input;
+const CreateRequest = () => {
   return (
-    <div>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Day Off Request</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div className="createquest-form">
-            <div className="left-form">
-              <label htmlFor="">Type Request</label>
-              <Form.Select className="col-5">
-                <option>Work From Home</option>
-                <option value="1">Day Off</option>
-                <option value="2">Working OutSide</option>
-              </Form.Select>
+    <div className="container request">
+      <div className="header-staff">
+        <div className="header-staff-nav">
+          <h2>Day Off</h2>
+          <a href="/request">Requests</a>
+          <a href="/create-request">Create Request</a>
+          <a href="/dayoff">Day Off</a>
+        </div>
+      </div>{" "}
+      <Form
+        labelCol={{
+          span: 3,
+        }}
+        wrapperCol={{
+          span: 14,
+        }}
+        layout="horizontal"
+        className=""
+      >
+        <Form.Item label="Type Requests">
+          <Radio.Group>
+            <Radio value="dayoff"> Day Off </Radio>
+            <Radio value="wfh"> WFH </Radio>
+          </Radio.Group>
+        </Form.Item>
 
-              <label htmlFor="">Start day</label>
-              <input type="date" />
+        <Form.Item label="From">
+          <DatePicker />
+        </Form.Item>
+        <Form.Item label="To">
+          <DatePicker />
+        </Form.Item>
+        <Form.Item label="Partial Day">
+          <Select
+            defaultValue="Morning"
+            style={{ width: 150 }}
+            options={[
+              {
+                value: "Morning",
+                label: "Morning",
+              },
+              {
+                value: "Afternoon",
+                label: "Afternoon",
+              },
+              {
+                value: "All day",
+                label: "All day",
+              },
+            ]}
+          />
+        </Form.Item>
 
-              <label htmlFor="">End day</label>
-              <input type="date" />
+        <Form.Item label="Quantity">
+          <InputNumber min="0" step="0.5" defaultValue="0.5" />
+        </Form.Item>
+        <Form.Item label="Reason">
+          <TextArea rows={6} />
+        </Form.Item>
 
-              <label htmlFor="">Quantily</label>
-              <input type="number" />
-
-              <label htmlFor="">Reason</label>
-              <textarea type="text" />
-            </div>
-          </div>{" "}
-        </Modal.Body>
-        <Modal.Footer>
-          <button
-            className="close-button"
-            variant="secondary"
-            onClick={handleClose}
-          >
-            Close
-          </button>
-          <button
-            className="sendrequest-button"
-            variant="primary"
-            onClick={handleClose}
-          >
-            Send Request
-          </button>
-        </Modal.Footer>
-      </Modal>
+        <div className="button-box">
+          <Button className="button-cancel">CANCEL</Button>
+          <Button className="button-sendrequest">SUBMIT</Button>
+        </div>
+      </Form>
     </div>
   );
-}
-
-export default CreateRequest;
+};
+export default () => <CreateRequest />;
