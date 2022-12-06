@@ -44,6 +44,7 @@ export default function EditUser() {
         } catch (error) {
             console.log(error);
         }
+        history("/list");
     }
 
     return (
