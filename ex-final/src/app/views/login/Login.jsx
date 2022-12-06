@@ -71,13 +71,6 @@ export default function Login({ setToken }) {
             <li className="social-links">
               <a href="/">
                 <span>
-                  <FontAwesomeIcon icon={faEnvelope} />
-                </span>
-              </a>
-            </li>
-            <li className="social-links">
-              <a href="/">
-                <span>
                   <FontAwesomeIcon icon={faGoogle} />
                 </span>
               </a>
