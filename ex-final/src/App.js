@@ -5,9 +5,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./app/views/homepage/Homepage";
 import { history } from "./app/helpers/history";
 import MyRequest from "./app/views/staff/myrequest/MyRequest";
-import User from "./app/Page/user";
 import Register from "./app/Page/user/formUser/Register";
 import ListUser from "./app/Page/user/listUser/ListUser";
+import EditUser from "./app/Page/user/editUser/EditUser";
 
 import { Layout, Menu } from "antd";
 import MenuSider from "./app/views/menuSider/MenuSider";
@@ -24,7 +24,6 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
         </Routes>
-
         {/* layout page */}
         <Layout>
           <Sider
@@ -49,11 +48,9 @@ function App() {
                   <Route path="/dayoff" element={<MyRequest />} />
                   <Route path="/detail-dayoff" element={<DetailDayoff />} />
 
-                  <Route path="user" element={<User />}>
-                    <Route index element={<Register />} />
-                    <Route path="form" element={<Register />} />
-                    <Route path="list" element={<ListUser />} />
-                  </Route>
+                  <Route path="/list/form" element={<Register />} />
+                  <Route path="/list/edit/:id" element={<EditUser />} />
+                  <Route path="/list" element={<ListUser />} />
                   {/* <Route path="/" element={<Home />} /> */}
                 </Routes>
               </div>
