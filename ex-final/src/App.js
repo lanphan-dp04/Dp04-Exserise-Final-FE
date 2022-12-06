@@ -45,8 +45,8 @@ function App() {
             <Content>
               <div>
                 <Routes history={history}>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/myrequest" element={<MyRequest />} />
+                  <Route path="/request" element={<Home />} />
+                  <Route path="/dayoff" element={<MyRequest />} />
                   <Route path="/detail-dayoff" element={<DetailDayoff />} />
 
                   <Route path="user" element={<User />}>
@@ -54,7 +54,7 @@ function App() {
                     <Route path="form" element={<Register />} />
                     <Route path="list" element={<ListUser />} />
                   </Route>
-                  <Route path="/" element={<Home />} />
+                  {/* <Route path="/" element={<Home />} /> */}
                 </Routes>
               </div>
             </Content>
