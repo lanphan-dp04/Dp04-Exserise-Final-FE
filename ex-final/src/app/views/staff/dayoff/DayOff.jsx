@@ -1,10 +1,10 @@
 import Table from "react-bootstrap/Table";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./myrequest.css";
+import "./dayoff.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-function MyRequest() {
+function DayOff() {
   const [listDayOff, setListDayOff] = useState([]);
 
   useEffect(() => {
@@ -71,4 +71,4 @@ function MyRequest() {
   );
 }
 
-export default MyRequest;
+export default DayOff;

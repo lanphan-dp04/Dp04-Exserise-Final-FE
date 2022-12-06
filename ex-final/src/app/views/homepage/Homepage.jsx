@@ -16,10 +16,10 @@ import {
 import Table from "react-bootstrap/Table";
 import Search from "../../components/search/Search";
 
-import "../staff/myrequest/myrequest.css";
+import "../staff/dayoff/dayoff.css";
 import "../staff/createRequest/createRequest.css";
 
-export default function Homepage() {
+export default function Request() {
   if (hasJWT() === false) {
     redirect("/login");
   }

@@ -6,19 +6,19 @@ import EditUser from "../../Page/user/editUser/EditUser";
 import Register from "../../Page/user/formUser/Register";
 import ListUser from "../../Page/user/listUser/ListUser";
 import Header from "../header/Header";
-import Homepage from "../homepage/Homepage";
+import Request from "../homepage/Homepage";
 import MenuSider from "../menuSider/MenuSider";
+import CreateRequest from "../staff/createRequest/CreateRequest";
 import DetailDayoff from "../staff/detailDayoff/DetailDayoff";
-import MyRequest from "../staff/myrequest/MyRequest";
-
+import DayOff from "../staff/dayoff/DayOff";
 
 function Admin() {
   const { Content, Sider } = Layout;
 
   return (
-    <Layout style={{height: '100vh'}}>
+    <Layout style={{ height: "100vh" }}>
       <Sider
-        style={{height: '100%'}}
+        style={{ height: "100%" }}
         breakpoint="lg"
         collapsedWidth="0"
         onBreakpoint={(broken) => {
@@ -33,11 +33,13 @@ function Admin() {
       </Sider>
       <Layout>
         <Header />
-        <Content  style={{height: '100%', overflow: 'scroll'}}>
+        <Content style={{ height: "100%", overflow: "scroll" }}>
           <div>
             <Routes history={history}>
-              <Route path="/request" element={<Homepage />} />
-              <Route path="/dayoff" element={<MyRequest />} />
+              <Route path="/request" element={<Request />} />
+              <Route path="/create-request" element={<CreateRequest />} />
+
+              <Route path="/dayoff" element={<DayOff />} />
               <Route path="/detail-dayoff" element={<DetailDayoff />} />
               <Route path="/list/form" element={<Register />} />
               <Route path="/list/edit/:id" element={<EditUser />} />
