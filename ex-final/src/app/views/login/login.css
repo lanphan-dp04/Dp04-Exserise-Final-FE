@@ -18,7 +18,6 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  width: 100vw;
   background: linear-gradient(52deg, rgb(203 113 25) 6%, #1b6447 61%);
 
 }
@@ -69,7 +68,6 @@ body {
   border: none;
   outline: none;
   border-bottom: 2px solid hsl(0, 0%, 83%);
-  border-radius: 5px;
 }
 
 .input-group input:focus {
@@ -109,6 +107,7 @@ body {
   display: flex;
   justify-content: center;
   gap: 10px;
+  padding-left: unset !important;
 }
 
 .social-links {

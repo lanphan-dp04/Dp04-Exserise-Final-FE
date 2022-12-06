@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../redux/action/apiRequest";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import "./login.css";
 
@@ -33,7 +32,7 @@ export default function Login({ setToken }) {
             src="https://stunited.vn/wp-content/uploads/2019/09/stunited-e15650013362301.png"
             alt="stunited"
           />
-          <h1 className="header-login-title">Login to your account</h1>
+          <h2 className="header-login-title">Login to your account</h2>
         </div>
         <div className="js-err-login"></div>
         <form className="form-login" onSubmit={handleLogin}>
@@ -68,13 +67,6 @@ export default function Login({ setToken }) {
 
         <div className="social-icons">
           <ul className="social-list">
-            <li className="social-links">
-              <a href="/">
-                <span>
-                  <FontAwesomeIcon icon={faEnvelope} />
-                </span>
-              </a>
-            </li>
             <li className="social-links">
               <a href="/">
                 <span>
