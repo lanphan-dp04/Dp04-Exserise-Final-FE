@@ -7,6 +7,8 @@ const autheSlice = createSlice({
       currentUser: null,
       isFetching: false,
       error: false,
+      isLogin: false,
+      isToken: null
     },
   },
 
@@ -17,15 +19,17 @@ const autheSlice = createSlice({
     loginSuccess: (state, action) => {
       state.login.isFetching = false;
       state.login.currentUser = action.payload;
-      state.login.error = false;
+      state.login.isLogin = true;
+    },
+    loginToken: (state, action) => {
+      state.login.isToken = action.payload;
     },
     loginFailed: (state) => {
-      state.login.isFetching = false;
       state.login.error = true;
     },
   },
 });
 
-export const { loginFailed, loginStart, loginSuccess } = autheSlice.actions;
+export const { loginFailed, loginStart, loginSuccess, loginToken } = autheSlice.actions;
 
 export default autheSlice.reducer;

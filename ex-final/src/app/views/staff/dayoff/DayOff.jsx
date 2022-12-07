@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./dayoff.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function DayOff() {
   const [listDayOff, setListDayOff] = useState([]);
@@ -25,9 +26,9 @@ function DayOff() {
       <div className="header-staff">
         <div className="header-staff-nav">
           <h2>Day Off</h2>
-          <a href="/request">Requests</a>
-          <a href="/create-request">Create Request</a>
-          <a href="/dayoff">Day Off</a>
+          <Link to={"/request"}>Requests</Link>
+          <Link to={"/create-request"}>Create Request</Link>
+          <Link to={"/dayoff"}>Day Off</Link>
         </div>
       </div>
 
@@ -54,13 +55,13 @@ function DayOff() {
                 <td>{item.requestTime}</td>
                 <td>{item.status}</td>
                 <td>
-                  <a
-                    href="/detail-dayoff"
+                  <Link
+                    to={"/detail-dayoff"}
                     className="button-viewdetail"
                     type="button"
                   >
                     View
-                  </a>
+                  </Link>
                 </td>
               </tr>
             );

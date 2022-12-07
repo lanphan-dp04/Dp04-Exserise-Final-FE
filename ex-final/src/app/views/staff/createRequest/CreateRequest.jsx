@@ -9,6 +9,7 @@ import {
   DatePicker,
   InputNumber,
 } from "antd";
+import { Link } from "react-router-dom";
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 const CreateRequest = () => {
@@ -17,9 +18,9 @@ const CreateRequest = () => {
       <div className="header-staff">
         <div className="header-staff-nav">
           <h2>Day Off</h2>
-          <a href="/request">Requests</a>
-          <a href="/create-request">Create Request</a>
-          <a href="/dayoff">Day Off</a>
+          <Link to={"/request"}>Requests</Link>
+          <Link to={"/create-request"}>Create Request</Link>
+          <Link to={"/dayoff"}>Day Off</Link>
         </div>
       </div>{" "}
       <Form
