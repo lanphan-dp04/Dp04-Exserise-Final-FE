@@ -11,6 +11,7 @@ import MenuSider from "../menuSider/MenuSider";
 import CreateRequest from "../staff/createRequest/CreateRequest";
 import DetailDayoff from "../staff/detailDayoff/DetailDayoff";
 import DayOff from "../staff/dayoff/DayOff";
+import Group from "../manager/groups/Group";
 
 function Admin() {
   const { Content, Sider } = Layout;
@@ -41,9 +42,13 @@ function Admin() {
 
               <Route path="/dayoff" element={<DayOff />} />
               <Route path="/detail-dayoff" element={<DetailDayoff />} />
+
               <Route path="/list/form" element={<Register />} />
               <Route path="/list/edit/:id" element={<EditUser />} />
               <Route path="/list" element={<ListUser />} />
+
+              <Route path="/group" element={<Group />} />
+              <Route path="/group/id" element={<Group />} />
             </Routes>
           </div>
         </Content>
