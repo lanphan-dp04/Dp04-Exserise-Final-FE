@@ -46,7 +46,7 @@ export default function Request() {
           <h2>Day Off Request</h2>
           <Link to={'/request'} >Requests</Link>
           <Link to={'/create-request'} >Create Request</Link>
-          <Link to={'/dayoff'} >Day Off lan</Link>
+          <Link to={'/dayoff'} >Day Off</Link>
         </div>
 
         <div className="search">

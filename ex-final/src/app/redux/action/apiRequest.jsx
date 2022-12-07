@@ -24,7 +24,6 @@ export const loginUser = async (user, dispatch, navigate) => {
       const user = await axios.get("http://localhost:5000/user", {
         headers: { authorization: `Bearer ${token}` },
       });
-
       dispatch(loginSuccess(user.data));
       dispatch(loginToken(token));
       switch (user.data.role) {
