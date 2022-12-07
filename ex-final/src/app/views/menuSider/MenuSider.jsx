@@ -66,7 +66,7 @@ const items = [
     children: [
       {
         key: "manager1",
-        label: <Link to="/members">Members</Link>,
+        label: <Link to="/list">Members</Link>,
       },
       {
         key: "manager2",
