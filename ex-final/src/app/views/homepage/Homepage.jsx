@@ -1,5 +1,5 @@
 import React from "react";
-import { redirect } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 import hasJWT from "../../utils/hasJWT";
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -44,9 +44,9 @@ export default function Request() {
       <div className="header-staff">
         <div className="header-staff-nav">
           <h2>Day Off Request</h2>
-          <a href="/request">Requests</a>
-          <a href="/create-request">Create Request</a>
-          <a href="/dayoff">Day Off</a>
+          <Link to={'/request'} >Requests</Link>
+          <Link to={'/create-request'} >Create Request</Link>
+          <Link to={'/dayoff'} >Day Off</Link>
         </div>
 
         <div className="search">

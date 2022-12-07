@@ -1,5 +1,5 @@
 import axios from "axios";
-import { loginFailed, loginStart, loginSuccess } from "../reducers/authSlice";
+import { loginFailed, loginStart, loginSuccess, loginToken } from "../reducers/authSlice";
 
 const handleErrorLogin = () => {
   const notiError = document.querySelector(".desc-error-login");
@@ -17,24 +17,29 @@ export const loginUser = async (user, dispatch, navigate) => {
   dispatch(loginStart());
   try {
     const res = await axios.post("http://localhost:5000/login", user);
+    console.log(res);
+
     if (res) {
       const token = res.data;
       const user = await axios.get("http://localhost:5000/user", {
         headers: { authorization: `Bearer ${token}` },
       });
-      localStorage.setItem("token", token);
       dispatch(loginSuccess(user.data));
+      dispatch(loginToken(token));
       switch (user.data.role) {
-        case 0:
+        case 'admin':
           navigate("/admin");
           break;
-        default:
+        case 'staff':
           navigate("/");
+          break;  
+        default:
+          navigate("/404");
       }
     }
   } catch (error) {
     dispatch(loginFailed());
-    if (error.response.status === 401) {
+    if (error.response.status === 400) {
       //
       handleErrorLogin();
     }
