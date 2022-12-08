@@ -1,3 +1,12 @@
+table {
+    text-align: center !important;
+}
+
+table th {
+    text-align: center !important;
+}
+
+
 .group-container {
     margin-top: 30px;
     position: relative;
@@ -29,3 +38,37 @@
 .newgroup button span {
     margin-right: 5px;
 }
+
+.member-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.member-wraper {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.group-boxmember {
+    /* padding: 5px; */
+    text-align: center;
+}
+
+
+/* .member-avatar:hover + .member-content{
+    display: block;
+
+}
+
+.member-content {
+    display: none;
+    padding: 5px 15px;
+    background-color: rgb(19, 184, 101);
+    color: wheat;
+    border-radius: 5px;
+    margin-top: 2px;
+
+} */

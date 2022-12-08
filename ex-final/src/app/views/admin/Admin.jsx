@@ -12,6 +12,7 @@ import CreateRequest from "../staff/createRequest/CreateRequest";
 import DetailDayoff from "../staff/detailDayoff/DetailDayoff";
 import DayOff from "../staff/dayoff/DayOff";
 import Group from "../manager/groups/Group";
+import GroupDetail from "../manager/groupDetail/GroupDetail";
 
 function Admin() {
   const { Content, Sider } = Layout;
@@ -48,7 +49,7 @@ function Admin() {
               <Route path="/list" element={<ListUser />} />
 
               <Route path="/group" element={<Group />} />
-              <Route path="/group/id" element={<Group />} />
+              <Route path="/group/detail" element={<GroupDetail />} />
             </Routes>
           </div>
         </Content>
