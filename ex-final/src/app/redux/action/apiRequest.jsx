@@ -17,7 +17,6 @@ export const loginUser = async (user, dispatch, navigate) => {
   dispatch(loginStart());
   try {
     const res = await axios.post("http://localhost:5000/login", user);
-    console.log(res);
 
     if (res) {
       const token = res.data;

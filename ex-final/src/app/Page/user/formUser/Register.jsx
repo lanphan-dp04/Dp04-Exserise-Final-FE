@@ -36,7 +36,6 @@ export default function Register() {
     axios
       .post("http://localhost:5000/user/create", data)
       .then((response) => {
-        console.log(response.data);
         e.target.reset();
         alert("Saved successfully.");
       })

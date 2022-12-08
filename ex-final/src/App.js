@@ -14,11 +14,11 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route
+          {/* <Route
             path="*"
             element={isToken ? <Admin /> : <Navigate to={"/login"} />}
-          />
-          {/* <Route path="*" element={<Admin />} /> */}
+          /> */}
+          <Route path="*" element={<Admin />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -7,7 +7,6 @@ export default function Search(props) {
 
   const handleOnChange = (e) => {
     setSearch(e.target.value);
-    console.log("search", search);
   };
 
   const handleSearch = () => {};

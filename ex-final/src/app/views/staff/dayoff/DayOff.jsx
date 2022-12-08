@@ -14,7 +14,6 @@ function DayOff() {
       .get(api)
       .then((res) => {
         setListDayOff(res.data);
-        console.log("listdayoff", res.data);
       })
       .catch((error) => {
         console.log("err", error);
