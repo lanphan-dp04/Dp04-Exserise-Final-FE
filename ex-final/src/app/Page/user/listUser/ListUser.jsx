@@ -18,7 +18,6 @@ export default function ListUser() {
       let response = await axios.get(apiListData);
       let temp = await response.data;
       setDataUser(temp);
-      console.log(temp);
     } catch (err) {
       console.log("Error: ", err.message);
     }

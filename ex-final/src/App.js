@@ -9,7 +9,6 @@ function App() {
 
   const isToken = useSelector(state => state.auth.login.isToken)
 
-  console.log(isToken);
   return (
     <div className="App">
       <BrowserRouter>
