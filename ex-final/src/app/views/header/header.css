@@ -1,7 +1,73 @@
 .header {
-    height: 64px;
+    position: relative;
+    height: 70px;
     padding-inline: 50px;
-    color: rgba(0, 0, 0, 0.88);
-    line-height: 64px;
+    color: rgba(255, 254, 254, 0.88);
+    line-height: 20px;
     background: #001529;
+    display: flex;
+    gap: 20px;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.header p {
+    color: white;
+    margin: 0;
+}
+
+.avatar-img {
+    width: 40px;
+    border-radius: 50%; 
+}
+
+.box-logoff p {
+    color: white;
+    margin: 0;
+    padding: 5px 15px;
+    background-color: rgb(11, 74, 151);
+    border-radius: 5px;
+}
+
+.box-logoff p a{
+    color: white;
+}
+
+.box-addnewmember p {
+    color: white;
+    margin: 0;
+    padding: 5px 15px;
+    background-color: rgb(11, 74, 151);
+    border-radius: 5px;
+}
+
+.box-addnewmember p a {
+    color: white;
+
+}
+
+.box-user {
+    margin-left: 50px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.box-user:hover .box-logout {
+    /* margin-left: 100px  ; */
+    display: block;
+}
+.box-logout {
+    display: none;
+}
+
+.logout a {
+    padding: 5px 15px;
+    color: white;
+
+    background-color: rgb(11, 74, 151);
+    border-radius: 5px;
+}
+
+span {
+    margin-right: 5px;
 }

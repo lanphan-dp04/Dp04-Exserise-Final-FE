@@ -6,15 +6,19 @@ import Admin from "./app/views/admin/Admin";
 import { useSelector } from "react-redux";
 
 function App() {
+  // const isToken = useSelector((state) => state.auth.login.isToken);
 
-  const isToken = useSelector(state => state.auth.login.isToken)
-
+  // console.log(isToken);
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={ <Login /> } />
-          <Route path="*" element={isToken ? <Admin /> : <Navigate to={'/login'}/>} />
+          <Route path="/login" element={<Login />} />
+          {/* <Route
+            path="*"
+            element={isToken ? <Admin /> : <Navigate to={"/login"} />}
+          /> */}
+          <Route path="*" element={<Admin />} />
         </Routes>
       </BrowserRouter>
     </div>

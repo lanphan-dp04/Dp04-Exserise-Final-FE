@@ -140,7 +140,7 @@ export default function Register() {
             <p className="color-err">{errors.phoneNumber?.message}</p>
           </div>
           <div className="form-name">
-            <label className="form-lable" htmlFor="inputPassword4">Role</label>
+            <label className="form-lable" htmlFor="inputPassword4">Role <span className="text-color-red">*</span></label>
             <Form.Select aria-label="Default select example" type="Number" name="role" id="role" className="input-name"
               {...register("role")}>
               <option value="0">User</option>

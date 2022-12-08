@@ -54,31 +54,31 @@ export default function ListUser() {
 
   return (
       <div className="container mt-4">
-        <div className="mt-4 mb-4">
+        <div className="container item-top">
           <h2>User Table</h2>
         </div>
-        <div>
+        <div className="container"> 
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>STT</th>
-                <th>Full Name</th>
-                <th>Email</th>
-                <th>Phone Number</th>
-                <th>Action</th>
+                <th className="text-size col-1">STT</th>
+                <th className="text-size col-2">Full Name</th>
+                <th className="text-size col-3">Email</th>
+                <th className="text-size col-2">Phone Number</th>
+                <th className="text-size col-2">Action</th>
               </tr>
             </thead>
             <tbody>
               {dataUser.map((item, index) => {
                 return (
                   <tr key={item._id}>
-                    <td className="item-data">{index + 1}</td>
-                    <td className="item-data">{item?.userName}</td>
-                    <td className="item-data">{item?.email}</td>
-                    <td className="item-data">{item?.phoneNumber}</td>
-                    <td className="item-data">
-                      <Link className="link-btn" to={`form`}>
-                        <Button variant="primary">Add</Button>{' '}
+                    <td className="text-size-m item-data-m"><span className="">{index + 1}</span></td>
+                    <td className="text-size-m item-data-m">{item?.userName}</td>
+                    <td className="text-size-m item-data-m">{item?.email}</td>
+                    <td className="text-size-m item-data-m">{item?.phoneNumber}</td>
+                    <td className="text-size-m item-data-m">
+                      <Link className="link-btn" to={`detail`}>
+                        <Button variant="primary">View</Button>{' '}
                       </Link>
                       <Link className="link-btn" to={`edit/${item._id}`}>
                         <Button variant="warning" onClick={() => setData(dataUser)}>Edit</Button>{' '}

@@ -1,12 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useForm } from "react-hook-form";
 import Form from 'react-bootstrap/Form';
 import { Link, useNavigate } from "react-router-dom";
 import "./EditUser.scss"
 import Button from "react-bootstrap/esm/Button";
 
+const ERROR_EMAIL = {
+    required: "Email address is required",
+    pattern: "Please include an '@' in the email address ",
+  };
+  const ERROR_FULLNAME = {
+    required: "Fullname is required",
+  };
+  const ERROR_PASSWORD = {
+    required: "Password is required",
+  };
+  const ERROR_PHONENUMBER = {
+    required: "Password is required",
+  };
 export default function EditUser() {
+    const {
+        register,
+        reset,
+        formState: { errors },
+      } = useForm();
+
     const { id } = useParams();
     let history = useNavigate();
 
@@ -52,12 +72,13 @@ export default function EditUser() {
             <div className="main-register">
                 <form className="form-group container" onSubmit={handleSubmit}>
                     <h2 className="text-center text-create-user">Edit an User</h2>
-                    <div className="form-name ">
+                    <div className="form-name-e ">
                         <label className="form-lable" htmlFor="inputFullname">
                             Full Name <span className="text-color-red">*</span>
                         </label>
                         <input
                             className="form-control input-name"
+                            required
                             type="text"
                             name="userName"
                             id="userName"
@@ -66,11 +87,12 @@ export default function EditUser() {
                             onChange={e => setUserName(e.target.value)}
                         />
                     </div>
-                    <div className="form-name">
+                    <div className="form-name-e">
                         <label className="form-lable" htmlFor="inputPassword4">
                             Password <span className="text-color-red">*</span>
                         </label>
                         <input
+                            required
                             type="password"
                             name="password"
                             className="form-control input-name"
@@ -81,11 +103,12 @@ export default function EditUser() {
                         ></input>
                     </div>
 
-                    <div className="form-name">
+                    <div className="form-name-e">
                         <label className="form-lable" htmlFor="inputEmail">
                             Email <span className="text-color-red">*</span>
                         </label>
                         <input
+                            required
                             className="form-control input-name"
                             placeholder="Enter email..."
                             id="email"
@@ -93,11 +116,12 @@ export default function EditUser() {
                             onChange={e => setEmail(e.target.value)}
                         />
                     </div>
-                    <div className="form-name ">
+                    <div className="form-name-e ">
                         <label className="form-lable" htmlFor="inputFullname">
                             Number Phone <span className="text-color-red">*</span>
                         </label>
                         <input
+                            required
                             className="form-control input-name"
                             type="text"
                             name="phoneNumber"
@@ -107,8 +131,8 @@ export default function EditUser() {
                             onChange={e => setPhoneNumber(e.target.value)}
                         />
                     </div>
-                    <div className="form-name">
-                        <label className="form-lable" htmlFor="inputPassword4">Role</label>
+                    <div className="form-name-e">
+                        <label className="form-lable" htmlFor="inputPassword4">Role <span className="text-color-red">*</span></label>
                         <Form.Select aria-label="Default select example" type="Number" name="role" id="role" className="input-name"
                             defaultValue={role}
                             onChange={e => setRole(e.target.value)}
@@ -119,7 +143,7 @@ export default function EditUser() {
                     </div>
                     <div className="content-btn">
                         <button className="btn btn-success" type="submit">
-                            Update User
+                            Update
                         </button>
                         <Link className="link-btn" to={`/list`}>
                             <Button variant="primary">Back</Button>{' '}
