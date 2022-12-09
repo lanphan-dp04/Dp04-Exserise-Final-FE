@@ -70,7 +70,10 @@ export default function Request() {
             return (
               <tr>
                 <td>{item.id}</td>
-                <td>{item.timeDayOff}</td>
+                <td>
+                  {" "}
+                  {item.fromDay} to {item.toDay}
+                </td>
                 <td>{item.Quantify}</td>
                 <td>{item.name}</td>
                 <td>{item.status}</td>

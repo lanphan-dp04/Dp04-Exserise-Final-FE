@@ -49,7 +49,7 @@ function DayOff() {
               <tr>
                 <td>{item.id}</td>
                 <td>
-                  {item.timeDayOff} to {item.timeDayOff}
+                  {item.fromDay} to {item.toDay}
                 </td>
                 <td>{item.quantify}</td>
                 <td>{item.name}</td>
