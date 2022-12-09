@@ -30,10 +30,11 @@
 }
 
 .table-title {
-    background-color:orange;
+    background-color:#7287b0;
 }
 
-.table-myrequest tr:nth-child(even) {background-color: rgb(240, 191, 77);}
+.table-myrequest tr:nth-child(even) {
+    --bs-table-accent-bg: var(--bs-table-striped-bg);}
 
 .col-index{
     width: 30px;

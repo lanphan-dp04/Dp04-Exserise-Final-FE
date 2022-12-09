@@ -47,9 +47,9 @@ table th {
 
 .member-wraper {
     display: flex;
-    gap: 20px;
+    gap: 5px;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: flex-start;
 }
 
 .group-boxmember {
