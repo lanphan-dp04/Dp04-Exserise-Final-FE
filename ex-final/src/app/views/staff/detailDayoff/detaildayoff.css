@@ -17,8 +17,42 @@
 tr:nth-child(even) {
     background-color: none;
 }
+
+.action-revert {
+    border: none;
+    margin: 30px 0 ;
+}
+
+.box-action span {
+    font-size: 15px;
+    background: rgb(11, 74, 151);
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+}
+
 /* histories */
 .histories {
     border-left: solid 1px;
     padding-left: 20px;
+}
+
+.box-histories h6 {
+    border-left: 5px solid #8989e1;
+    padding: 5px 15px;
+    color: #8989e1;
+}
+
+ h6 ~ p{
+    font-size: 18px;
+}
+
+.box-histories p {
+    color: gray;
+    padding: 0 20px;
+}
+
+.history-request {
+    line-height: 3px;
 }

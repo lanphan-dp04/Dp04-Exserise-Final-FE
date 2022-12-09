@@ -7,42 +7,69 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCheck,
-  faRectangleXmark,
-  faSquarePen,
-  faSquareCaretLeft,
   faXmark,
   faClockRotateLeft,
 } from "@fortawesome/free-solid-svg-icons";
 
 function DayOff() {
   const [listDayOff, setListDayOff] = useState([]);
+  const [resetDayOff, setResetDayOff] = useState([]);
 
   useEffect(() => {
-    const api = "https://636dab7a91576e19e32cef5d.mockapi.io/joinUs";
+    const api = "https://636dab7a91576e19e32cef5d.mockapi.io/dayoff";
     axios
       .get(api)
       .then((res) => {
         setListDayOff(res.data);
+        console.log("listDayOff", listDayOff);
+        setResetDayOff(res.data);
+        console.log("resetDayOff", resetDayOff);
       })
+
       .catch((error) => {
         console.log("err", error);
       });
-  });
+  }, []);
+
+  //filter
 
   const filterApproved = () => {
-    console.log("test");
-    // listDayOff.filter(() => {
-
-    // })
+    setListDayOff(resetDayOff);
+    const status = [];
+    listDayOff.filter((item) => {
+      if (item.status == "approved") {
+        status.push(item);
+        setListDayOff(status);
+      }
+    });
   };
 
   const filterRejected = () => {
-    console.log("test1");
+    setListDayOff(resetDayOff);
+
+    const status = [];
+    listDayOff.filter((item) => {
+      if (item.status == "rejected") {
+        status.push(item);
+        setListDayOff(status);
+      }
+    });
   };
 
   const filterReverted = () => {
-    console.log("test2");
+    setListDayOff(resetDayOff);
+
+    const status = [];
+
+    listDayOff.filter((item) => {
+      if (item.status == "reverted") {
+        status.push(item);
+        setListDayOff(status);
+      }
+    });
   };
+
+  // var today = new Date().toJSON().slice(0, 10).replace(/-/g, "-");
 
   return (
     <div className="container">
@@ -100,13 +127,13 @@ function DayOff() {
                 <td>
                   {item.fromDay} to {item.toDay}
                 </td>
-                <td>{item.quantify}</td>
+                <td>{item.quantity}</td>
                 <td>{item.name}</td>
                 <td>{item.status}</td>
-                <td>{item.requestTime}</td>
+                <td>{item.createAat}</td>
                 <td>
                   <Link
-                    to={"/detail-dayoff"}
+                    to={`/dayoff/${item.id}`}
                     className="button-viewdetail"
                     type="button"
                   >
