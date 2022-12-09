@@ -1,7 +1,7 @@
 import Table from "react-bootstrap/Table";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./dayoff.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,10 +10,11 @@ import {
   faXmark,
   faClockRotateLeft,
 } from "@fortawesome/free-solid-svg-icons";
+// import {formatDay} from "../../"
 
 function DayOff() {
   const [listDayOff, setListDayOff] = useState([]);
-  const [resetDayOff, setResetDayOff] = useState([]);
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
     const api = "https://636dab7a91576e19e32cef5d.mockapi.io/dayoff";
@@ -21,9 +22,6 @@ function DayOff() {
       .get(api)
       .then((res) => {
         setListDayOff(res.data);
-        console.log("listDayOff", listDayOff);
-        setResetDayOff(res.data);
-        console.log("resetDayOff", resetDayOff);
       })
 
       .catch((error) => {
@@ -31,46 +29,35 @@ function DayOff() {
       });
   }, []);
 
+  const filteredListDayOff = useMemo(() => {
+    if (status === "") return listDayOff;
+
+    const data = listDayOff.filter((item) => item.status === status);
+    return data;
+  }, [listDayOff, status]);
+
   //filter
 
+  const seeAll = () => {
+    setStatus("");
+  };
   const filterApproved = () => {
-    setListDayOff(resetDayOff);
-    const status = [];
-    listDayOff.filter((item) => {
-      if (item.status == "approved") {
-        status.push(item);
-        setListDayOff(status);
-      }
-    });
+    setStatus("approved");
   };
 
   const filterRejected = () => {
-    setListDayOff(resetDayOff);
-
-    const status = [];
-    listDayOff.filter((item) => {
-      if (item.status == "rejected") {
-        status.push(item);
-        setListDayOff(status);
-      }
-    });
+    setStatus("rejected");
   };
 
   const filterReverted = () => {
-    setListDayOff(resetDayOff);
-
-    const status = [];
-
-    listDayOff.filter((item) => {
-      if (item.status == "reverted") {
-        status.push(item);
-        setListDayOff(status);
-      }
-    });
+    setStatus("reverted");
   };
 
   // var today = new Date().toJSON().slice(0, 10).replace(/-/g, "-");
-
+  const formatDay = (day) => {
+    return day.slice(0, 10).replace(/-/g, "-");
+  };
+  console.log("test", formatDay("2022-09-11T17:00:00.000"));
   return (
     <div className="container">
       <div className="header-staff">
@@ -83,6 +70,14 @@ function DayOff() {
       </div>
 
       <div className="box-filter">
+        <button className="filter-approved" onClick={seeAll}>
+          {" "}
+          <span>
+            {" "}
+            <FontAwesomeIcon icon={faCheck} />
+          </span>{" "}
+          See All
+        </button>
         <button className="filter-approved" onClick={filterApproved}>
           {" "}
           <span>
@@ -120,17 +115,17 @@ function DayOff() {
           </tr>
         </thead>
         <tbody>
-          {listDayOff.map((item) => {
+          {filteredListDayOff.map((item) => {
             return (
               <tr>
                 <td>{item.id}</td>
                 <td>
-                  {item.fromDay} to {item.toDay}
+                  {formatDay(item.fromDay)} to {formatDay(item.toDay)}
                 </td>
                 <td>{item.quantity}</td>
                 <td>{item.name}</td>
                 <td>{item.status}</td>
-                <td>{item.createAat}</td>
+                <td>{formatDay(item.createAat)}</td>
                 <td>
                   <Link
                     to={`/dayoff/${item.id}`}
