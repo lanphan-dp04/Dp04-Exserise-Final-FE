@@ -43,9 +43,9 @@ export default function Request() {
       <div className="header-staff">
         <div className="header-staff-nav">
           <h2>Day Off Request</h2>
-          <Link to={'/request'} >Requests</Link>
-          <Link to={'/create-request'} >Create Request</Link>
-          <Link to={'/dayoff'} >Day Off</Link>
+          <Link to={"/request"}>Requests</Link>
+          <Link to={"/create-request"}>Create Request</Link>
+          <Link to={"/dayoff"}>Day Off</Link>
         </div>
 
         <div className="search">
@@ -57,11 +57,11 @@ export default function Request() {
         <thead>
           <tr className="table-title">
             <th className="col-index">No </th>
-            <th className="col-2">Requester</th>
-            <th className="col-2">Time day off</th>
+            <th className="col-3">Request for date</th>
             <th className="col-1">Quantify</th>
+            <th className="col-2">Requester </th>
             <th className="col-2">Status</th>
-            <th className="col-3">Reason</th>
+            <th className="col-2">Request date</th>
             <th className="col-2">Action</th>
           </tr>
         </thead>
@@ -70,11 +70,11 @@ export default function Request() {
             return (
               <tr>
                 <td>{item.id}</td>
-                <td>{item.name}</td>
                 <td>{item.timeDayOff}</td>
                 <td>{item.Quantify}</td>
+                <td>{item.name}</td>
                 <td>{item.status}</td>
-                <td>{item.approver}</td>
+                <td>{item.requestday}</td>
                 <td>
                   <a>
                     <FontAwesomeIcon
