@@ -6,7 +6,7 @@ import Admin from "./app/views/admin/Admin";
 import { useSelector } from "react-redux";
 
 function App() {
-  // const isToken = useSelector((state) => state.auth.login.isToken);
+  // const isToken = useSelector(state => state.auth.login.isToken)
 
   // console.log(isToken);
   return (
