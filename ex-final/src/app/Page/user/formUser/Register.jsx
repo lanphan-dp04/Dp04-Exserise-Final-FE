@@ -18,7 +18,8 @@ const ERROR_PASSWORD = {
   required: "Password is required",
 };
 const ERROR_PHONENUMBER = {
-  required: "Password is required",
+  required: "Phone number is required",
+  pattern: "Please enter the correct phone number format"
 };
 
 export default function Register() {
@@ -39,7 +40,12 @@ export default function Register() {
         alert("Saved successfully.");
       })
       .catch((error) => {
-        console.log(error.data);
+        console.log("Error:",error.response.data);
+        alert("Email or phone number already exists. Please re-enter!!!");
+          reset({
+            email:"",
+            phoneNumber:""
+          })
       });
   };
 
@@ -125,6 +131,7 @@ export default function Register() {
               placeholder="Enter number phone..."
               {...register("phoneNumber", {
                 required: ERROR_PHONENUMBER?.required,
+                pattern:/^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/i,
                 message: "Number is required",
                 minLength: {
                   value: 10,
