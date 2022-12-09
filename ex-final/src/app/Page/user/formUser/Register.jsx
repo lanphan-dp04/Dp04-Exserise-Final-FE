@@ -23,7 +23,6 @@ const ERROR_PHONENUMBER = {
 
 export default function Register() {
   let { id } = useParams();
-  let history = useNavigate();
   const {
     register,
     handleSubmit,

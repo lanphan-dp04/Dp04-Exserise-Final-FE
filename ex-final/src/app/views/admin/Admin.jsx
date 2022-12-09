@@ -13,6 +13,7 @@ import DetailDayoff from "../staff/detailDayoff/DetailDayoff";
 import DayOff from "../staff/dayoff/DayOff";
 import Group from "../manager/groups/Group";
 import GroupDetail from "../manager/groupDetail/GroupDetail";
+import DetailUser from "../../Page/user/detailUser/DetailUser";
 
 function Admin() {
   const { Content, Sider } = Layout;
@@ -45,6 +46,7 @@ function Admin() {
               <Route path="/detail-dayoff" element={<DetailDayoff />} />
 
               <Route path="/list/form" element={<Register />} />
+              <Route path="/list/detail/:id" element={<DetailUser />} />
               <Route path="/list/edit/:id" element={<EditUser />} />
               <Route path="/list" element={<ListUser />} />
 

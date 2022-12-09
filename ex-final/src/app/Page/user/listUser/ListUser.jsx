@@ -77,7 +77,7 @@ export default function ListUser() {
                     <td className="text-size-m item-data-m">{item?.email}</td>
                     <td className="text-size-m item-data-m">{item?.phoneNumber}</td>
                     <td className="text-size-m item-data-m">
-                      <Link className="link-btn" to={`detail`}>
+                      <Link className="link-btn" to={`detail/${item._id}`}>
                         <Button variant="primary">View</Button>{' '}
                       </Link>
                       <Link className="link-btn" to={`edit/${item._id}`}>
