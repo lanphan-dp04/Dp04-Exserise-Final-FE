@@ -4,6 +4,15 @@ import "./dayoff.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCheck,
+  faRectangleXmark,
+  faSquarePen,
+  faSquareCaretLeft,
+  faXmark,
+  faClockRotateLeft,
+} from "@fortawesome/free-solid-svg-icons";
 
 function DayOff() {
   const [listDayOff, setListDayOff] = useState([]);
@@ -20,6 +29,21 @@ function DayOff() {
       });
   });
 
+  const filterApproved = () => {
+    console.log("test");
+    // listDayOff.filter(() => {
+
+    // })
+  };
+
+  const filterRejected = () => {
+    console.log("test1");
+  };
+
+  const filterReverted = () => {
+    console.log("test2");
+  };
+
   return (
     <div className="container">
       <div className="header-staff">
@@ -29,6 +53,31 @@ function DayOff() {
           <Link to={"/create-request"}>Create Request</Link>
           <Link to={"/dayoff"}>Day Off</Link>
         </div>
+      </div>
+
+      <div className="box-filter">
+        <button className="filter-approved" onClick={filterApproved}>
+          {" "}
+          <span>
+            {" "}
+            <FontAwesomeIcon icon={faCheck} />
+          </span>{" "}
+          Approved day off
+        </button>
+        <button className="filter-rejected" onClick={filterRejected}>
+          <span>
+            {" "}
+            <FontAwesomeIcon icon={faXmark} />
+          </span>{" "}
+          Rejected day off
+        </button>
+        <button className="filter-reverted" onClick={filterReverted}>
+          <span>
+            {" "}
+            <FontAwesomeIcon icon={faClockRotateLeft} />
+          </span>{" "}
+          Reverted day off
+        </button>
       </div>
 
       <Table className="table-myrequest">
