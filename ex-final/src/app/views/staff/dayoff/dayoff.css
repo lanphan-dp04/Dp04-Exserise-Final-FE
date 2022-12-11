@@ -57,6 +57,24 @@ td a .svg-inline--fa{
     font-size: 30px;
 }
 
+.box-filter {
+    margin: 20px;
+}
+
+.box-filter button {
+    margin: 20px 20px 20px 0;
+    padding: 5px 15px;
+    border-radius: 5px;
+    border: 2px solid gray;
+    color: rgb(102, 101, 101);
+    
+}
+
+.box-filter button:hover {
+    
+    color: rgb(228, 219, 219);
+    background-color: rgb(114, 138, 137);
+}
 /* .icon-approve {
     color: olivedrab;
 } */

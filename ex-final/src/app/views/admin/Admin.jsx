@@ -43,7 +43,7 @@ function Admin() {
               <Route path="/create-request" element={<CreateRequest />} />
 
               <Route path="/dayoff" element={<DayOff />} />
-              <Route path="/detail-dayoff" element={<DetailDayoff />} />
+              <Route path="/dayoff/:id" element={<DetailDayoff />} />
 
               <Route path="/list/form" element={<Register />} />
               <Route path="/list/detail/:id" element={<DetailUser />} />
