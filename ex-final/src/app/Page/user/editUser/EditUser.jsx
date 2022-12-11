@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useForm } from "react-hook-form";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 import { Link, useNavigate } from "react-router-dom";
-import "./EditUser.scss"
 import Button from "react-bootstrap/esm/Button";
+import "./EditUser.scss"
 
 const ERROR_EMAIL = {
     required: "Email address is required",

@@ -2,14 +2,12 @@ import "./ListUser.scss";
 import axios from "axios";
 import {Button, Modal, Table} from 'react-bootstrap';
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function ListUser() {
-  let history = useNavigate();
 
   // id update and delete
   const [id, setId] = useState("");
-  
   const [dataUser, setDataUser] = useState([]);
   const apiListData = "http://localhost:5000/user/list";
 

@@ -51,7 +51,7 @@ function Admin() {
               <Route path="/list" element={<ListUser />} />
 
               <Route path="/group" element={<Group />} />
-              <Route path="/group/detail" element={<GroupDetail />} />
+              <Route path="/group/detail/:id" element={<GroupDetail />} />
             </Routes>
           </div>
         </Content>
