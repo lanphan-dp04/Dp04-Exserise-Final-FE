@@ -1,8 +1,9 @@
 import React from "react";
-import { Link, redirect } from "react-router-dom";
-import hasJWT from "../../utils/hasJWT";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import Moment from 'moment';
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,16 +19,17 @@ import Search from "../../components/search/Search";
 
 import "../staff/dayoff/dayoff.css";
 import "../staff/createRequest/createRequest.css";
+import { useDispatch, useSelector } from "react-redux";
+import { requests } from "../../redux/action/requestsAction";
+const  converter = require('number-to-words');
 
 export default function Request() {
-  if (hasJWT() === false) {
-    redirect("/login");
-  }
+  
 
   const [listDayOff, setListDayOff] = useState([]);
-
+  const userId = useSelector((state) => state.auth.login.currentUser._id);
   useEffect(() => {
-    const api = "https://636dab7a91576e19e32cef5d.mockapi.io/joinUs";
+    const api = `http://localhost:5000/requests/${userId}`;
     axios
       .get(api)
       .then((res) => {
@@ -36,8 +38,7 @@ export default function Request() {
       .catch((error) => {
         console.log("err", error);
       });
-  });
-
+  },[]);
   return (
     <div className="container">
       <div className="header-staff">
@@ -66,22 +67,59 @@ export default function Request() {
           </tr>
         </thead>
         <tbody>
-          {listDayOff.map((item) => {
+          {listDayOff.map((item, index) => {
+            const formatDate = 'YYYY-MM-DD';
+            const fromDay = new Date(item.fromDay);
+            const toDay = new Date(item.toDay);
+            const createdAt = new Date(item.createdAt);
+            let nowDate = new Date();
+            const formatFromDay = Moment(fromDay).format(formatDate)
+            const formatToDay = Moment(toDay).format(formatDate)
+
+            const renderDate = (formatFromDay === formatToDay) ? formatFromDay : `${formatFromDay} to ${formatToDay}`;
+
+            const currentDate =  () => {
+              let hours = nowDate.getHours()- createdAt.getHours() ;
+              let minutes = nowDate.getMinutes()- createdAt.getMinutes();
+              if(createdAt.getHours() !== nowDate.getHours()) {
+                if(+hours === +1) {
+                  return `${converter.toWords(+hours)} hours ago`
+                }
+                else {
+                  return ''
+                }
+              }
+              else {
+                return `${minutes} minutes ago`
+              }
+              
+            } 
+            const nextDate = () => {
+              let date = nowDate.getDate() - createdAt.getDate() ;
+              if(+date <= +1) {
+                return 'Yesterday'
+              }
+              else {
+                return `${converter.toWords(+date)} days ago`
+              }
+            }
+            const renderrequestDate = (createdAt.getDate() === nowDate.getDate()) ? `${currentDate()}` : `${nextDate()}`;
+            console.log(renderrequestDate);
+
             return (
-              <tr>
-                <td>{item.id}</td>
+              <tr key={index}>
+                <td>{index+1}</td>
                 <td>
                   {" "}
-                  {item.fromDay} to {item.toDay}
+                  {`${renderDate}`} 
                 </td>
-                <td>{item.Quantify}</td>
-                <td>{item.name}</td>
+                <td>{item.quantity}</td>
+                <td>{item.userName}</td>
                 <td>{item.status}</td>
-                <td>{item.requestday}</td>
+                <td>{renderrequestDate.charAt(0).toUpperCase() + renderrequestDate.slice(1)}</td>
                 <td>
                   <a>
                     <FontAwesomeIcon
-                      // className="icon-approve"
                       icon={faSquareCheck}
                     />
                   </a>

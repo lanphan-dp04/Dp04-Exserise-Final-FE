@@ -23,18 +23,16 @@ const CreateRequest = () => {
   const navigate = useNavigate();
   const isId = useSelector((state) => state.auth.login.currentUser._id);
   console.log(isId);
-
-  const dateFormat = "DD/MM/YYYY";
+  const dateFormat = "YYYY/MM/DD";
   const handleOnFinish = (values) => {
     const newRequestDayOff = {
       userID: isId,
       reason: values.reason,
-      fromDay: values.fromDay.format(dateFormat),
-      toDay: values.toDay.format(dateFormat),
+      fromDay: values.fromDay,
+      toDay: values.toDay,
       partialDay: values.partialDay,
       quantity: values.quantity,
     };
-    console.log(newRequestDayOff);
 
     requestDayOff(newRequestDayOff, dispatch, navigate);
   };
