@@ -149,8 +149,8 @@ export default function Register() {
             <label className="form-lable" htmlFor="inputPassword4">Role <span className="text-color-red">*</span></label>
             <Form.Select aria-label="Default select example" type="Number" name="role" id="role" className="input-name"
               {...register("role")}>
-              <option value="0">User</option>
-              <option value="1">Master</option>
+              <option value="user">User</option>
+              <option value="master">Master</option>
             </Form.Select>
           </div>
           <div className="content-btn">
