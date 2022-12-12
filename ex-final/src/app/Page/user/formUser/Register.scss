@@ -40,6 +40,11 @@
     justify-content: end;
 }
 
+.content-btn-left {
+    justify-content: start !important;
+    padding-top: 0 !important;
+}
+
 .btn {
     border: none;
     margin-left: 10px;

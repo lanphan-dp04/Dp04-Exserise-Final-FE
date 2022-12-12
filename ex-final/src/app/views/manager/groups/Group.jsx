@@ -182,8 +182,8 @@ export default function ListUser() {
             <tr>
               <th className="text-size col-1">STT</th>
               <th className="text-size col-2">Group Name</th>
-              <th className="text-size col-3">Members</th>
-              <th className="text-size col-2">Master(s)</th>
+              <th className="text-size col-4">Members</th>
+              <th className="text-size col-3">Master(s)</th>
               <th className="text-size col-2">Action</th>
             </tr>
           </thead>
@@ -210,9 +210,6 @@ export default function ListUser() {
                   <td className="text-size-m item-data-m">
                     <Link className="link-btn" to={`/group/detail/${item._id}`}>
                       <Button variant="primary">View</Button>{' '}
-                    </Link>
-                    <Link className="link-btn" to={`edit/${item._id}`}>
-                      <Button variant="warning" onClick={() => setData(dataUser)}>Edit</Button>{' '}
                     </Link>
                     <Button variant="danger" onClick={() => handleClickDeleteUser(item._id)}>Delete</Button>{' '}
                   </td>

@@ -1,3 +1,14 @@
+
+.group-container {
+    margin-top: 30px;
+}
+
+.group-container .box-title {
+    margin-bottom: 30px;
+    margin-left: 20px;
+    color: #776e63;
+}
+
 .box-groupdetail p{
     margin: 0;
     padding: 5px 10px;
@@ -18,10 +29,16 @@
 
 .box-groupdetail-name div {
     flex-basis: 20%;
-    padding:0 20px;
     border-radius: 5px;
-
     border: 1px solid gray;
+}
+.box-groupdetail-name div p span {
+    font-size: 16px;
+}
+
+.box-groupdetail-name div p .name-group{
+    font-size: 15px;
+    font-weight: 500;
 }
 
 .box-groupdetail-member {
@@ -48,4 +65,8 @@
     padding: 20px;
     border-radius: 5px;
     border: 1px solid gray;
+}
+
+.box-groupdetail .item-user-detail {
+    margin-right: 10px;
 }

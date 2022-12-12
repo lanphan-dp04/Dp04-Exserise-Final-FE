@@ -11,8 +11,7 @@ import axios from "axios";
 export default function GroupDetail() {
 
   const { id } = useParams();
-  const [idNameGroup, setIdNameGroup] = useState("");
-  const [idMember, setIdMember] = useState("");
+  const [idNameGroup, setIdNameGroup] = useState([]);
   const apiGroupData = `http://localhost:5000/group/list/${id}`;
 
   useEffect(() => {
@@ -22,13 +21,15 @@ export default function GroupDetail() {
     try {
       const response = await axios.get(apiGroupData);
       let temp = await response.data;
-      setIdNameGroup(temp.nameGroup);
-      setIdMember(temp.memberID);
+      setIdNameGroup(temp);
       console.log("data 1:", temp);
     } catch (error) {
       console.log("Error: ", error.message);
     }
   }
+  // {Object.values(idNameGroup).map((item,index) => 
+  //   console.log("Data:",item)
+  // )}
 
   return (
     <div className="container group-container">
@@ -44,33 +45,43 @@ export default function GroupDetail() {
                 <span>
                   <FontAwesomeIcon icon={faLayerGroup} />
                 </span>
-                {idNameGroup}
+                <span className="name-group">{idNameGroup.nameGroup}</span>
               </p>
             </div>
           </div>
           <div className="box-groupdetail-member">
             <h5>Masters</h5>
-            <div>
-              <p>
-                <span>
-                  <FontAwesomeIcon icon={faUser} />
-                </span>Phong
-              </p>
+            <div >
+              {idNameGroup?.masterID?.map((item, index) => {
+                return (
+                  <p key={index} className="item-user-detail">
+                    <span>
+                      <FontAwesomeIcon icon={faUser} />
+                    </span>
+                    <span>{item.userName}</span>
+                  </p>
+                )
+              })}
             </div>
           </div>
           <div className="box-groupdetail-member">
             <h5>Members</h5>
             <div>
-              <p>
-                <span>
-                  <FontAwesomeIcon icon={faUser} />
-                </span>Long
-              </p>
+            {idNameGroup?.memberID?.map((item, index) => {
+                return (
+                  <p key={index} className="item-user-detail">
+                    <span>
+                      <FontAwesomeIcon icon={faUser} />
+                    </span>
+                    <span>{item.userName}</span>
+                  </p>
+                )
+              })}
             </div>
           </div>
         </div>
       </div>
-      <div className="content-btn">
+      <div className="content-btn content-btn-left">
         <Link className="link-btn" to={`/group`}>
           <Button variant="primary">Back</Button>{' '}
         </Link>

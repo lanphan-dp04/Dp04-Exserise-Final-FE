@@ -60,10 +60,11 @@ export default function ListUser() {
             <thead>
               <tr>
                 <th className="text-size col-1">STT</th>
+                <th className="text-size col-1">Role</th>
                 <th className="text-size col-2">Full Name</th>
                 <th className="text-size col-3">Email</th>
                 <th className="text-size col-2">Phone Number</th>
-                <th className="text-size col-2">Action</th>
+                <th className="text-size col-3">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -71,6 +72,7 @@ export default function ListUser() {
                 return (
                   <tr key={item._id}>
                     <td className="text-size-m item-data-m"><span className="">{index + 1}</span></td>
+                    <td className="text-size-m item-data-m">{item?.role}</td>
                     <td className="text-size-m item-data-m">{item?.userName}</td>
                     <td className="text-size-m item-data-m">{item?.email}</td>
                     <td className="text-size-m item-data-m">{item?.phoneNumber}</td>
