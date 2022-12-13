@@ -27,9 +27,6 @@ export default function GroupDetail() {
       console.log("Error: ", error.message);
     }
   }
-  // {Object.values(idNameGroup).map((item,index) => 
-  //   console.log("Data:",item)
-  // )}
 
   return (
     <div className="container group-container">
@@ -67,9 +64,9 @@ export default function GroupDetail() {
           <div className="box-groupdetail-member">
             <h5>Members</h5>
             <div>
-            {idNameGroup?.memberID?.map((item, index) => {
+            {idNameGroup?.memberID?.map((item) => {
                 return (
-                  <p key={index} className="item-user-detail">
+                  <p key={item?._id} className="item-user-detail">
                     <span>
                       <FontAwesomeIcon icon={faUser} />
                     </span>

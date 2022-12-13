@@ -125,7 +125,7 @@ export default function ListUser() {
       let response = await axios.get(apiListData);
       let temp = await response.data;
       setDataUser(temp);
-      console.log(temp);
+      // console.log(temp);
     } catch (err) {
       console.log("Error: ", err.message);
     }
@@ -145,19 +145,9 @@ export default function ListUser() {
 
   const deleteUser = async id => {
 
-    await axios.delete(`http://localhost:5000/user/${id}/delete`)
+    await axios.delete(`http://localhost:5000/group/delete/${id}`)
       .then((res) => setShow(false));
     getUserData();
-  }
-
-  const setData = (data) => {
-    let { _id, userName, email, password, role, phoneNumber } = data;
-    localStorage.setItem("_id", _id);
-    localStorage.setItem("userName", userName);
-    localStorage.setItem("email", email);
-    localStorage.setItem("password", password);
-    localStorage.setItem("role", role);
-    localStorage.setItem("phoneNumber", phoneNumber);
   }
 
   return (
@@ -166,7 +156,7 @@ export default function ListUser() {
         <h2>Group Table</h2>
         <div className="box-addnewmember">
           <p>
-            <Link to="" type="button">
+            <Link to="/group/create" type="button">
               <span>
                 {" "}
                 <FontAwesomeIcon icon={faPlus} />
@@ -209,7 +199,7 @@ export default function ListUser() {
                   </td>
                   <td className="text-size-m item-data-m">
                     <Link className="link-btn" to={`/group/detail/${item._id}`}>
-                      <Button variant="primary">View</Button>{' '}
+                      <Button variant="primary mb-1">View</Button>{' '}
                     </Link>
                     <Button variant="danger" onClick={() => handleClickDeleteUser(item._id)}>Delete</Button>{' '}
                   </td>
