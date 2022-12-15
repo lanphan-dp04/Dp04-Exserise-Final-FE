@@ -1,5 +1,4 @@
 import React from "react";
-// import { PlusOutlined } from "@ant-design/icons";
 import {
   Form,
   Input,
@@ -10,22 +9,23 @@ import {
   InputNumber,
 } from "antd";
 import { Link, useNavigate } from "react-router-dom";
-// import moment from 'moment';
 import { useState } from "react";
 import { requestDayOff } from "../../../redux/action/dayoffAction";
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 
 const CreateRequest = () => {
   const [typeDayOff, setTypeDayOff] = useState("Day Off");
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isId = useSelector((state) => state.auth.login.currentUser._id);
-  console.log(isId);
   const dateFormat = "YYYY/MM/DD";
   const handleOnFinish = (values) => {
     const newRequestDayOff = {
+      typeDayOff: values.typeDayOff,
       userID: isId,
       reason: values.reason,
       fromDay: values.fromDay,
@@ -33,9 +33,10 @@ const CreateRequest = () => {
       partialDay: values.partialDay,
       quantity: values.quantity,
     };
-
     requestDayOff(newRequestDayOff, dispatch, navigate);
   };
+
+
   return (
     <div className="container request">
       <div className="header-staff">
@@ -46,7 +47,7 @@ const CreateRequest = () => {
           <Link to={"/dayoff"}>Day Off</Link>
         </div>
       </div>{" "}
-      <Form
+      <Form 
         onFinish={handleOnFinish}
         labelCol={{
           span: 3,
@@ -55,10 +56,9 @@ const CreateRequest = () => {
           span: 14,
         }}
         layout="horizontal"
-        className=""
       >
         <Form.Item
-          name={"typeDayoff"}
+          name={"typeDayOff"}
           rules={[{ required: true, message: "Please enter Type Requests!" }]}
           label="Type Requests"
         >

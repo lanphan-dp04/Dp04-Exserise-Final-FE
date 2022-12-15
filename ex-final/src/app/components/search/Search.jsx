@@ -25,7 +25,7 @@ export default function Search(props) {
           onChange={handleOnChange}
         />
         <button
-          class="btn-search btn btn-outline-success my-2 my-sm-0"
+          className="btn-search btn btn-outline-success my-2 my-sm-0"
           type="submit"
         >
           Search

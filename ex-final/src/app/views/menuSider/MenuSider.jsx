@@ -51,7 +51,7 @@ const items = [
       },
       {
         key: "account2",
-        label: <Link to="/request">Request</Link>,
+        label: <Link to="/requests">Request</Link>,
       },
       {
         key: "account3",

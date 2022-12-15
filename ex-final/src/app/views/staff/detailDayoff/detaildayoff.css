@@ -1,7 +1,18 @@
+.box-action-detail {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+.item-action-detail {
+    padding-top: 20px;
+    padding-right: 10px;
+}
+
 .layout-detaildayoff {
+    padding-left: 20px;
     margin-top: 50px;
     display: grid;
-    grid-template-columns: 40% 60%;
+    grid-template-columns: 45% 55%;
 }
 
 .layout-detaildayoff h4 {
@@ -10,8 +21,8 @@
 }
 
 .detail-dayoff table tr th {
-    margin-top: 30px;
-    padding: 20px 30px;
+    display: flex;
+    padding: 20px 10px;
 }
 
 tr:nth-child(even) {
