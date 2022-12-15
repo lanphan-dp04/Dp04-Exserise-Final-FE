@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 
 export default function ListUser() {
 
-  // id update and delete
   const [id, setId] = useState("");
   const [dataUser, setDataUser] = useState([]);
   const apiListData = "http://localhost:5000/user/list";
@@ -24,7 +23,6 @@ export default function ListUser() {
     getUserData(apiListData);
   }, [])
   
- // modal delete
  const [show, setShow] = useState(false);
  const handleClose = () => setShow(false);
   

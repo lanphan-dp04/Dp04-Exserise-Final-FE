@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import "./CreateGroup.scss"
 import axios from "axios";
 import { Link } from 'react-router-dom';
-import { Select, Space } from 'antd';
+import { Select } from 'antd';
 import { Form, Input } from 'antd';
-// import Button from "react-bootstrap/esm/Button";
-import { Option } from 'antd/es/mentions';
 import Button from 'react-bootstrap/esm/Button';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 const CreateGroup = () => {
   //call api user
@@ -54,9 +54,9 @@ const CreateGroup = () => {
 
   return (
     <div className='container container-create-group'>
-      
       <Form
         form={form}
+        initialValues={""}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
@@ -69,7 +69,7 @@ const CreateGroup = () => {
           name={["nameGroup"]}
           rules={[
             {
-              required: true,
+              required: true, 
               message: 'Please input your username!',
             },
           ]}
@@ -77,7 +77,7 @@ const CreateGroup = () => {
           <Input style={{ width: '85%' }} placeholder='Group name...' />
         </Form.Item>
         <Form.Item
-          label="Member(s)"
+          label="Members"
           name={"memberID"}
           rules={[
             {
@@ -88,7 +88,7 @@ const CreateGroup = () => {
         >
           <Select
             mode='multiple'
-            maxTagCount='responsive'
+            maxTagTextLength='responsive'
             placeholder='Choose members...'
             style={{
               width: '85%',
@@ -96,13 +96,16 @@ const CreateGroup = () => {
           >
             {memberName.map((option) => (
               <Select.Option key={option._id} value={option._id}>
+                <span>
+                  <FontAwesomeIcon icon={faUser} />
+                </span>
                 {option.userName}
               </Select.Option>
             ))}
           </Select>
         </Form.Item>
         <Form.Item
-          label="Master(s)"
+          label="Masters"
           name={["masterID"]}
           rules={[
             {
@@ -113,7 +116,7 @@ const CreateGroup = () => {
         >
           <Select
             mode='multiple'
-            maxTagCount='responsive'
+            maxTagTextLength='responsive'
             placeholder='Choose members...'
             style={{
               width: '85%',
@@ -121,6 +124,9 @@ const CreateGroup = () => {
           >
             {masterName.map((option) => (
               <Select.Option key={option._id} value={option._id}>
+                <span>
+                  <FontAwesomeIcon icon={faUser} />
+                </span>
                 {option.userName}
               </Select.Option>
             ))}

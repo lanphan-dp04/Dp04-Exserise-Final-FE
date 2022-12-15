@@ -14,6 +14,16 @@
     padding-top: 3px;
 }
 
+:where(.css-dev-only-do-not-override-1ij74fp).ant-select-multiple .ant-select-selection-item-remove svg {
+    color: red;
+    margin: 0 -8px 2px 5px;
+}
+
+:where(.css-dev-only-do-not-override-1ij74fp).ant-select-multiple .ant-select-selection-overflow {
+    height: 120px;
+    display: inline !important;
+}
+
 .ant-form {
     padding-top: 40px;
 }
@@ -28,6 +38,18 @@ h3 {
     display: flex;
     width: 88%;
     justify-content: flex-end;
+}
+
+.ant-form {
+    padding: 20px 20px 30px 20px;
+}
+
+:where(.css-dev-only-do-not-override-1ij74fp).ant-form-horizontal .ant-form-item-label {
+    margin-top: -8px;
+}
+
+:where(.css-dev-only-do-not-override-1ij74fp).ant-form-item .ant-form-item-label>label {
+    font-size: 18px;
 }
 
 @media only screen and (max-width: 700px) {
