@@ -69,4 +69,10 @@
 
 .box-groupdetail .item-user-detail {
     margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.box-groupdetail .item-user-detail:hover {
+    cursor: pointer;
+    color: wheat;
 }
