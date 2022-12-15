@@ -2,14 +2,12 @@ import "./ListUser.scss";
 import axios from "axios";
 import {Button, Modal, Table} from 'react-bootstrap';
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function ListUser() {
-  let history = useNavigate();
 
   // id update and delete
   const [id, setId] = useState("");
-  
   const [dataUser, setDataUser] = useState([]);
   const apiListData = "http://localhost:5000/user/list";
 
@@ -62,10 +60,11 @@ export default function ListUser() {
             <thead>
               <tr>
                 <th className="text-size col-1">STT</th>
+                <th className="text-size col-1">Role</th>
                 <th className="text-size col-2">Full Name</th>
                 <th className="text-size col-3">Email</th>
                 <th className="text-size col-2">Phone Number</th>
-                <th className="text-size col-2">Action</th>
+                <th className="text-size col-3">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -73,6 +72,7 @@ export default function ListUser() {
                 return (
                   <tr key={item._id}>
                     <td className="text-size-m item-data-m"><span className="">{index + 1}</span></td>
+                    <td className="text-size-m item-data-m">{item?.role}</td>
                     <td className="text-size-m item-data-m">{item?.userName}</td>
                     <td className="text-size-m item-data-m">{item?.email}</td>
                     <td className="text-size-m item-data-m">{item?.phoneNumber}</td>

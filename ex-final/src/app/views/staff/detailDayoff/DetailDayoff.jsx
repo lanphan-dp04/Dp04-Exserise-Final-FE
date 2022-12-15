@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import "./detailDayoff.css";
+import "./detaildayoff.css";
 import axios from "axios";
 import Moment from "moment";
 import { Button,Modal } from "antd";
