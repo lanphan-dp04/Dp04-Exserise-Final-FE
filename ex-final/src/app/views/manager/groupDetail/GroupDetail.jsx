@@ -11,7 +11,6 @@ import { Select } from 'antd';
 import { Form, Input } from 'antd';
 
 export default function GroupDetail() {
-
   const { id } = useParams();
   const [form] = Form.useForm();
 
