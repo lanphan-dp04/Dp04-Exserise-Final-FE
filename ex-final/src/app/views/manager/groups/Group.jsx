@@ -1,4 +1,6 @@
 import "../../../Page/user/listUser/ListUser.scss";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 import axios from "axios";
 import { Button, Modal, Table } from 'react-bootstrap';
 import { useEffect, useState } from "react";
@@ -37,8 +39,11 @@ export default function ListUser() {
 
   const deleteUser = async id => {
     await axios.delete(`http://localhost:5000/group/delete/${id}`)
-      .then((res) => setShow(false));
-    getUserData();
+      .then((res) => {
+        setShow(false)
+        toast.success("Update Group successfully!!!", { autoClose: 2000 });
+        getUserData();
+      })
   }
 
   return (
@@ -78,7 +83,7 @@ export default function ListUser() {
                     {item.memberID.map((member) => {
                       return (
                         <Tooltip title={member.userName} placement="top">
-                        <img key={member._id} className="user-group" src={member?.avatar} alt="member"></img> 
+                          <img key={member._id} className="user-group" src={member?.avatar} alt="member"></img>
                         </Tooltip>
                       )
                     })}
@@ -117,6 +122,7 @@ export default function ListUser() {
             <Button variant="danger" onClick={() => deleteUser(id)}>
               Deleted
             </Button>
+            <ToastContainer />
           </Modal.Footer>
         </Modal>
       </div>

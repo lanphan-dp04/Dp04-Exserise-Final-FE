@@ -1,3 +1,5 @@
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "./ListUser.scss";
 import {Button, Modal, Table} from 'react-bootstrap';
 import axios from "axios";
@@ -31,8 +33,7 @@ export default function ListUser() {
     setShow(true);
   }
 
-  const deleteUser = async id => {
-
+const deleteUser = async id => {
     await axios.delete(`http://localhost:5000/user/${id}/delete`)
     .then((res) => setShow(false));
     getUserData();
@@ -99,7 +100,7 @@ export default function ListUser() {
               <Button variant="secondary" onClick={handleClose}>
                 Close
               </Button>
-              <Button variant="danger" onClick={() => deleteUser(id)}>
+              <Button variant="danger" onClick={() => {deleteUser(id)}}>
                 Deleted
               </Button>
             </Modal.Footer>

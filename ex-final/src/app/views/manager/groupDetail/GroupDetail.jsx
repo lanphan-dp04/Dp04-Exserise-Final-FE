@@ -1,4 +1,6 @@
 import React from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "./groupdetail.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
@@ -64,7 +66,7 @@ export default function GroupDetail() {
   const onFinish = async(values) => {
     await axios.put(`http://localhost:5000/group/update/${id}`, values)
     .then((res) => {
-      alert("Saved successfully.");
+      return toast.success("Update Group successfully!!!",{autoClose:2000});
     })
     .catch((error) => {
       return error.response.data;
@@ -91,12 +93,24 @@ export default function GroupDetail() {
         <Form.Item
           label="Groupname"
           name='nameGroup'
+          rules={[
+            {
+              required: true, 
+              message: 'Please input your username!',
+            },
+          ]}
         >
           <Input style={{ width: '85%' }}/>
         </Form.Item>
         <Form.Item
           label="Members"
           name={"memberID"}
+          rules={[
+            {
+              required: true,
+              message: 'Please input your member!',
+            },
+          ]}
         >
           <Select
             mode='multiple'
@@ -116,6 +130,12 @@ export default function GroupDetail() {
         <Form.Item
           label="Masters"
           name={["masterID"]}
+          rules={[
+            {
+              required: true,
+              message: 'Please input your master!',
+            },
+          ]}
         >
           <Select
             mode='multiple'
@@ -138,6 +158,7 @@ export default function GroupDetail() {
             <Button className="btn btn-success" type="submit">
               Send
             </Button>
+            <ToastContainer />
             <Link className="link-btn" to={`/group`}>
               <Button variant="primary">Back</Button>{' '}
             </Link>
