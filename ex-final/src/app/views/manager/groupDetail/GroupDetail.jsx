@@ -46,7 +46,7 @@ export default function GroupDetail() {
       let temp = await response.data;
       setDataUser(temp);
     } catch (err) {
-      console.log("Error: ", err.message);
+      return err;
     }
   }
   useEffect(() => {
@@ -65,16 +65,15 @@ export default function GroupDetail() {
   const onFinish = async(values) => {
     await axios.put(`http://localhost:5000/group/update/${id}`, values)
     .then((res) => {
-      console.log("data", values);
       alert("Saved successfully.");
     })
     .catch((error) => {
-      console.log("Error:",error.response.data);
+      return error.response.data;
     });
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
+    return errorInfo;
   };
 
   return (
@@ -110,9 +109,6 @@ export default function GroupDetail() {
           >
             {memberName?.map((option) => (
               <Select.Option key={option._id} value={option._id}>
-                {/* <span>
-                  <FontAwesomeIcon icon={faUser} />
-                </span> */}
                 {option.userName}
               </Select.Option>
             ))}
@@ -132,9 +128,6 @@ export default function GroupDetail() {
           >
             {masterName?.map((option) => (
               <Select.Option key={option._id} value={option._id}>
-                {/* <span>
-                  <FontAwesomeIcon icon={faUser} />
-                </span> */}
                 {option.userName}
               </Select.Option>
             ))}

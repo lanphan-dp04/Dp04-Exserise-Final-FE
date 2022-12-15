@@ -39,7 +39,7 @@ export default function Register() {
         alert("Saved successfully.");
       })
       .catch((error) => {
-        console.log("Error:",error.response.data);
+        return error;
       }); 
   };
 

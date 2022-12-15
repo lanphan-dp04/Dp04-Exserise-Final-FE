@@ -47,7 +47,7 @@ export default function EditUser() {
         alert("Update success!!!")
         );
         } catch (error) {
-            console.log(error);
+            return error;
         }
         history("/list");
     }

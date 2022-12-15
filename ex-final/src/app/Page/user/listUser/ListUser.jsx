@@ -16,7 +16,7 @@ export default function ListUser() {
       let temp = await response.data;
       setDataUser(temp);
     } catch (err) {
-      console.log("Error: ", err.message);
+      return err;
     }
   }
   useEffect(() => {
