@@ -15,7 +15,7 @@ export default function Header() {
           <Link to="list/form" type="button">
             <span>
               {" "}
-              <FontAwesomeIcon icon={faPlus} />
+              <FontAwesomeIcon icon={faUserPlus} />
             </span>
             New Member
           </Link>
@@ -26,7 +26,7 @@ export default function Header() {
           <Link to="create-request" type="button">
             <span>
               {" "}
-              <FontAwesomeIcon icon={faUserPlus} />
+              <FontAwesomeIcon icon={faPlus} />
             </span>
             Log Off
           </Link>

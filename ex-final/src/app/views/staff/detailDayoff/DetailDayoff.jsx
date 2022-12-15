@@ -1,30 +1,28 @@
 import { React, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import "./detaildayoff.css";
+import "./detailDayoff.css";
 import axios from "axios";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClockRotateLeft } from "@fortawesome/free-solid-svg-icons";
-
-import { Modal } from "antd";
+import Moment from "moment";
+import { Button,Modal } from "antd";
+import { HistoryOutlined, UndoOutlined } from "@ant-design/icons";
 
 export default function DetailDayoff() {
   const [dayOffWithId, setDayOffWithId] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const paramId = useParams();
 
-  console.log("paramId", paramId.id);
+  const formatDate = "YYYY-MM-DD";
+
   useEffect(() => {
-    const api = `https://636dab7a91576e19e32cef5d.mockapi.io/dayoff/${paramId.id}`;
+    const api = `http://localhost:5000/requests/detail/${paramId.id}`;
     axios
       .get(api)
       .then((res) => {
         setDayOffWithId(res.data);
-        console.log("dayOffWithId", dayOffWithId);
       })
 
       .catch((error) => {
-        console.log("err", error);
+        return error;
       });
   }, []);
 
@@ -46,11 +44,11 @@ export default function DetailDayoff() {
           <table>
             <tr>
               <th className="">From:</th>
-              <td>{dayOffWithId.fromDay}</td>
+              <td>{Moment(dayOffWithId.fromDay).format(formatDate)}</td>
             </tr>
             <tr>
               <th>To:</th>
-              <td>{dayOffWithId.toDay}</td>
+              <td>{Moment(dayOffWithId.toDay).format(formatDate)}</td>
             </tr>
             <tr>
               <th>Time:</th>
@@ -70,14 +68,13 @@ export default function DetailDayoff() {
             </tr>
           </table>
 
-          <div className="box-action">
+          <div >
             <h4>Action: </h4>
-            <button className="action-revert" onClick={showModal}>
-              <span>
-                {" "}
-                <FontAwesomeIcon icon={faClockRotateLeft} />
-              </span>{" "}
-            </button>
+            <Button
+              icon={<HistoryOutlined />}
+              onClick={() => showModal(dayOffWithId._id)}
+              type="primary"
+            ></Button>
 
             <Modal
               title="Reason for revert"

@@ -10,14 +10,19 @@ import {
   faXmark,
   faClockRotateLeft,
 } from "@fortawesome/free-solid-svg-icons";
-// import {formatDay} from "../../"
+import { useSelector } from "react-redux";
+import { Button } from "antd";
+import Moment from "moment";
+import { EyeOutlined } from "@ant-design/icons";
 
 function DayOff() {
   const [listDayOff, setListDayOff] = useState([]);
   const [status, setStatus] = useState("");
 
+  const userId = useSelector((state) => state.auth.login.currentUser._id);
+
   useEffect(() => {
-    const api = "https://636dab7a91576e19e32cef5d.mockapi.io/dayoff";
+    const api = `http://localhost:5000/requests/${userId}`;
     axios
       .get(api)
       .then((res) => {
@@ -53,11 +58,7 @@ function DayOff() {
     setStatus("reverted");
   };
 
-  // var today = new Date().toJSON().slice(0, 10).replace(/-/g, "-");
-  const formatDay = (day) => {
-    return day.slice(0, 10).replace(/-/g, "-");
-  };
-  console.log("test", formatDay("2022-09-11T17:00:00.000"));
+  
   return (
     <div className="container">
       <div className="header-staff">
@@ -116,23 +117,23 @@ function DayOff() {
         </thead>
         <tbody>
           {filteredListDayOff.map((item) => {
+            const formatDate = "YYYY-MM-DD";
             return (
               <tr>
                 <td>{item.id}</td>
                 <td>
-                  {formatDay(item.fromDay)} to {formatDay(item.toDay)}
+                  {Moment(item.fromDay).format(formatDate)} - {Moment(item.toDay).format(formatDate)}
                 </td>
                 <td>{item.quantity}</td>
-                <td>{item.name}</td>
+                <td>{item.userName}</td>
                 <td>{item.status}</td>
-                <td>{formatDay(item.createAat)}</td>
+                <td>{Moment(item.createdAt).format(formatDate)}</td>
                 <td>
                   <Link
-                    to={`/dayoff/${item.id}`}
-                    className="button-viewdetail"
+                    to={`/dayoff/${item._id}`}
                     type="button"
                   >
-                    View
+                     <Button icon={<EyeOutlined />} type="primary"></Button>
                   </Link>
                 </td>
               </tr>

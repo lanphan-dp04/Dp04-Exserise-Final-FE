@@ -86,7 +86,9 @@ body {
   color: white;
   font-size: 1rem;
 }
-
+.button-login:hover {
+  border-radius: 10px;
+}
 .button-login:focus {
   box-shadow: 0 0 0 1px hsl(178, 100%, 50%);
 }

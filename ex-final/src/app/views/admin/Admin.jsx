@@ -8,12 +8,14 @@ import ListUser from "../../Page/user/listUser/ListUser";
 import Header from "../header/Header";
 import Request from "../requests/Requests";
 import MenuSider from "../menuSider/MenuSider";
-import CreateRequest from "../staff/createRequest/CreateRequest";
+import CreateRequest from "../staff/formDayOff/FormDayOff";
 import DetailDayoff from "../staff/detailDayoff/DetailDayoff";
 import DayOff from "../staff/dayoff/DayOff";
 import Group from "../manager/groups/Group";
 import GroupDetail from "../manager/groupDetail/GroupDetail";
 import DetailUser from "../../Page/user/detailUser/DetailUser";
+import DetailRequest from "../requests/DetailRequest";
+import FormEditDayOff from "../requests/FormEditDayOff";
 
 function Admin() {
   const { Content, Sider } = Layout;
@@ -39,7 +41,9 @@ function Admin() {
         <Content style={{ height: "100%", overflow: "scroll" }}>
           <div>
             <Routes history={history}>
-              <Route path="/request" element={<Request />} />
+              <Route path="/requests" element={<Request />} />
+              <Route path="/requests/detail/:id" element={<DetailRequest />} />
+              <Route path="/requests/edit/:id" element={<FormEditDayOff />} />
               <Route path="/create-request" element={<CreateRequest />} />
 
               <Route path="/dayoff" element={<DayOff />} />

@@ -32,7 +32,11 @@
 .table-title {
     background-color:#7287b0;
 }
-
+.table-action {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .table-myrequest tr:nth-child(even) {
     --bs-table-accent-bg: var(--bs-table-striped-bg);}
 
@@ -69,7 +73,17 @@ td a .svg-inline--fa{
     color: rgb(102, 101, 101);
     
 }
+.anticon svg {
+    margin-bottom: 5px;
+    margin-left: 5px;
+  }
 
+  .display-none {
+    display: none;
+  }
+  .display-block {
+    display: block;
+  }
 .box-filter button:hover {
     
     color: rgb(228, 219, 219);
