@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "./Register.scss";
 import Form from 'react-bootstrap/Form';
 import { useParams } from "react-router-dom";
@@ -24,6 +26,7 @@ const ERROR_PHONENUMBER = {
 
 export default function Register() {
   let { id } = useParams();
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -34,13 +37,14 @@ export default function Register() {
     e.preventDefault();
     axios
       .post("http://localhost:5000/user/create", data)
-      .then((response) => {
+      .then(() => {
         e.target.reset();
-        alert("Saved successfully.");
+        toast.success("Create new Staff successfully!!!", { autoClose: 1000 })
       })
       .catch((error) => {
+        toast.error("Email or phone number already exists. please re-enter!!!", { autoClose: 2000 })
         return error;
-      }); 
+      });
   };
 
   return (
@@ -93,7 +97,7 @@ export default function Register() {
               </>
             )}
           </div>
-          
+
           <div className="form-name">
             <label className="form-lable" htmlFor="inputEmail">
               Email <span className="text-color-red">*</span>
@@ -125,7 +129,7 @@ export default function Register() {
               placeholder="Enter number phone..."
               {...register("phoneNumber", {
                 required: ERROR_PHONENUMBER?.required,
-                pattern:/^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/i,
+                pattern: /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/i,
                 message: "Number is required",
                 minLength: {
                   value: 10,
@@ -143,13 +147,14 @@ export default function Register() {
             <label className="form-lable" htmlFor="inputPassword4">Role <span className="text-color-red">*</span></label>
             <Form.Select aria-label="Default select example" type="text" name="role" id="role" className="input-name" disabled
               {...register("role")}>
-              <option  value="staff">Staff</option>
+              <option value="staff">Staff</option>
             </Form.Select>
           </div>
           <div className="content-btn">
             <button className="btn btn-success" type="submit">
               Add
             </button>
+            <ToastContainer />
             <Link className="link-btn" to={`/list`}>
               <Button variant="primary">Back</Button>{' '}
             </Link>

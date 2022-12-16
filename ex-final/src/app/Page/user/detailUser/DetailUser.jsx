@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Loanding from "../../../components/loading/Loanding";
+
 
 export default function DetailUser() {
   const { id } = useParams();
@@ -12,8 +14,10 @@ export default function DetailUser() {
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true)
     getDetailUserByID();
   }, [])
 
@@ -24,12 +28,15 @@ export default function DetailUser() {
       setEmail(response.data.email);
       setPhoneNumber(response.data.phoneNumber);
       setRole(response.data.role);
+      setLoading(false);
     } catch (err) {
       console.log("Error: ", err.message);
     }
   }
   dataUser.map(item => console.log(item))
   return (
+    <div>
+      {loading ? <Loanding /> :
     <div className="container container-detail">
       <div className="content-detail">
         <div className="title-detail">
@@ -53,6 +60,7 @@ export default function DetailUser() {
           <Button variant="primary">Back</Button>{' '}
         </Link>
       </div>
+    </div>}
     </div>
   )
 }

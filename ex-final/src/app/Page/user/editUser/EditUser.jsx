@@ -2,15 +2,31 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Form from 'react-bootstrap/Form';
 import { Link, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/esm/Button";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "./EditUser.scss"
+
+const ERROR_EMAIL = {
+    required: "Email address is required",
+    pattern: "Please include an '@' in the email address ",
+};
+const ERROR_FULLNAME = {
+    required: "Fullname is required",
+};
+const ERROR_PASSWORD = {
+    required: "Password is required",
+};
+const ERROR_PHONENUMBER = {
+    required: "Phone number is required",
+    pattern: "Please enter the correct phone number format"
+};
 
 export default function EditUser() {
     const {
         formState: { errors },
-      } = useForm();
+    } = useForm();
 
     const { id } = useParams();
     let history = useNavigate();
@@ -23,9 +39,9 @@ export default function EditUser() {
 
     useEffect(() => {
         getUserByID();
-    },[]);
+    }, []);
 
-    const getUserByID = async() => {
+    const getUserByID = async () => {
         const response = await axios.get(`http://localhost:5000/user/${id}/edit`);
         setUserName(response.data.userName);
         setPassword(response.data.password);
@@ -34,22 +50,22 @@ export default function EditUser() {
         setRole(response.data.role);
     }
 
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            await axios.patch(`http://localhost:5000/user/${id}`, {
+        await axios.patch(`http://localhost:5000/user/${id}`, {
             userName,
             password,
             email,
             phoneNumber,
             role
-        },
-        alert("Update success!!!")
-        );
-        } catch (error) {
-            return error;
-        }
-        history("/list");
+        })
+            .then((res) => {
+                toast.success("Update User successfully!!!", { autoClose: 1000 })
+                console.log("status:",res.status);
+            })
+            .catch((errors) => {
+                console.log("errors",errors); 
+            });
     }
 
     return (
@@ -63,13 +79,13 @@ export default function EditUser() {
                         </label>
                         <input
                             className="form-control input-name"
-                            required
                             type="text"
                             name="userName"
                             id="userName"
                             placeholder="Enter user name..."
                             defaultValue={userName}
                             onChange={e => setUserName(e.target.value)}
+                            required
                         />
                     </div>
                     <div className="form-name-e">
@@ -87,20 +103,6 @@ export default function EditUser() {
                             onChange={e => setPassword(e.target.value)}
                         ></input>
                     </div>
-
-                    <div className="form-name-e">
-                        <label className="form-lable" htmlFor="inputEmail">
-                            Email <span className="text-color-red">*</span>
-                        </label>
-                        <input
-                            required
-                            className="form-control input-name"
-                            placeholder="Enter email..."
-                            id="email"
-                            defaultValue={email}
-                            onChange={e => setEmail(e.target.value)}
-                        />
-                    </div>
                     <div className="form-name-e ">
                         <label className="form-lable" htmlFor="inputFullname">
                             Number Phone <span className="text-color-red">*</span>
@@ -117,18 +119,23 @@ export default function EditUser() {
                         />
                     </div>
                     <div className="form-name-e">
-                        <label className="form-lable" htmlFor="inputPassword4">Role <span className="text-color-red">*</span></label>
-                        <Form.Select aria-label="Default select example" type="Number" name="role" id="role" className="input-name" disabled
-                            defaultValue={role}
-                            onChange={e => setRole(e.target.value)}
-                        >
-                            <option value="staff">Staff</option>
-                        </Form.Select>
+                        <label className="form-lable" htmlFor="inputEmail">
+                            Email <span className="text-color-red">*</span>
+                        </label>
+                        <input
+                            required
+                            className="form-control input-name"
+                            placeholder="Enter email..."
+                            id="email"
+                            defaultValue={email}
+                            disabled
+                        />
                     </div>
                     <div className="content-btn">
                         <button className="btn btn-success" type="submit">
                             Update
                         </button>
+                        <ToastContainer />
                         <Link className="link-btn" to={`/list`}>
                             <Button variant="primary">Back</Button>{' '}
                         </Link>

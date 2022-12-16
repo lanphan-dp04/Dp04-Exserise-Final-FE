@@ -1,14 +1,14 @@
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import "./ListUser.scss";
 import {Button, Modal, Table} from 'react-bootstrap';
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Loanding from "../../../components/loading/Loanding";
 
 export default function ListUser() {
 
   const [id, setId] = useState("");
+  const [loading, setLoading] = useState(false);
   const [dataUser, setDataUser] = useState([]);
   const apiListData = "http://localhost:5000/user/list";
 
@@ -17,11 +17,13 @@ export default function ListUser() {
       let response = await axios.get(apiListData);
       let temp = await response.data;
       setDataUser(temp);
+      setLoading(false);
     } catch (err) {
       return err;
     }
   }
   useEffect(() => {
+    setLoading(true);
     getUserData(apiListData);
   }, [])
   
@@ -50,6 +52,8 @@ const deleteUser = async id => {
  }
 
   return (
+    <div>
+      {loading ? <Loanding /> :
       <div className="container mt-4">
         <div className="container item-top">
           <h2>User Table</h2>
@@ -69,7 +73,7 @@ const deleteUser = async id => {
             <tbody>
               {dataUser.map((item, index) => {
                 return (
-                  <tr key={item._id}>
+                  <tr key={item?._id}>
                     <td className="text-size-m item-data-m"><span className="">{index + 1}</span></td>
                     <td className="text-size-m item-data-m">{item?.role}</td>
                     <td className="text-size-m item-data-m">{item?.userName}</td>
@@ -107,5 +111,7 @@ const deleteUser = async id => {
           </Modal>
         </div>
       </div>
+      }
+    </div>
   );
 }
