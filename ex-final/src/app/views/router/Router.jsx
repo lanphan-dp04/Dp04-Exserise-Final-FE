@@ -16,6 +16,7 @@ import GroupDetail from "../manager/groupDetail/GroupDetail";
 import DetailUser from "../../Page/user/detailUser/DetailUser";
 import DetailRequest from "../requests/DetailRequest";
 import FormEditDayOff from "../requests/FormEditDayOff";
+import CreateGroup from "../manager/createGroup/CreateGroup";
 
 function Router() {
   const { Content, Sider } = Layout;
@@ -54,6 +55,7 @@ function Router() {
               <Route path="/list" element={<ListUser />} />
 
               <Route path="/group" element={<Group />} />
+              <Route path="/group/create" element={<CreateGroup />} />
               <Route path="/group/detail/:id" element={<GroupDetail />} />
             </Routes>
           </div>

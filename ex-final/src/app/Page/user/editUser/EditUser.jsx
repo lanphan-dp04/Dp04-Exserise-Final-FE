@@ -7,23 +7,8 @@ import { Link, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/esm/Button";
 import "./EditUser.scss"
 
-const ERROR_EMAIL = {
-    required: "Email address is required",
-    pattern: "Please include an '@' in the email address ",
-  };
-  const ERROR_FULLNAME = {
-    required: "Fullname is required",
-  };
-  const ERROR_PASSWORD = {
-    required: "Password is required",
-  };
-  const ERROR_PHONENUMBER = {
-    required: "Password is required",
-  };
 export default function EditUser() {
     const {
-        register,
-        reset,
         formState: { errors },
       } = useForm();
 
@@ -62,7 +47,7 @@ export default function EditUser() {
         alert("Update success!!!")
         );
         } catch (error) {
-            console.log(error);
+            return error;
         }
         history("/list");
     }
@@ -133,12 +118,11 @@ export default function EditUser() {
                     </div>
                     <div className="form-name-e">
                         <label className="form-lable" htmlFor="inputPassword4">Role <span className="text-color-red">*</span></label>
-                        <Form.Select aria-label="Default select example" type="Number" name="role" id="role" className="input-name"
+                        <Form.Select aria-label="Default select example" type="Number" name="role" id="role" className="input-name" disabled
                             defaultValue={role}
                             onChange={e => setRole(e.target.value)}
                         >
-                            <option value="0">User</option>
-                            <option value="1">Master</option>
+                            <option value="staff">Staff</option>
                         </Form.Select>
                     </div>
                     <div className="content-btn">

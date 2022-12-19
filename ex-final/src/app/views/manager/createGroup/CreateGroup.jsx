@@ -1,102 +1,90 @@
-import React from "react";
-import "./groupdetail.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
-import Button from "react-bootstrap/esm/Button";
+import React, { useState, useEffect } from 'react';
+import "./CreateGroup.scss"
 import axios from "axios";
+import { Link } from 'react-router-dom';
 import { Select } from 'antd';
 import { Form, Input } from 'antd';
+import Button from 'react-bootstrap/esm/Button';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
-export default function GroupDetail() {
-  const { id } = useParams();
-  const [form] = Form.useForm();
-
-  const [idNameGroup, setIdNameGroup] = useState({});
-  const apiGroupData = `http://localhost:5000/group/list/${id}`;
-
-  useEffect(() => {
-    getGroupByID()
-  }, [])
-
-  const getGroupByID = async () => {
-    try {
-      const response = await axios.get(apiGroupData);
-      let temp = await response.data;
-      form.setFieldsValue({
-        nameGroup: temp.nameGroup,
-        memberID: temp.memberID.map((i) => i._id),
-        masterID: temp.masterID.map((i) => i._id),
-      })
-      setIdNameGroup(temp);
-    } catch (error) {
-      console.log("Error: ", error.message);
-    }
-  }
-  
+const CreateGroup = () => {
+  //call api user
   const apiListData = "http://localhost:5000/user/list";
   const [dataUser, setDataUser] = useState([]);
-  
+
   async function getUserData() {
     try {
       let response = await axios.get(apiListData);
       let temp = await response.data;
       setDataUser(temp);
     } catch (err) {
-      return err;
+      console.log("Error: ", err.message);
     }
   }
   useEffect(() => {
     getUserData();
   }, [])
-
   // filter Member
   const memberName = dataUser.filter(function (e) {
-    return e.role === "staff"
+    return e.role === "staff";
   });
   // filter Master
-  const masterName = dataUser.filter(function (e) {
-    return e.role === "staff"  
+  const masterName = memberName.filter(function (e) {
+    return e.role === "staff"
   });
-
-  const onFinish = async(values) => {
-    await axios.put(`http://localhost:5000/group/update/${id}`, values)
+  //form
+  const [form] = Form.useForm();
+  const onFinish = (values) => {
+    axios.post("http://localhost:5000/group/new", values)
     .then((res) => {
       alert("Saved successfully.");
+      form.resetFields();
     })
     .catch((error) => {
-      return error.response.data;
-    });
+      if(error.status(422))
+        alert("error email or phone number!!!");
+      else
+      console.log("Error:",error.response.data);
+    }); 
   };
-
   const onFinishFailed = (errorInfo) => {
-    return errorInfo;
+    console.log('Failed:', errorInfo);
   };
 
   return (
-    <div className="container group-container">
+    <div className='container container-create-group'>
       <Form
         form={form}
+        initialValues={""}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
         <Form.Item>
-          <div className="box-title">
-            <h3>Group Detail </h3>
-          </div>
+          <h3 className='d-flex justify-content-center'>Create New Group</h3>
         </Form.Item>
         <Form.Item
           label="Groupname"
-          name='nameGroup'
+          name={["nameGroup"]}
+          rules={[
+            {
+              required: true, 
+              message: 'Please input your username!',
+            },
+          ]}
         >
-          <Input style={{ width: '85%' }}/>
+          <Input style={{ width: '85%' }} placeholder='Group name...' />
         </Form.Item>
         <Form.Item
           label="Members"
           name={"memberID"}
+          rules={[
+            {
+              required: true,
+              message: 'Please input your member!',
+            },
+          ]}
         >
           <Select
             mode='multiple'
@@ -106,8 +94,11 @@ export default function GroupDetail() {
               width: '85%',
             }}
           >
-            {memberName?.map((option) => (
+            {memberName.map((option) => (
               <Select.Option key={option._id} value={option._id}>
+                <span>
+                  <FontAwesomeIcon icon={faUser} />
+                </span>
                 {option.userName}
               </Select.Option>
             ))}
@@ -116,6 +107,12 @@ export default function GroupDetail() {
         <Form.Item
           label="Masters"
           name={["masterID"]}
+          rules={[
+            {
+              required: true,
+              message: 'Please input your master!',
+            },
+          ]}
         >
           <Select
             mode='multiple'
@@ -125,8 +122,11 @@ export default function GroupDetail() {
               width: '85%',
             }}
           >
-            {masterName?.map((option) => (
+            {masterName.map((option) => (
               <Select.Option key={option._id} value={option._id}>
+                <span>
+                  <FontAwesomeIcon icon={faUser} />
+                </span>
                 {option.userName}
               </Select.Option>
             ))}
@@ -136,7 +136,7 @@ export default function GroupDetail() {
         >
           <div className="btn-bottom">
             <Button className="btn btn-success" type="submit">
-              Send
+              Add
             </Button>
             <Link className="link-btn" to={`/group`}>
               <Button variant="primary">Back</Button>{' '}
@@ -146,4 +146,5 @@ export default function GroupDetail() {
       </Form>
     </div>
   );
-}
+};
+export default CreateGroup;

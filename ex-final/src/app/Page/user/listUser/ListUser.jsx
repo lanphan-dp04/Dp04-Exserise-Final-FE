@@ -1,12 +1,11 @@
 import "./ListUser.scss";
-import axios from "axios";
 import {Button, Modal, Table} from 'react-bootstrap';
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function ListUser() {
 
-  // id update and delete
   const [id, setId] = useState("");
   const [dataUser, setDataUser] = useState([]);
   const apiListData = "http://localhost:5000/user/list";
@@ -17,14 +16,13 @@ export default function ListUser() {
       let temp = await response.data;
       setDataUser(temp);
     } catch (err) {
-      console.log("Error: ", err.message);
+      return err;
     }
   }
   useEffect(() => {
     getUserData(apiListData);
   }, [])
   
- // modal delete
  const [show, setShow] = useState(false);
  const handleClose = () => setShow(false);
   

@@ -4,7 +4,7 @@
 
     // background-image: linear-gradient(170deg, #b86bd6 , #53e3a6);
     .main-register {
-        padding: 40px 25%;
+        padding: 40px 12%;
     }
 
     .form-group {
@@ -52,7 +52,7 @@
 
 .text-create-user {
     width: 100%;
-    font-size: 40px;
+    font-size: 38px;
     margin-bottom: 45px;
     font-weight: 700;
     color: rgb(0, 0, 0);
@@ -86,12 +86,12 @@
 
 @media only screen and (max-width: 1024px) {
     .container-register .main-register {
-        padding: 40px 20%;
+        padding: 40px 10%;
     }
 }
 
 @media only screen and (max-width: 700px) {
     .container-register .main-register {
-        padding: 40px 10%;
+        padding: 40px 5%;
     }
 }

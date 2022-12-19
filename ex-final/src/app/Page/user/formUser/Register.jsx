@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
+import "./Register.scss";
+import Form from 'react-bootstrap/Form';
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import Form from 'react-bootstrap/Form';
-import { Link, useNavigate } from "react-router-dom";
-import "./Register.scss";
+import { Link } from "react-router-dom";
 import Button from "react-bootstrap/esm/Button";
 
 const ERROR_EMAIL = {
@@ -27,7 +27,6 @@ export default function Register() {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm();
 
@@ -40,13 +39,8 @@ export default function Register() {
         alert("Saved successfully.");
       })
       .catch((error) => {
-        console.log("Error:",error.response.data);
-        alert("Email or phone number already exists. Please re-enter!!!");
-          reset({
-            email:"",
-            phoneNumber:""
-          })
-      });
+        return error;
+      }); 
   };
 
   return (
@@ -138,8 +132,8 @@ export default function Register() {
                   message: "Min length is 10",
                 },
                 maxLength: {
-                  value: 10,
-                  message: "Max length is 10",
+                  value: 11,
+                  message: "Max length is 11",
                 },
               })}
             />
@@ -147,10 +141,9 @@ export default function Register() {
           </div>
           <div className="form-name">
             <label className="form-lable" htmlFor="inputPassword4">Role <span className="text-color-red">*</span></label>
-            <Form.Select aria-label="Default select example" type="Number" name="role" id="role" className="input-name"
+            <Form.Select aria-label="Default select example" type="text" name="role" id="role" className="input-name" disabled
               {...register("role")}>
-              <option value="user">User</option>
-              <option value="master">Master</option>
+              <option  value="staff">Staff</option>
             </Form.Select>
           </div>
           <div className="content-btn">
