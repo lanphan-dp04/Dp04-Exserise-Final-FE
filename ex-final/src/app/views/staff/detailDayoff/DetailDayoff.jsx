@@ -5,21 +5,27 @@ import axios from "axios";
 import Moment from "moment";
 import { Button,Modal } from "antd";
 import { HistoryOutlined } from "@ant-design/icons";
+import Loanding from "../../../components/loading/Loanding";
 
 export default function DetailDayoff() {
   const [dayOffWithId, setDayOffWithId] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const paramId = useParams();
 
+  const [loading, setLoading] = useState(false);
   const formatDate = "YYYY-MM-DD";
   const API_DETAIL_REQUEST = process.env.REACT_APP_API_DETAIL_REQUEST
   console.log('API_DETAIL_REQUEST',API_DETAIL_REQUEST);
   useEffect(() => {
     const api = `${API_DETAIL_REQUEST}/${paramId.id}`;
+    setLoading(true)
     axios
       .get(api)
       .then((res) => {
         setDayOffWithId(res.data);
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
       })
 
       .catch((error) => {
@@ -38,6 +44,8 @@ export default function DetailDayoff() {
     setIsModalOpen(false);
   };
   return (
+    <div>
+      {loading ? <Loanding /> :
     <div className="container">
       <div className="layout-detaildayoff">
         <div className="detail-dayoff">
@@ -116,6 +124,8 @@ export default function DetailDayoff() {
           </div>
         </div>
       </div>
+    </div>
+    }
     </div>
   );
 }
