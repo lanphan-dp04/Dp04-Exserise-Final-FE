@@ -6,9 +6,6 @@ import Router from "./app/views/router/Router";
 import { useSelector } from "react-redux";
 
 function App() {
-  // console.log('Test', process.env.REACT_APP_API_LOGIN)
-
-
 
   const isToken = useSelector((state) => state.auth.login.isToken);
 
