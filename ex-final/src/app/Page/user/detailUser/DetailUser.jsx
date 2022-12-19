@@ -28,12 +28,13 @@ export default function DetailUser() {
       setEmail(response.data.email);
       setPhoneNumber(response.data.phoneNumber);
       setRole(response.data.role);
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
     } catch (err) {
-      console.log("Error: ", err.message);
+      return err;
     }
   }
-  dataUser.map(item => console.log(item))
   return (
     <div>
       {loading ? <Loanding /> :

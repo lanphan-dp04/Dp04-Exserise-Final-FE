@@ -26,7 +26,6 @@ const ERROR_PHONENUMBER = {
 
 export default function Register() {
   let { id } = useParams();
-  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -123,7 +122,7 @@ export default function Register() {
             </label>
             <input
               className="form-control input-name"
-              type="text"
+              type="number"
               name="phoneNumber"
               id="phoneNumber"
               placeholder="Enter number phone..."

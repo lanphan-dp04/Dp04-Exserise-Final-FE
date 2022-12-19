@@ -17,7 +17,9 @@ export default function ListUser() {
       let response = await axios.get(apiListData);
       let temp = await response.data;
       setDataUser(temp);
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
     } catch (err) {
       return err;
     }

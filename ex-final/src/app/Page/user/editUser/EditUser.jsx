@@ -2,7 +2,7 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from "react-bootstrap/esm/Button";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -25,11 +25,12 @@ const ERROR_PHONENUMBER = {
 
 export default function EditUser() {
     const {
+        register,
+        handleSubmit,
         formState: { errors },
     } = useForm();
 
     const { id } = useParams();
-    let history = useNavigate();
 
     const [userName, setUserName] = useState("");
     const [email, setEmail] = useState("");
@@ -50,9 +51,8 @@ export default function EditUser() {
         setRole(response.data.role);
     }
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        await axios.patch(`http://localhost:5000/user/${id}`, {
+    const onSubmit = async (e) => {
+        await axios.post(`http://localhost:5000/user/${id}`, {
             userName,
             password,
             email,
@@ -61,17 +61,16 @@ export default function EditUser() {
         })
             .then((res) => {
                 toast.success("Update User successfully!!!", { autoClose: 1000 })
-                console.log("status:",res.status);
             })
             .catch((errors) => {
-                console.log("errors",errors); 
+                toast.error("Phone number already exists. please re-enter new number phone  !!!", { autoClose: 2000 })
             });
     }
 
     return (
         <div className="container-register">
             <div className="main-register">
-                <form className="form-group container" onSubmit={handleSubmit}>
+                <form className="form-group container" onSubmit={handleSubmit(onSubmit)}>
                     <h2 className="text-center text-create-user">Edit an User</h2>
                     <div className="form-name-e ">
                         <label className="form-lable" htmlFor="inputFullname">
@@ -85,8 +84,8 @@ export default function EditUser() {
                             placeholder="Enter user name..."
                             defaultValue={userName}
                             onChange={e => setUserName(e.target.value)}
-                            required
-                        />
+                            ref={register({required:"This is required."})}
+                            />
                     </div>
                     <div className="form-name-e">
                         <label className="form-lable" htmlFor="inputPassword4">
@@ -110,7 +109,7 @@ export default function EditUser() {
                         <input
                             required
                             className="form-control input-name"
-                            type="text"
+                            type="number"
                             name="phoneNumber"
                             id="phoneNumber"
                             placeholder="Enter number phone..."

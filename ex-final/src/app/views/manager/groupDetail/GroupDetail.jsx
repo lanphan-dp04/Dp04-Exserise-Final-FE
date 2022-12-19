@@ -39,7 +39,7 @@ export default function GroupDetail() {
         setLoading(false);
       }, 500);
     } catch (error) {
-      console.log("Error: ", error.message);
+      return error.message;
     }
   }
 
@@ -66,11 +66,10 @@ export default function GroupDetail() {
 
   const onFinish = async (values) => {
     await axios.put(`http://localhost:5000/group/update/${id}`, values)
-      .then((res) => {
+      .then(() => {
         return toast.success("Update Group successfully!!!", { autoClose: 2000 });
       })
-      .catch((error) => {
-        // return error;
+      .catch(() => {
         return toast.success("Update Group fail!!!", { autoClose: 2000 });
       });
   };
@@ -104,6 +103,7 @@ export default function GroupDetail() {
                 },
               ]}
             >
+              
               <Input style={{ width: '85%' }} />
             </Form.Item>
             <Form.Item
@@ -117,15 +117,17 @@ export default function GroupDetail() {
               ]}
             >
               <Select
+                showSearch
+                optionFilterProp="children"
                 mode='multiple'
                 maxTagTextLength='responsive'
-                placeholder='Choose members...'
                 style={{
                   width: '85%',
                 }}
               >
                 {memberName?.map((option) => (
-                  <Select.Option key={option._id} value={option._id}>
+                  <Select.Option 
+                  key={option._id} value={option._id}>
                     {option.userName}
                   </Select.Option>
                 ))}
@@ -142,9 +144,10 @@ export default function GroupDetail() {
               ]}
             >
               <Select
+                showSearch
+                optionFilterProp="children"
                 mode='multiple'
                 maxTagTextLength='responsive'
-                placeholder='Choose members...'
                 style={{
                   width: '85%',
                 }}

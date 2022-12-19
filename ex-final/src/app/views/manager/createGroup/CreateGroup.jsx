@@ -21,7 +21,7 @@ const CreateGroup = () => {
       let temp = await response.data;
       setDataUser(temp);
     } catch (err) {
-      console.log("Error: ", err.message);
+      return err.message;
     }
   }
   useEffect(() => {
@@ -48,11 +48,11 @@ const CreateGroup = () => {
       if(error.status(422))
         alert("error email or phone number!!!");
       else
-      console.log("Error:",error.response.data);
+      return error.response.data;
     }); 
   };
   const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
+    return errorInfo;
   };
 
   return (
