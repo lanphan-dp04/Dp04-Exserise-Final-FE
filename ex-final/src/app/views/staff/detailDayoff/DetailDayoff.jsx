@@ -4,7 +4,7 @@ import "./detaildayoff.css";
 import axios from "axios";
 import Moment from "moment";
 import { Button,Modal } from "antd";
-import { HistoryOutlined, UndoOutlined } from "@ant-design/icons";
+import { HistoryOutlined } from "@ant-design/icons";
 
 export default function DetailDayoff() {
   const [dayOffWithId, setDayOffWithId] = useState([]);
@@ -12,9 +12,10 @@ export default function DetailDayoff() {
   const paramId = useParams();
 
   const formatDate = "YYYY-MM-DD";
-
+  const API_DETAIL_REQUEST = process.env.REACT_APP_API_DETAIL_REQUEST
+  console.log('API_DETAIL_REQUEST',API_DETAIL_REQUEST);
   useEffect(() => {
-    const api = `http://localhost:5000/requests/detail/${paramId.id}`;
+    const api = `${API_DETAIL_REQUEST}/${paramId.id}`;
     axios
       .get(api)
       .then((res) => {

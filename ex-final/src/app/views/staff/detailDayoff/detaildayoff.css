@@ -12,7 +12,7 @@
     padding-left: 20px;
     margin-top: 50px;
     display: grid;
-    grid-template-columns: 45% 55%;
+    grid-template-columns: 40% 60%;
 }
 
 .layout-detaildayoff h4 {
@@ -45,7 +45,7 @@ tr:nth-child(even) {
 
 /* histories */
 .histories {
-    border-left: solid 1px;
+    border-left: solid 1px #8989e1;
     padding-left: 20px;
 }
 
@@ -65,5 +65,9 @@ tr:nth-child(even) {
 }
 
 .history-request {
-    line-height: 3px;
+    line-height: 5px;
+}
+.box-request {
+    display: flex;
+    align-items: center;
 }

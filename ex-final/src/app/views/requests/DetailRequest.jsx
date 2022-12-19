@@ -20,6 +20,7 @@ import { requestsDetail } from "../../redux/action/requestsDetailAction";
 import { approved } from "../../redux/action/approveAction";
 import { rejected } from "../../redux/action/rejectAction";
 import { changed } from "../../redux/action/changeAction";
+import History from "../history/History";
 const { confirm } = Modal;
 
 export default function DetailRequest() {
@@ -49,9 +50,9 @@ export default function DetailRequest() {
   const formatDate = "YYYY-MM-DD";
   const formatFromDay = Moment(dayOffWithId.fromDay).format(formatDate);
   const formatToDay = Moment(dayOffWithId.toDay).format(formatDate);
-
+  const API_DETAIL_REQUEST = process.env.REACT_APP_API_DETAIL_REQUEST;
   useEffect(() => {
-    const api = `http://localhost:5000/requests/detail/${paramIdDayOff}`;
+    const api = `${API_DETAIL_REQUEST}/${paramIdDayOff}`;
     axios.get(api).then((res) => {
       setDayOffWithId(res.data);
       setMasterId(res.data.approved);
@@ -63,8 +64,8 @@ export default function DetailRequest() {
   const showModal = (id) => {
     setDayOffId(id);
     setIsModalOpen(!isModalOpen);
-    if(isModalOpen === false) {
-      form.resetFields()
+    if (isModalOpen === false) {
+      form.resetFields();
     }
   };
 
@@ -118,6 +119,44 @@ export default function DetailRequest() {
       ? "display-none"
       : "display-block";
 
+  const renderButtonMaster = (
+    <div className={AuthWith(dayOffWithId, approveId, userId)}>
+      <a
+        onClick={() => showConfirm(dayOffWithId._id, userId)}
+        className="item-action-detail"
+      >
+        <Button icon={<CheckOutlined />} type="primary"></Button>
+      </a>
+      <a
+        onClick={() => showReject(dayOffWithId._id, userId)}
+        className="item-action-detail"
+      >
+        <Button icon={<CloseOutlined />} type="primary"></Button>
+      </a>
+      <a className="item-action-detail">
+        <Button
+          icon={<UndoOutlined />}
+          onClick={() => showModal(dayOffWithId._id)}
+          type="primary"
+        ></Button>
+      </a>
+    </div>
+  );
+  const renderButtonSatff = (
+    <div className={AuthEdit(dayOffWithId, userId)}>
+      <Link to={`/requests/edit/${dayOffWithId._id}`}>
+        <Button icon={<EditOutlined />} type="primary"></Button>
+      </Link>
+    </div>
+  );
+  const displayButtonMaster =
+    AuthWith(dayOffWithId, approveId, userId) === "display-block"
+      ? renderButtonMaster
+      : "";
+
+  const displayButtonStaff =
+    AuthEdit(dayOffWithId, userId) === "display-block" ? renderButtonSatff : "";
+
   return (
     <div className="container">
       <div className="layout-detaildayoff">
@@ -152,59 +191,12 @@ export default function DetailRequest() {
           <div>
             <h4 className={`${displayH4Action}`}>Action: </h4>
             <div className="box-action-detail">
-              <div className={AuthWith(dayOffWithId, approveId, userId)}>
-                <a
-                  onClick={() => showConfirm(dayOffWithId._id, userId)}
-                  className="item-action-detail"
-                >
-                  <Button icon={<CheckOutlined />} type="primary"></Button>
-                </a>
-                <a
-                  onClick={() => showReject(dayOffWithId._id, userId)}
-                  className="item-action-detail"
-                >
-                  <Button icon={<CloseOutlined />} type="primary"></Button>
-                </a>
-                <a className="item-action-detail">
-                  <Button icon={<UndoOutlined />} 
-                  onClick={() => showModal(dayOffWithId._id)}
-                  type="primary"></Button>
-                </a>
-              </div>
-              <div className={AuthEdit(dayOffWithId, userId)}>
-                <Link to={`/requests/edit/${dayOffWithId._id}`}>
-                  <Button
-                    icon={<EditOutlined />}
-                    type="primary"
-                  ></Button>
-                </Link>
-              </div>
+              {displayButtonMaster}
+              {displayButtonStaff}
             </div>
           </div>
         </div>
-        <div className="histories">
-          <h4>History</h4>
-          <div className="box-histories">
-            <h6>Request</h6>
-            <p>Khoa Nguyen requested</p>
-            <div className="history-request">
-              <p>From: 2022-10-22</p>
-              <p>To: 2022-10-22</p>
-              <p>Time: 2022-10-22</p>
-              <p>Quantity: 2022-10-22</p>
-              <p>Reason: 2022-10-22</p>
-            </div>
-
-            <h6>Approved</h6>
-            <p>Khoa Nguyen requested</p>
-
-            <h6>Request Change</h6>
-            <p>Khoa Nguyen requested</p>
-
-            <h6>Day Off</h6>
-            <p>Khoa Nguyen requested</p>
-          </div>
-        </div>
+        <History value={paramIdDayOff} />
       </div>
       <Modal
         footer={""}
