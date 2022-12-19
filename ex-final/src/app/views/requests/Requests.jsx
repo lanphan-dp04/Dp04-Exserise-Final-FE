@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Moment from "moment";
-import { Form, Input } from "antd";
+import { Form } from "antd";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Table from "react-bootstrap/Table";
 import Search from "../../components/search/Search";
@@ -31,7 +31,7 @@ const converter = require("number-to-words");
 const { confirm } = Modal;
 
 export default function Request() {
-  const [form] = Form.useForm()
+  const [form] = Form.useForm();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [dayoffId, setDayOffId] = useState("");
   const [listDayOff, setListDayOff] = useState([]);
@@ -48,8 +48,9 @@ export default function Request() {
   const fetchingChange = useSelector(
     (state) => state.changed.changed.isFetching
   );
+  const API_GET_REQUEST = process.env.REACT_APP_API_GET_REQUEST;
   useEffect(() => {
-    const api = `http://localhost:5000/requests/${userId}`;
+    const api = `${API_GET_REQUEST}/${userId}`;
     axios.get(api).then((res) => {
       setListDayOff(res.data);
       requests(res.data, dispatch, navigate);
@@ -91,13 +92,13 @@ export default function Request() {
   const showModal = (id) => {
     setDayOffId(id);
     setIsModalOpen(!isModalOpen);
-    if(isModalOpen === false) {
-      form.resetFields()
+    if (isModalOpen === false) {
+      form.resetFields();
     }
   };
 
   const handleRequestChange = (values) => {
-    if(values.note !== '') {
+    if (values.note !== "") {
       showModal();
     }
     const newNotifies = {
@@ -176,7 +177,42 @@ export default function Request() {
                 ? `${currentDate()}`
                 : `${nextDate()}`;
 
-              const approveId = item.approved.includes(userId);
+            const approveId = item.approved.includes(userId);
+
+            const renderButtonMaster = (
+              <div className={AuthWith(item, approveId, userId)}>
+                <a onClick={(e) => showConfirm(item._id, userId)}>
+                  <Button icon={<CheckOutlined />} type="primary"></Button>
+                </a>
+                <a onClick={(e) => showReject(item._id, userId)}>
+                  <Button icon={<CloseOutlined />} type="primary"></Button>
+                </a>
+                <a>
+                  <Button
+                    icon={<UndoOutlined />}
+                    onClick={() => showModal(item._id)}
+                    type="primary"
+                  ></Button>
+                </a>
+              </div>
+            );
+            const renderButtonSatff = (
+              <div className={AuthEdit(item, userId)}>
+                <Link to={`/requests/edit/${item._id}`}>
+                  <Button icon={<EditOutlined />} type="primary"></Button>
+                </Link>
+              </div>
+            );
+            const displayButtonMaster =
+              AuthWith(item, approveId, userId) === "display-block"
+                ? renderButtonMaster
+                : "";
+
+            const displayButtonStaff =
+              AuthEdit(item, userId) === "display-block"
+                ? renderButtonSatff
+                : "";
+          
             return (
               <tr key={index}>
                 <td>{index + 1}</td>
@@ -188,28 +224,9 @@ export default function Request() {
                   {renderrequestDate.charAt(0).toUpperCase() +
                     renderrequestDate.slice(1)}
                 </td>
-                {}
                 <td className="table-action">
-                  <div className={AuthWith(item,approveId,userId)}>
-                    <a onClick={(e) => showConfirm(item._id, userId)}>
-                      <Button icon={<CheckOutlined />} type="primary"></Button>
-                    </a>
-                    <a onClick={(e) => showReject(item._id, userId)}>
-                      <Button icon={<CloseOutlined />} type="primary"></Button>
-                    </a>
-                    <a>
-                      <Button
-                        icon={<UndoOutlined />}
-                        onClick={() => showModal(item._id)}
-                        type="primary"
-                      ></Button>
-                    </a>
-                  </div>
-                  <div className={AuthEdit(item,userId) }>
-                    <Link to={`/requests/edit/${item._id}`}>
-                      <Button icon={<EditOutlined />} type="primary"></Button>
-                    </Link>
-                  </div>
+                  {displayButtonMaster}
+                  {displayButtonStaff}
                   <div>
                     <Link to={`/requests/detail/${item._id}`}>
                       <Button icon={<EyeOutlined />} type="primary"></Button>
@@ -222,45 +239,45 @@ export default function Request() {
         </tbody>
       </Table>
       <div>{/* <Pagin /> */}</div>
-          <Modal
-            footer={""}
-            open={isModalOpen}
-            title="Reson for change"
-            onCancel={showModal}
+      <Modal
+        footer={""}
+        open={isModalOpen}
+        title="Reson for change"
+        onCancel={showModal}
+      >
+        <Form
+          form={form}
+          style={{ heigth: "200px" }}
+          layout="vertical"
+          name="form_in_modal"
+          onFinish={handleRequestChange}
+        >
+          <Form.Item
+            name="note"
+            rules={[{ required: true, message: "Need more detail!" }]}
           >
-            <Form
-              form={form}
-              style={{ heigth: "200px" }}
-              layout="vertical"
-              name="form_in_modal"
-              onFinish={handleRequestChange}
+            <TextArea
+              defaultValue={""}
+              style={{ width: "100%" }}
+              placeholder="Need more detail"
+              rows={4}
+            />
+          </Form.Item>
+          <Form.Item>
+            <Button
+              style={{
+                margin: "0 8px",
+              }}
+              onClick={showModal}
             >
-              <Form.Item
-                name="note"
-                rules={[{ required: true, message: "Need more detail!" }]}
-              >
-                <TextArea
-                  defaultValue={''}
-                  style={{ width: "100%" }}
-                  placeholder="Need more detail"
-                  rows={4}
-                />
-              </Form.Item>
-              <Form.Item>
-                <Button
-                  style={{
-                    margin: "0 8px",
-                  }}
-                  onClick={showModal}
-                >
-                  Cancel
-                </Button>
-                <Button  htmlType="submit" type="primary">
-                  SEND
-                </Button>
-              </Form.Item>
-            </Form>
-          </Modal>
+              Cancel
+            </Button>
+            <Button htmlType="submit" type="primary">
+              SEND
+            </Button>
+          </Form.Item>
+        </Form>
+      </Modal>
     </div>
   );
 }

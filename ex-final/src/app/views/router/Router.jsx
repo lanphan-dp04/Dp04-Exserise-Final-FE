@@ -17,7 +17,7 @@ import DetailUser from "../../Page/user/detailUser/DetailUser";
 import DetailRequest from "../requests/DetailRequest";
 import FormEditDayOff from "../requests/FormEditDayOff";
 
-function Admin() {
+function Router() {
   const { Content, Sider } = Layout;
 
   return (
@@ -27,10 +27,9 @@ function Admin() {
         breakpoint="lg"
         collapsedWidth="0"
         onBreakpoint={(broken) => {
-          console.log(broken);
+          
         }}
         onCollapse={(collapsed, type) => {
-          console.log(collapsed, type);
         }}
       >
         <div className="logo" />
@@ -64,4 +63,4 @@ function Admin() {
   );
 }
 
-export default Admin;
+export default Router;

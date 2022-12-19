@@ -6,21 +6,28 @@ import {
   faRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function Header() {
+  const name = useSelector((state) => state.auth.login.currentUser.userName);
+  const avatar = useSelector((state) => state.auth.login.currentUser.avatar);
+  const role = useSelector((state) => state.auth.login.currentUser.role);
+  const addUser = (
+    <div className="box-addnewmember">
+      <Link to="list/form" type="button">
+        <span>
+          {" "}
+          <FontAwesomeIcon icon={faUserPlus} />
+        </span>
+        New Member
+      </Link>
+    </div>
+  );
+
+  const renderAddNewNumber = role === "Admin" ? addUser : "";
   return (
     <div className="header">
-      <div className="box-addnewmember">
-        <p>
-          <Link to="list/form" type="button">
-            <span>
-              {" "}
-              <FontAwesomeIcon icon={faUserPlus} />
-            </span>
-            New Member
-          </Link>
-        </p>
-      </div>
+      <p>{renderAddNewNumber}</p>
       <div className="box-logoff">
         <p>
           <Link to="create-request" type="button">
@@ -34,12 +41,8 @@ export default function Header() {
       </div>
 
       <div className="box-user">
-        <img
-          src="https://toanthaydinh.com/wp-content/uploads/2020/04/avatar-dep-nhat-111_112148.jpg "
-          alt="avatar"
-          className="avatar-img"
-        />
-        <p>Name</p>
+        <img src={avatar} alt="avatar" className="avatar-img" />
+        <p>{name}</p>
         <div className="box-logout">
           <div className="logout">
             <Link to="/login">

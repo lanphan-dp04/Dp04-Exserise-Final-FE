@@ -12,7 +12,7 @@ export const AuthWith = (item, approveId,userId) => {
 };
 export const AuthEdit = (item,userId) => {
   const checkAuthEdit =
-    (item.userId === userId && item.status === "Pending") ||
+    (item.userId === userId && item.status === "Requested") ||
     (item.userId === userId && item.status === "Request Change")
       ? "display-block"
       : "display-none";

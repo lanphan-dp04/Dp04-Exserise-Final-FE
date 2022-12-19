@@ -1,14 +1,7 @@
 import React, { useState } from "react";
 import "./menuSider.css";
 import "../header/header.css";
-import {
-  AppstoreOutlined,
-  MailOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
 import { Menu } from "antd";
-import Homepage from "../requests/Requests";
-import MyRequest from "../staff/dayoff/DayOff";
 import { Link } from "react-router-dom";
 
 function getItem(label, key, icon, children, type) {
@@ -21,25 +14,6 @@ function getItem(label, key, icon, children, type) {
   };
 }
 const items = [
-  // getItem("Account", "sub1", <MailOutlined />, [
-  //   getItem("Dashboard", "1"),
-  //   getItem("Requests", <Homepage />),
-  //   ,
-  //   getItem("Days off", "3"),
-  //   // getItem("Option 4", "4"),
-  // ]),
-  // getItem("Manager", "sub2", <AppstoreOutlined />, [
-  //   getItem("Members", "5"),
-  //   getItem("Groups", "6"),
-  //   getItem("Notification", "sub3", null, [
-  //     getItem("slack", "7"),
-  //     getItem("Brouwser", "8"),
-  //   ]),
-  // ]),
-  // getItem("Administation", "sub4", <SettingOutlined />, [
-  //   getItem("Workspaces", "9"),
-  // ]),
-
   {
     key: "account",
     icon: "",
@@ -128,7 +102,6 @@ const MenuSider = () => {
         selectedKeys={[current]}
         mode="inline"
         items={items}
-        // style={{ marginTop: "60px" }}
       />
     </>
   );
