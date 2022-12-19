@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "./CreateGroup.scss"
 import axios from "axios";
 import { Link } from 'react-router-dom';
@@ -19,7 +21,7 @@ const CreateGroup = () => {
       let temp = await response.data;
       setDataUser(temp);
     } catch (err) {
-      console.log("Error: ", err.message);
+      return err.message;
     }
   }
   useEffect(() => {
@@ -35,21 +37,22 @@ const CreateGroup = () => {
   });
   //form
   const [form] = Form.useForm();
+  
   const onFinish = (values) => {
     axios.post("http://localhost:5000/group/new", values)
     .then((res) => {
-      alert("Saved successfully.");
+      toast.success("Update Group successfully!!!",{autoClose:2000});
       form.resetFields();
     })
     .catch((error) => {
       if(error.status(422))
         alert("error email or phone number!!!");
       else
-      console.log("Error:",error.response.data);
+      return error.response.data;
     }); 
   };
   const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
+    return errorInfo;
   };
 
   return (
@@ -138,6 +141,7 @@ const CreateGroup = () => {
             <Button className="btn btn-success" type="submit">
               Add
             </Button>
+            <ToastContainer/>
             <Link className="link-btn" to={`/group`}>
               <Button variant="primary">Back</Button>{' '}
             </Link>

@@ -2,7 +2,6 @@
     width: 100%;
     height: 100vh;
 
-    // background-image: linear-gradient(170deg, #b86bd6 , #53e3a6);
     .main-register {
         padding: 40px 25%;
     }
@@ -43,6 +42,7 @@
 .btn {
     border: none;
     margin-left: 10px;
+    margin-bottom: 5px;
 }
 
 .text-create-user {
@@ -81,12 +81,22 @@
 
 @media only screen and (max-width: 1024px) {
     .container-register .main-register {
-        padding: 40px 20%;
+        padding: 40px 10%;
     }
 }
 
 @media only screen and (max-width: 700px) {
     .container-register .main-register {
         padding: 40px 10%;
+    }
+}
+
+@media only screen and (min-width: 300px) {
+    .container-register .main-register {
+        padding: 40px 10%;
+    }
+
+    .container-register .form-group {
+        padding: 50px 7% !important;
     }
 }
