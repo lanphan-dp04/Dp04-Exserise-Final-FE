@@ -30,7 +30,8 @@ const CreateRequest = () => {
 
   const userId = useSelector((state) => state.auth.login.currentUser._id);
   const formatDate = "YYYY/MM/DD";
-  const API_DATA = `http://localhost:5000/dayoff/${paramId.id}`;
+  const API_GET_DAYOFF = process.env.REACT_APP_API_GET_DAYOFF
+  const API_DATA = `${API_GET_DAYOFF}/${paramId.id}`;
 
   useEffect(() => {
     getData();
@@ -39,12 +40,15 @@ const CreateRequest = () => {
     const response = await axios.get(API_DATA);
     const data = response.data;
     setTypeDayOff(data.typeDayOff)
+    const fromDay = moment(data.fromDay).format(formatDate)
+    const toDay = moment(data.toDay).format(formatDate)
     form.setFieldsValue({
+      
       typeDayOff: data.typeDayOff,
       reason: data.reason,
       quantity: data.quantity,
-      fromDay: dayjs(data.fromDay, formatDate),
-      toDay: dayjs(data.toDay, formatDate),
+      fromDay: dayjs(fromDay, formatDate),
+      toDay: dayjs(toDay, formatDate),
       partialDay: data.partialDay,
     });
   };
@@ -52,6 +56,7 @@ const CreateRequest = () => {
   const handleOnFinish = (values) => {
     console.log(values);
     const EditRequestDayOff = {
+      userId: userId,
       dayoffId: paramId.id,
       typeDayOff: values.typeDayOff,
       reason: values.reason,

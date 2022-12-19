@@ -20,9 +20,10 @@ function DayOff() {
   const [status, setStatus] = useState("");
 
   const userId = useSelector((state) => state.auth.login.currentUser._id);
+  const API_GET_REQUEST = process.env.REACT_APP_API_GET_REQUEST;
 
   useEffect(() => {
-    const api = `http://localhost:5000/requests/${userId}`;
+    const api = `${API_GET_REQUEST}/${userId}`;
     axios
       .get(api)
       .then((res) => {
@@ -116,11 +117,11 @@ function DayOff() {
           </tr>
         </thead>
         <tbody>
-          {filteredListDayOff.map((item) => {
+          {filteredListDayOff.map((item,index) => {
             const formatDate = "YYYY-MM-DD";
             return (
               <tr>
-                <td>{item.id}</td>
+                <td>{index+1}</td>
                 <td>
                   {Moment(item.fromDay).format(formatDate)} - {Moment(item.toDay).format(formatDate)}
                 </td>

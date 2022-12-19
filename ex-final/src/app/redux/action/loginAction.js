@@ -14,13 +14,15 @@ const handleErrorLogin = () => {
 };
 
 export const loginUser = async (user, dispatch, navigate) => {
+  const API_LOGIN = process.env.REACT_APP_API_LOGIN ;
+  const API_LOGIN_USER = process.env.REACT_APP_API_LOGIN_USER;
+ 
   dispatch(loginStart());
   try {
-    const res = await axios.post("http://localhost:5000/login", user);
-
+    const res = await axios.post(API_LOGIN, user);
     if (res) {
       const token = res.data;
-      const user = await axios.get("http://localhost:5000/user", {
+      const user = await axios.get(API_LOGIN_USER, {
         headers: { authorization: `Bearer ${token}` },
       });
       dispatch(loginSuccess(user.data));
@@ -38,8 +40,7 @@ export const loginUser = async (user, dispatch, navigate) => {
     }
   } catch (error) {
     dispatch(loginFailed());
-    if (error.response.status === 400) {
-      //
+    if (error.response.status === 500) {
       handleErrorLogin();
     }
   }

@@ -16,8 +16,8 @@ const updateDayOffReducer = createSlice({
       state.updateDayOff.fetching = true;
     },
     updateDayOffSuccess: (state, action) => {
-      state.updateDayOff.isFetching = false;
-      state.updateDayOff.currentUpdateupdateDayOff = action.payload;
+      state.updateDayOff.isFetching = true;
+      state.updateDayOff.currentUpdateDayOff = action.payload;
     },
     updateDayOffFailed: (state) => {
       state.updateDayOff.error = true;
