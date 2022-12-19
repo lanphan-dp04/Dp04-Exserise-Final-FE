@@ -52,7 +52,7 @@ export default function EditUser() {
     }
 
     const onSubmit = async (e) => {
-        await axios.post(`http://localhost:5000/user/${id}`, {
+        await axios.put(`http://localhost:5000/user/${id}`, {
             userName,
             password,
             email,
