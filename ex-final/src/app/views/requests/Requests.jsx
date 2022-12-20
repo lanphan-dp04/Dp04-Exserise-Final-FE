@@ -55,7 +55,11 @@ export default function Request() {
   useEffect(() => {
     const api = `${API_GET_REQUEST}/${userId}`;
     axios.get(api).then((res) => {
-      setListDayOff(res.data);
+      const data = res.data.filter(
+        (item) =>
+          item.status !== "Cancled"
+      );
+      setListDayOff(data);
       requests(res.data, dispatch, navigate);
     });
   }, [fetchingApprove, fetchingReject, fetchingChange]);

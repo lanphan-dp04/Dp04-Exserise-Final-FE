@@ -12,7 +12,6 @@ export const requestDayOff = async (dayoff, dispatch, navigate) => {
       navigate('/requests')
     }
   } catch (error) {
-    console.log(error);
     dispatch(dayOffFailed());
   }
 };

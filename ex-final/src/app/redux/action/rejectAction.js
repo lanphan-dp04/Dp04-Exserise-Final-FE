@@ -8,7 +8,6 @@ export const rejected = async (reject,dispatch, navigate) => {
   dispatch(rejectedStart());
   try {
     const res = await axios.post(API_REJECTED, reject);
-    console.log(res);
       dispatch(rejectedSuccess(res.data))
   } catch (error) {
     dispatch(rejectedFailed());
