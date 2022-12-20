@@ -41,7 +41,6 @@ export default function Request() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [loading, setLoading] = useState(false);
   const userId = useSelector((state) => state.auth.login.currentUser._id);
   const fetchingApprove = useSelector(
     (state) => state.approved.approved.isFetching
@@ -54,13 +53,9 @@ export default function Request() {
   );
   const API_GET_REQUEST = process.env.REACT_APP_API_GET_REQUEST;
   useEffect(() => {
-    setLoading(true);
     const api = `${API_GET_REQUEST}/${userId}`;
     axios.get(api).then((res) => {
       setListDayOff(res.data);
-      setTimeout(() => {
-        setLoading(false);
-      }, 500);
       requests(res.data, dispatch, navigate);
     });
   }, [fetchingApprove, fetchingReject, fetchingChange]);
@@ -71,7 +66,7 @@ export default function Request() {
       icon: <ExclamationCircleFilled />,
       okText: "Approve",
       onOk() {
-        toast.success("Successfully!!!", { autoClose: 1000 });
+        toast.success("successful approval!!!", { autoClose: 1000 });
         const actionApprove = {
           masterId: userId,
           dayoffId: dayoffId,
@@ -90,6 +85,7 @@ export default function Request() {
       okType: "danger",
 
       onOk() {
+        toast.success("Successfully!!!", { autoClose: 1000 });
         const actionReject = {
           masterId: userId,
           dayoffId: dayoffId,
@@ -121,7 +117,7 @@ export default function Request() {
 
   return (
     <div>
-      {loading ? <Loanding /> :
+      {Object.keys(listDayOff).length === 0 ? <Loanding /> :
         <div className="container">
           <div className="header-staff">
             <div className="header-staff-nav">
@@ -199,6 +195,7 @@ export default function Request() {
                     </a>
                     <a onClick={(e) => showReject(item._id, userId)}>
                       <Button icon={<CloseOutlined />} type="primary"></Button>
+                      <ToastContainer />
                     </a>
                     <a>
                       <Button
