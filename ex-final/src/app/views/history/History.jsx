@@ -15,6 +15,10 @@ function History(props) {
   const fetchingChange = useSelector(
     (state) => state.changed.changed.isFetching
   );
+  const fetchingRevert = useSelector(
+    (state) => state.revert.reverted.isFetching
+  );
+
   const API_GET_HISTORY = process.env.REACT_APP_API_GET_HISTORY;
 
   useEffect(() => {
@@ -22,16 +26,16 @@ function History(props) {
     axios.get(api).then((res) => {
       setHistory(res.data);
     });
-  }, [props.value, fetchingApprove, fetchingReject, fetchingChange]);
+  }, [props.value, fetchingApprove, fetchingReject, fetchingChange,fetchingRevert]);
 
-  const countApproved = useSelector(
-    async (state) =>
-      await state.requestsDetail.requests.currentRequestsDetail.approved.length
-  );
-  const countListMaster = useSelector(
-    async (state) =>
-    await  state.requestsDetail.requests.currentRequestsDetail.listMaster.length
-  );
+  // const countApproved = useSelector(
+  //   async (state) =>
+  //     await state.requestsDetail.requests.currentRequestsDetail.approved.length
+  // );
+  // const countListMaster = useSelector(
+  //   async (state) =>
+  //   await  state.requestsDetail.requests.currentRequestsDetail.listMaster.length
+  // );
 
   const renderRequestedHistroy = (item) => {
     return (
@@ -129,7 +133,7 @@ function History(props) {
       <p>Day off has been created</p>
     </div>
   );
-  const dayoff = (+countApproved === +countListMaster) ? renderDayOff : null;
+  // const dayoff = (+countApproved === +countListMaster) ? renderDayOff : null;
   return (
     <div className="histories">
       <h4>History</h4>
@@ -144,7 +148,9 @@ function History(props) {
         const approve =
           item.status === "Approved" ||
           item.status === "Rejected" ||
-          item.status === "Request Change"
+          item.status === "Request Change" ||
+          item.status === "Cancled" ||
+          item.status === "Day Off" 
             ? renderAprrovedHistroy(item, index)
             : "";
 
@@ -156,7 +162,6 @@ function History(props) {
           </div>
         );
       })}
-      <div>{dayoff}</div>
     </div>
   );
 }

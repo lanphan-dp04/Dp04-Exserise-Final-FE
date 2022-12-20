@@ -7,6 +7,7 @@ import dayoffReducer from "./reducers/dayoffReducer";
 import rejectReducer from "./reducers/rejectReducer";
 import requestsDetailReducer from "./reducers/requestsDetailReducer";
 import reqestsReducer from "./reducers/requestsReducer";
+import revertReducer from "./reducers/revertReducer";
 import updateDayOffReducer from "./reducers/updateDayOffReducer";
 
 export const store = configureStore({
@@ -17,6 +18,7 @@ export const store = configureStore({
     approved: approveReducer,
     rejected: rejectReducer,
     changed: changeReducer,
+    revert: revertReducer,
     requestsDetail: requestsDetailReducer,
     updateDayOff: updateDayOffReducer,
   },

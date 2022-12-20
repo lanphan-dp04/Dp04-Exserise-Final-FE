@@ -52,7 +52,11 @@ export default function Request() {
   useEffect(() => {
     const api = `${API_GET_REQUEST}/${userId}`;
     axios.get(api).then((res) => {
-      setListDayOff(res.data);
+      const data = res.data.filter(
+        (item) =>
+          item.status !== "Cancled"
+      );
+      setListDayOff(data);
       requests(res.data, dispatch, navigate);
     });
   }, [fetchingApprove, fetchingReject, fetchingChange]);
@@ -123,7 +127,6 @@ export default function Request() {
           <Search />
         </div>
       </div>
-
       <Table className="table-myrequest">
         <thead>
           <tr className="table-title">
@@ -238,7 +241,6 @@ export default function Request() {
           })}
         </tbody>
       </Table>
-      <div>{/* <Pagin /> */}</div>
       <Modal
         footer={""}
         open={isModalOpen}

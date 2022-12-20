@@ -6,7 +6,6 @@ import { changedFailed, changedStart, changedSuccess } from "../reducers/changeR
 export const changed = async (changed,dispatch, navigate) => {
   const API_CHANGED_REQUEST = process.env.REACT_APP_API_CHANGED;
 
-  console.log(changed);
   dispatch(changedStart());
   try {
     const res = await axios.post(API_CHANGED_REQUEST, changed);

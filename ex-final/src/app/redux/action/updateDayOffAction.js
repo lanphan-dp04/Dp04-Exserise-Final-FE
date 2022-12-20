@@ -12,7 +12,6 @@ export const updateDayOff = async (data, dispatch, navigate) => {
       navigate('/requests')
     }
   } catch (error) {
-    console.log(error);
     dispatch(updateDayOffFailed());
   }
 };

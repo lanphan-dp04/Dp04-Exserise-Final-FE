@@ -27,7 +27,15 @@ function DayOff() {
     axios
       .get(api)
       .then((res) => {
-        setListDayOff(res.data);
+        const data = res.data.filter(
+          (item) =>
+            item.status === "Approved" ||
+            item.status === "Rejected" ||
+            item.status === "Requested" ||
+            item.status === "Cancled" ||
+            item.status === "Reverted"
+        );
+        setListDayOff(data);
       })
 
       .catch((error) => {
@@ -48,18 +56,17 @@ function DayOff() {
     setStatus("");
   };
   const filterApproved = () => {
-    setStatus("approved");
+    setStatus("Approved");
   };
 
   const filterRejected = () => {
-    setStatus("rejected");
+    setStatus("Rejected");
   };
 
   const filterReverted = () => {
-    setStatus("reverted");
+    setStatus("Cancled");
   };
 
-  
   return (
     <div className="container">
       <div className="header-staff">
@@ -117,24 +124,22 @@ function DayOff() {
           </tr>
         </thead>
         <tbody>
-          {filteredListDayOff.map((item,index) => {
+          {filteredListDayOff.map((item, index) => {
             const formatDate = "YYYY-MM-DD";
             return (
               <tr>
-                <td>{index+1}</td>
+                <td>{index + 1}</td>
                 <td>
-                  {Moment(item.fromDay).format(formatDate)} - {Moment(item.toDay).format(formatDate)}
+                  {Moment(item.fromDay).format(formatDate)} -{" "}
+                  {Moment(item.toDay).format(formatDate)}
                 </td>
                 <td>{item.quantity}</td>
                 <td>{item.userName}</td>
                 <td>{item.status}</td>
                 <td>{Moment(item.createdAt).format(formatDate)}</td>
                 <td>
-                  <Link
-                    to={`/dayoff/${item._id}`}
-                    type="button"
-                  >
-                     <Button icon={<EyeOutlined />} type="primary"></Button>
+                  <Link to={`/dayoff/${item._id}`} type="button">
+                    <Button icon={<EyeOutlined />} type="primary"></Button>
                   </Link>
                 </td>
               </tr>
