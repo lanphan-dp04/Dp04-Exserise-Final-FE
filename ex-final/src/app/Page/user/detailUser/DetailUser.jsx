@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Loanding from "../../../components/loading/Loanding";
+
 
 export default function DetailUser() {
   const { id } = useParams();
@@ -12,8 +14,10 @@ export default function DetailUser() {
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true)
     getDetailUserByID();
   }, [])
 
@@ -24,35 +28,46 @@ export default function DetailUser() {
       setEmail(response.data.email);
       setPhoneNumber(response.data.phoneNumber);
       setRole(response.data.role);
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
     } catch (err) {
-      console.log("Error: ", err.message);
+      return err;
     }
   }
-  dataUser.map(item => console.log(item))
   return (
-    <div className="container container-detail">
-      <div className="content-detail">
-        <div className="title-detail">
-          <h2 className="title-text">Basic Information</h2>
-        </div>
-        <div className="view-detail row">
-          <div className="col-2 lable-infor">
-            <p>USer Name:</p>
-            <p>Email:</p>
-            <p>Phone Number:</p>
-            <p>Role:</p>
+    <div>
+      {loading ? <Loanding /> :
+        <div className="container container-detail">
+          <div className="content-detail">
+            <div className="title-detail">
+              <h2 className="title-text">Basic Information</h2>
+            </div>
+            <div className="view-detail ">
+              <div className="lable-infor">
+                <div className="row row-detail">
+                  <span className="col-2">USer Name:</span>
+                  <span className="col-10">{userName}</span>
+                </div>
+                <div className="row row-detail">
+                  <span className="col-2">Email:</span>
+                  <span className="col-10">{email}</span>
+                </div>
+                <div className="row row-detail">
+                  <span className="col-2">Phone Number:</span>
+                  <span className="col-10">{phoneNumber}</span>
+                </div>
+                <div className="row row-detail">
+                  <span className="col-2">Role:</span>
+                  <span className="col-10">{role}</span>
+                </div>
+              </div>
+            </div>
+            <Link className="link-btn" to={`/list`}>
+              <Button className="btn-back" variant="primary">Back</Button>{' '}
+            </Link>
           </div>
-          <div className="col data-user">
-            <p>{userName}</p>
-            <p>{email}</p>
-            <p>{phoneNumber}</p>
-            <p>{role}</p>
-          </div>
-        </div>
-        <Link className="link-btn" to={`/list`}>
-          <Button variant="primary">Back</Button>{' '}
-        </Link>
-      </div>
+        </div>}
     </div>
   )
 }

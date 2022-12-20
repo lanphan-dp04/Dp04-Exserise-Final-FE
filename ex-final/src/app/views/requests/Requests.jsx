@@ -26,8 +26,11 @@ import { rejected } from "../../redux/action/rejectAction";
 import TextArea from "antd/es/input/TextArea";
 import { changed } from "../../redux/action/changeAction";
 import { AuthEdit, AuthWith } from "../../helpers/common";
-const converter = require("number-to-words");
+import Loanding from "../../components/loading/Loanding";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+const converter = require("number-to-words");
 const { confirm } = Modal;
 
 export default function Request() {
@@ -67,13 +70,15 @@ export default function Request() {
       icon: <ExclamationCircleFilled />,
       okText: "Approve",
       onOk() {
+        toast.success("successful approval!!!", { autoClose: 1000 });
         const actionApprove = {
           masterId: userId,
           dayoffId: dayoffId,
         };
         approved(actionApprove, dispatch, navigate);
       },
-      onCancel() {},
+      onCancel() {
+       },
     });
   };
   const showReject = (dayoffId, userId) => {
@@ -84,13 +89,14 @@ export default function Request() {
       okType: "danger",
 
       onOk() {
+        toast.success("Successfully!!!", { autoClose: 1000 });
         const actionReject = {
           masterId: userId,
           dayoffId: dayoffId,
         };
         rejected(actionReject, dispatch, navigate);
       },
-      onCancel() {},
+      onCancel() { },
     });
   };
   const showModal = (id) => {
@@ -114,172 +120,180 @@ export default function Request() {
   };
 
   return (
-    <div className="container">
-      <div className="header-staff">
-        <div className="header-staff-nav">
-          <h2>Day Off Request</h2>
-          <Link to={"/request"}>Requests</Link>
-          <Link to={"/create-request"}>Create Request</Link>
-          <Link to={"/dayoff"}>Day Off</Link>
-        </div>
+    <div>
+      {Object.keys(listDayOff).length === 0 ? <Loanding /> :
+        <div className="container">
+          <div className="header-staff">
+            <div className="header-staff-nav">
+              <h2>Day Off Request</h2>
+              <Link to={"/request"}>Requests</Link>
+              <Link to={"/create-request"}>Create Request</Link>
+              <Link to={"/dayoff"}>Day Off</Link>
+            </div>
 
-        <div className="search">
-          <Search />
-        </div>
-      </div>
-      <Table className="table-myrequest">
-        <thead>
-          <tr className="table-title">
-            <th className="col-index">No </th>
-            <th className="col-2">Request for date</th>
-            <th className="col-1">Quantify</th>
-            <th className="col-2">Requester </th>
-            <th className="col-2">Status</th>
-            <th className="col-2">Request date</th>
-            <th className="col-3">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {listDayOff.map((item, index) => {
-            const formatDate = "YYYY-MM-DD";
-            const fromDay = new Date(item.fromDay);
-            const toDay = new Date(item.toDay);
-            const createdAt = new Date(item.createdAt);
-            let nowDate = new Date();
-            const formatFromDay = Moment(fromDay).format(formatDate);
-            const formatToDay = Moment(toDay).format(formatDate);
+            <div className="search">
+              <Search />
+            </div>
+          </div>
 
-            const renderDate =
-              formatFromDay === formatToDay
-                ? formatFromDay
-                : `${formatFromDay} - ${formatToDay}`;
+          <Table className="table-myrequest">
+            <thead>
+              <tr className="table-title">
+                <th className="col-index">No </th>
+                <th className="col-2">Request for date</th>
+                <th className="col-1">Quantify</th>
+                <th className="col-2">Requester </th>
+                <th className="col-2">Status</th>
+                <th className="col-2">Request date</th>
+                <th className="col-3">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {listDayOff.map((item, index) => {
+                const formatDate = "YYYY-MM-DD";
+                const fromDay = new Date(item.fromDay);
+                const toDay = new Date(item.toDay);
+                const createdAt = new Date(item.createdAt);
+                let nowDate = new Date();
+                const formatFromDay = Moment(fromDay).format(formatDate);
+                const formatToDay = Moment(toDay).format(formatDate);
 
-            const currentDate = () => {
-              let hours = nowDate.getHours() - createdAt.getHours();
-              let minutes = nowDate.getMinutes() - createdAt.getMinutes();
-              if (createdAt.getHours() !== nowDate.getHours()) {
-                if (+hours === +1) {
-                  return `An hour ago`;
-                } else {
-                  return `${+hours} hours ago`;
-                }
-              } else {
-                return `${minutes} minutes ago`;
-              }
-            };
-            const nextDate = () => {
-              let date = nowDate.getDate() - createdAt.getDate();
-              if (+date <= +1) {
-                return "Yesterday";
-              } else {
-                return `${converter.toWords(+date)} days ago`;
-              }
-            };
-            const renderrequestDate =
-              createdAt.getDate() === nowDate.getDate()
-                ? `${currentDate()}`
-                : `${nextDate()}`;
+                const renderDate =
+                  formatFromDay === formatToDay
+                    ? formatFromDay
+                    : `${formatFromDay} - ${formatToDay}`;
 
-            const approveId = item.approved.includes(userId);
+                const currentDate = () => {
+                  let hours = nowDate.getHours() - createdAt.getHours();
+                  let minutes = nowDate.getMinutes() - createdAt.getMinutes();
+                  if (createdAt.getHours() !== nowDate.getHours()) {
+                    if (+hours === +1) {
+                      return `An hour ago`;
+                    } else {
+                      return `${+hours} hours ago`;
+                    }
+                  } else {
+                    return `${minutes} minutes ago`;
+                  }
+                };
+                const nextDate = () => {
+                  let date = nowDate.getDate() - createdAt.getDate();
+                  if (+date <= +1) {
+                    return "Yesterday";
+                  } else {
+                    return `${converter.toWords(+date)} days ago`;
+                  }
+                };
+                const renderrequestDate =
+                  createdAt.getDate() === nowDate.getDate()
+                    ? `${currentDate()}`
+                    : `${nextDate()}`;
 
-            const renderButtonMaster = (
-              <div className={AuthWith(item, approveId, userId)}>
-                <a onClick={(e) => showConfirm(item._id, userId)}>
-                  <Button icon={<CheckOutlined />} type="primary"></Button>
-                </a>
-                <a onClick={(e) => showReject(item._id, userId)}>
-                  <Button icon={<CloseOutlined />} type="primary"></Button>
-                </a>
-                <a>
-                  <Button
-                    icon={<UndoOutlined />}
-                    onClick={() => showModal(item._id)}
-                    type="primary"
-                  ></Button>
-                </a>
-              </div>
-            );
-            const renderButtonSatff = (
-              <div className={AuthEdit(item, userId)}>
-                <Link to={`/requests/edit/${item._id}`}>
-                  <Button icon={<EditOutlined />} type="primary"></Button>
-                </Link>
-              </div>
-            );
-            const displayButtonMaster =
-              AuthWith(item, approveId, userId) === "display-block"
-                ? renderButtonMaster
-                : "";
+                const approveId = item.approved.includes(userId);
 
-            const displayButtonStaff =
-              AuthEdit(item, userId) === "display-block"
-                ? renderButtonSatff
-                : "";
-          
-            return (
-              <tr key={index}>
-                <td>{index + 1}</td>
-                <td> {`${renderDate}`}</td>
-                <td>{item.quantity}</td>
-                <td>{item.userName}</td>
-                <td>{item.status}</td>
-                <td>
-                  {renderrequestDate.charAt(0).toUpperCase() +
-                    renderrequestDate.slice(1)}
-                </td>
-                <td className="table-action">
-                  {displayButtonMaster}
-                  {displayButtonStaff}
-                  <div>
-                    <Link to={`/requests/detail/${item._id}`}>
-                      <Button icon={<EyeOutlined />} type="primary"></Button>
+                const renderButtonMaster = (
+                  <div className={AuthWith(item, approveId, userId)}>
+                    <a onClick={(e) => showConfirm(item._id, userId)}>
+                      <Button icon={<CheckOutlined />} type="primary"></Button>
+                      <ToastContainer />
+                    </a>
+                    <a onClick={(e) => showReject(item._id, userId)}>
+                      <Button icon={<CloseOutlined />} type="primary"></Button>
+                      <ToastContainer />
+                    </a>
+                    <a>
+                      <Button
+                        icon={<UndoOutlined />}
+                        onClick={() => showModal(item._id)}
+                        type="primary"
+                      ></Button>
+                    </a>
+                  </div>
+                );
+                const renderButtonSatff = (
+                  <div className={AuthEdit(item, userId)}>
+                    <Link to={`/requests/edit/${item._id}`}>
+                      <Button icon={<EditOutlined />} type="primary"></Button>
                     </Link>
                   </div>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </Table>
-      <Modal
-        footer={""}
-        open={isModalOpen}
-        title="Reson for change"
-        onCancel={showModal}
-      >
-        <Form
-          form={form}
-          style={{ heigth: "200px" }}
-          layout="vertical"
-          name="form_in_modal"
-          onFinish={handleRequestChange}
-        >
-          <Form.Item
-            name="note"
-            rules={[{ required: true, message: "Need more detail!" }]}
+                );
+                const displayButtonMaster =
+                  AuthWith(item, approveId, userId) === "display-block"
+                    ? renderButtonMaster
+                    : "";
+
+                const displayButtonStaff =
+                  AuthEdit(item, userId) === "display-block"
+                    ? renderButtonSatff
+                    : "";
+
+                return (
+                  <tr key={index}>
+                    <td>{index + 1}</td>
+                    <td> {`${renderDate}`}</td>
+                    <td>{item.quantity}</td>
+                    <td>{item.userName}</td>
+                    <td>{item.status}</td>
+                    <td>
+                      {renderrequestDate.charAt(0).toUpperCase() +
+                        renderrequestDate.slice(1)}
+                    </td>
+                    <td className="table-action">
+                      {displayButtonMaster}
+                      {displayButtonStaff}
+                      <div>
+                        <Link to={`/requests/detail/${item._id}`}>
+                          <Button icon={<EyeOutlined />} type="primary"></Button>
+                        </Link>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </Table>
+          <div>{/* <Pagin /> */}</div>
+          <Modal
+            footer={""}
+            open={isModalOpen}
+            title="Reson for change"
+            onCancel={showModal}
           >
-            <TextArea
-              defaultValue={""}
-              style={{ width: "100%" }}
-              placeholder="Need more detail"
-              rows={4}
-            />
-          </Form.Item>
-          <Form.Item>
-            <Button
-              style={{
-                margin: "0 8px",
-              }}
-              onClick={showModal}
+            <Form
+              form={form}
+              style={{ heigth: "200px" }}
+              layout="vertical"
+              name="form_in_modal"
+              onFinish={handleRequestChange}
             >
-              Cancel
-            </Button>
-            <Button htmlType="submit" type="primary">
-              SEND
-            </Button>
-          </Form.Item>
-        </Form>
-      </Modal>
+              <Form.Item
+                name="note"
+                rules={[{ required: true, message: "Need more detail!" }]}
+              >
+                <TextArea
+                  defaultValue={""}
+                  style={{ width: "100%" }}
+                  placeholder="Need more detail"
+                  rows={4}
+                />
+              </Form.Item>
+              <Form.Item>
+                <Button
+                  style={{
+                    margin: "0 8px",
+                  }}
+                  onClick={showModal}
+                >
+                  Cancel
+                </Button>
+                <Button htmlType="submit" type="primary">
+                  SEND
+                </Button>
+              </Form.Item>
+            </Form>
+          </Modal>
+        </div>
+      }
     </div>
   );
 }

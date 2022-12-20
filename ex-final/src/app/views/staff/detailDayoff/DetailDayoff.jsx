@@ -18,6 +18,7 @@ import { AuthRevert, AuthWithRevert } from "../../../helpers/common";
 import { useDispatch, useSelector } from "react-redux";
 import { reverted } from "../../../redux/action/revertAction";
 import { requestsDetail } from "../../../redux/action/requestsDetailAction";
+import Loanding from "../../../components/loading/Loanding";
 
 export default function DetailDayoff() {
   const [dayOffWithId, setDayOffWithId] = useState([]);
@@ -33,16 +34,22 @@ export default function DetailDayoff() {
   const fetchingRevert = useSelector(
     (state) => state.revert.reverted.isFetching
   );
+
+  const [loading, setLoading] = useState(false);
   const formatDate = "YYYY-MM-DD";
   const API_DETAIL_REQUEST = process.env.REACT_APP_API_DETAIL_REQUEST;
   useEffect(() => {
     const api = `${API_DETAIL_REQUEST}/${paramId.id}`;
+    setLoading(true)
     axios
       .get(api)
       .then((res) => {
         setDayOffWithId(res.data);
         setMasterId(res.data.canceled);
         requestsDetail(res.data, dispatch, navigate);
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
       })
       .catch((error) => {
         return error;
@@ -108,6 +115,8 @@ export default function DetailDayoff() {
       : "display-block";
 
   return (
+    <div>
+      {loading ? <Loanding /> :
     <div className="container">
       <div className="layout-detaildayoff">
         <div className="detail-dayoff">
@@ -197,6 +206,8 @@ export default function DetailDayoff() {
           </Form.Item>
         </Form>
       </Modal>
+    </div>
+    }
     </div>
   );
 }

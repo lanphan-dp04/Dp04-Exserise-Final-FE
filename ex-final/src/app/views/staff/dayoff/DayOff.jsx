@@ -50,7 +50,6 @@ function DayOff() {
     return data;
   }, [listDayOff, status]);
 
-  //filter
 
   const seeAll = () => {
     setStatus("");
@@ -64,7 +63,7 @@ function DayOff() {
   };
 
   const filterReverted = () => {
-    setStatus("Cancled");
+    setStatus("");
   };
 
   return (

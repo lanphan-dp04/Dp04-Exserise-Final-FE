@@ -17,26 +17,37 @@
 .ant-form {
     width: 100%;
     box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
-    padding: 40px 20px 70px 20px;
+    padding: 20px 20px 70px 20px !important;
     margin-bottom: 30px;
     position: relative;
 }
 
 .button-box {
     position: absolute;
-    bottom: 40px;
-    left: 154px;
+    bottom: 10px;
+    left: 175px;
 }
 .button-sendrequest {
     background-color: rgb(44, 81, 109);
     color: white;
-   
 }
 
 .button-cancel {
-
     background-color: gray;
     color: white;
-    margin-right: 20px  ;
-   
+    margin-right: 20px  ;  
+}
+
+:where(.css-dev-only-do-not-override-1ij74fp).ant-row { 
+    align-items: center;
+}
+:where(.css-dev-only-do-not-override-1ij74fp).ant-form-horizontal .ant-form-item-label {
+    margin-top: -4px !important; 
+}
+
+:where(.css-dev-only-do-not-override-1ij74fp).ant-form-item .ant-form-item-label > label {
+    font-size: 16px !important;
+}
+:where(.css-dev-only-do-not-override-1ij74fp).ant-form-item {
+    margin-bottom: 12px !important;
 }

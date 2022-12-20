@@ -3,10 +3,12 @@ import {Button, Modal, Table} from 'react-bootstrap';
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Loanding from "../../../components/loading/Loanding";
 
 export default function ListUser() {
 
   const [id, setId] = useState("");
+  const [loading, setLoading] = useState(false);
   const [dataUser, setDataUser] = useState([]);
   const apiListData = "http://localhost:5000/user/list";
 
@@ -15,11 +17,15 @@ export default function ListUser() {
       let response = await axios.get(apiListData);
       let temp = await response.data;
       setDataUser(temp);
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
     } catch (err) {
       return err;
     }
   }
   useEffect(() => {
+    setLoading(true);
     getUserData(apiListData);
   }, [])
   
@@ -31,8 +37,7 @@ export default function ListUser() {
     setShow(true);
   }
 
-  const deleteUser = async id => {
-
+const deleteUser = async id => {
     await axios.delete(`http://localhost:5000/user/${id}/delete`)
     .then((res) => setShow(false));
     getUserData();
@@ -49,6 +54,8 @@ export default function ListUser() {
  }
 
   return (
+    <div>
+      {loading ? <Loanding /> :
       <div className="container mt-4">
         <div className="container item-top">
           <h2>User Table</h2>
@@ -68,7 +75,7 @@ export default function ListUser() {
             <tbody>
               {dataUser.map((item, index) => {
                 return (
-                  <tr key={item._id}>
+                  <tr key={item?._id}>
                     <td className="text-size-m item-data-m"><span className="">{index + 1}</span></td>
                     <td className="text-size-m item-data-m">{item?.role}</td>
                     <td className="text-size-m item-data-m">{item?.userName}</td>
@@ -99,12 +106,14 @@ export default function ListUser() {
               <Button variant="secondary" onClick={handleClose}>
                 Close
               </Button>
-              <Button variant="danger" onClick={() => deleteUser(id)}>
+              <Button variant="danger" onClick={() => {deleteUser(id)}}>
                 Deleted
               </Button>
             </Modal.Footer>
           </Modal>
         </div>
       </div>
+      }
+    </div>
   );
 }

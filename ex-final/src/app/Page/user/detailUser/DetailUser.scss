@@ -14,10 +14,22 @@
 .title-text {
     margin: 0;
     padding: 20px 0;
+    color: #776e63;
 }
 
 .infor-user {
     padding: 5px 0;
 }
 
-.col-2 {}
+.row {
+    flex-wrap: nowrap !important;
+}
+
+.row-detail {
+    margin-bottom: 10px;
+}
+
+.btn-back {
+    margin-top: 20px;
+    margin-left: 0 !important;
+}
