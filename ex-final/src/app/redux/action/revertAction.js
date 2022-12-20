@@ -4,12 +4,10 @@ import { revertedFailed, revertedStart, revertedSuccess } from "../reducers/reve
 
 
 export const reverted = async (data,dispatch, navigate) => {
-  // const API_REVERTED_REQUEST = process.env.REACT_APP_API_REVERTED;
-  // console.log('API_REVERTED_REQUEST',API_REVERTED_REQUEST);
+  const API_REVERTED_REQUEST = process.env.REACT_APP_API_REVERTED;
   dispatch(revertedStart());
   try {
-    const res = await axios.post('http://localhost:5000/dayoff/revert', data);
-    console.log(res);
+    const res = await axios.post(API_REVERTED_REQUEST, data);
       dispatch(revertedSuccess(res.data))
   } catch (error) {
     dispatch(revertedFailed());
