@@ -11,16 +11,18 @@ import {
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import Loanding from "../../../components/loading/Loanding";
+import { useSelector } from "react-redux";
 export default function ListUser() {
-
+  const userId = useSelector((state) => state.auth.login.currentUser._id);
   const [id, setId] = useState("");
   const [dataUser, setDataUser] = useState([]);
   const [loading, setLoading] = useState(false);
-  const apiListData = "http://localhost:5000/group/list";
+  const apiListData = `http://localhost:5000/group/lists/${userId}`;
 
   async function getUserData() {
     try {
       let response = await axios.get(apiListData)
+      console.log('response',response);
       let temp = await response.data;
       setDataUser(temp);
       setTimeout(() => {
