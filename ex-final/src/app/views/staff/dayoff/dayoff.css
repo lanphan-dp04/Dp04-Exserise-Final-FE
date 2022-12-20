@@ -33,9 +33,7 @@
     background-color:#7287b0;
 }
 .table-action {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: table-cell;
 }
 .table-myrequest tr:nth-child(even) {
     --bs-table-accent-bg: var(--bs-table-striped-bg);}
