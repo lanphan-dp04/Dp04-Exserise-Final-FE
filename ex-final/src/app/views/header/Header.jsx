@@ -13,21 +13,24 @@ export default function Header() {
   const avatar = useSelector((state) => state.auth.login.currentUser.avatar);
   const role = useSelector((state) => state.auth.login.currentUser.role);
   const addUser = (
-    <div className="box-addnewmember">
-      <Link to="list/form" type="button">
-        <span>
-          {" "}
-          <FontAwesomeIcon icon={faUserPlus} />
-        </span>
-        New Member
-      </Link>
+    <div className="box-logoff">
+      <div className="box-addnewmember">
+        <Link to="list/form" type="button">
+          <span>
+            {" "}
+            <FontAwesomeIcon icon={faUserPlus} />
+          </span>
+          New Member
+        </Link>
+      </div>
     </div>
   );
 
-  const renderAddNewNumber = role === "Admin" ? addUser : "";
+  const renderAddNewNumber =
+    role === "admin" || role === "manager" ? addUser : "";
   return (
     <div className="header">
-      <p>{renderAddNewNumber}</p>
+      {renderAddNewNumber}
       <div className="box-logoff">
         <p>
           <Link to="create-request" type="button">

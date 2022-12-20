@@ -54,7 +54,7 @@ function Router() {
               <Route path="/list/edit/:id" element={<EditUser />} />
               <Route path="/list" element={<ListUser />} />
 
-              <Route path="/group" element={<Group />} />
+              <Route path="/group/" element={<Group />} />
               <Route path="/group/create" element={<CreateGroup />} />
               <Route path="/group/detail/:id" element={<GroupDetail />} />
             </Routes>

@@ -3,6 +3,7 @@ import "./menuSider.css";
 import "../header/header.css";
 import { Menu } from "antd";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function getItem(label, key, icon, children, type) {
   return {
@@ -13,7 +14,39 @@ function getItem(label, key, icon, children, type) {
     type,
   };
 }
-const items = [
+const itemsStaff = [
+  {
+    key: "account",
+    icon: "",
+    label: "Account",
+    children: [
+      {
+        key: "account1",
+        label: <Link to="/dashboard">Dashboard</Link>,
+      },
+      {
+        key: "account2",
+        label: <Link to="/requests">Request</Link>,
+      },
+      {
+        key: "account3",
+        label: <Link to="/dayoff">Day Off</Link>,
+      },
+    ],
+  },
+  {
+    key: "manager",
+    icon: "",
+    label: "Manager",
+    children: [
+      {
+        key: "manager2",
+        label: <Link to="/group">Groups</Link>,
+      },
+    ],
+  },
+];
+const itemsAdmin = [
   {
     key: "account",
     icon: "",
@@ -79,6 +112,11 @@ const items = [
   },
 ];
 const MenuSider = () => {
+  const role = useSelector((state) => state.auth.login.currentUser.role);
+  const renderNav =
+    role === "admin" || role === "manager" 
+      ? itemsAdmin
+      : itemsStaff;
   const [theme, setTheme] = useState("dark");
   const [current, setCurrent] = useState("1");
   const changeTheme = (value) => {
@@ -101,7 +139,7 @@ const MenuSider = () => {
         defaultOpenKeys={["sub1"]}
         selectedKeys={[current]}
         mode="inline"
-        items={items}
+        items={renderNav}
       />
     </>
   );
