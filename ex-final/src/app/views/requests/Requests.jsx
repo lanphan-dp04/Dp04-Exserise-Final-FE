@@ -51,9 +51,9 @@ export default function Request() {
   const fetchingChange = useSelector(
     (state) => state.changed.changed.isFetching
   );
-  const API_GET_REQUEST = process.env.REACT_APP_API_GET_REQUEST;
+  const LINK_API = process.env.REACT_APP_API;
   useEffect(() => {
-    const api = `${API_GET_REQUEST}/${userId}`;
+    const api = `${LINK_API}/requests/${userId}`;
     axios.get(api).then((res) => {
       const data = res.data.filter(
         (item) =>

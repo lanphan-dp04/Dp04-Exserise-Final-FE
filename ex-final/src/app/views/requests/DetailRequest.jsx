@@ -52,10 +52,10 @@ export default function DetailRequest() {
   const formatDate = "YYYY-MM-DD";
   const formatFromDay = Moment(dayOffWithId.fromDay).format(formatDate);
   const formatToDay = Moment(dayOffWithId.toDay).format(formatDate);
-  const API_DETAIL_REQUEST = process.env.REACT_APP_API_DETAIL_REQUEST;
+  const LINK_API = process.env.REACT_APP_API;
   useEffect(() => {
     setLoading(true);
-    const api = `${API_DETAIL_REQUEST}/${paramIdDayOff}`;
+    const api = `${LINK_API}/requests/detail/${paramIdDayOff}`;
     axios.get(api).then((res) => {
       setDayOffWithId(res.data);
       setMasterId(res.data.approved);

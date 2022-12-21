@@ -30,8 +30,8 @@ const CreateRequest = () => {
 
   const userId = useSelector((state) => state.auth.login.currentUser._id);
   const formatDate = "YYYY/MM/DD";
-  const API_GET_DAYOFF = process.env.REACT_APP_API_GET_DAYOFF
-  const API_DATA = `${API_GET_DAYOFF}/${paramId.id}`;
+  const LINK_API = process.env.REACT_APP_API
+  const API_DATA = `${LINK_API}/dayoff/${paramId.id}`;
 
   useEffect(() => {
     getData();

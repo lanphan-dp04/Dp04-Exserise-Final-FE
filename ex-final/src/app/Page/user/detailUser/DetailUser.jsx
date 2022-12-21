@@ -15,6 +15,7 @@ export default function DetailUser() {
   const [role, setRole] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [loading, setLoading] = useState(false);
+  const LINK_API = process.env.REACT_APP_API;
 
   useEffect(() => {
     setLoading(true)
@@ -23,7 +24,7 @@ export default function DetailUser() {
 
   const getDetailUserByID = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/user/${id}/edit`);
+      const response = await axios.get(`${LINK_API}/user/${id}/edit`);
       setUserName(response.data.userName);
       setEmail(response.data.email);
       setPhoneNumber(response.data.phoneNumber);

@@ -18,7 +18,9 @@ export default function GroupDetail() {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [idNameGroup, setIdNameGroup] = useState({});
-  const apiGroupData = `http://localhost:5000/group/list/${id}`;
+  const LINK_API = process.env.REACT_APP_API;
+
+  const apiGroupData = `${LINK_API}/group/list/${id}`;
 
   useEffect(() => {
     setLoading(true);
@@ -43,7 +45,7 @@ export default function GroupDetail() {
     }
   }
 
-  const apiListData = "http://localhost:5000/user/list";
+  const apiListData = `${LINK_API}/user/list`;
   const [dataUser, setDataUser] = useState([]);
 
   async function getUserData() {
@@ -65,7 +67,7 @@ export default function GroupDetail() {
   });
 
   const onFinish = async (values) => {
-    await axios.put(`http://localhost:5000/group/update/${id}`, values)
+    await axios.put(`${LINK_API}/group/update/${id}`, values)
       .then(() => {
         return toast.success("Update Group successfully!!!", { autoClose: 2000 });
       })

@@ -19,10 +19,10 @@ function History(props) {
     (state) => state.revert.reverted.isFetching
   );
 
-  const API_GET_HISTORY = process.env.REACT_APP_API_GET_HISTORY;
+  const LINK_API = process.env.REACT_APP_API;
 
   useEffect(() => {
-    const api = `${API_GET_HISTORY}/${props.value}`;
+    const api = `${LINK_API}/history/${props.value}`;
     axios.get(api).then((res) => {
       setHistory(res.data);
     });

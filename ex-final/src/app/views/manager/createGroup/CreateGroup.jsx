@@ -12,7 +12,9 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 const CreateGroup = () => {
   //call api user
-  const apiListData = "http://localhost:5000/user/list";
+  const LINK_API = process.env.REACT_APP_API;
+
+  const apiListData =`${LINK_API}/user/list`;
   const [dataUser, setDataUser] = useState([]);
 
   async function getUserData() {
@@ -39,7 +41,7 @@ const CreateGroup = () => {
   const [form] = Form.useForm();
   
   const onFinish = (values) => {
-    axios.post("http://localhost:5000/group/new", values)
+    axios.post(`${LINK_API}/group/new`, values)
     .then((res) => {
       toast.success("Update Group successfully!!!",{autoClose:2000});
       form.resetFields();

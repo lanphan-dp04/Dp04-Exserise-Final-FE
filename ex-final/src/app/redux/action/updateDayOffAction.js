@@ -3,10 +3,10 @@ import { updateDayOffFailed, updateDayOffStart, updateDayOffSuccess } from "../r
 
 
 export const updateDayOff = async (data, dispatch, navigate) => {
-  const API_UPDATED = process.env.REACT_APP_API_UPDATED;
+  const LINK_API = process.env.REACT_APP_API;
   dispatch(updateDayOffStart());
   try {
-    const res = await axios.post(API_UPDATED, data);
+    const res = await axios.post(`${LINK_API}/dayoff/update`, data);
     if(res.status === 200) {
       dispatch(updateDayOffSuccess(res.data))
       navigate('/requests')
