@@ -22,6 +22,7 @@ const approveReducer = createSlice({
       state.approved.currentApproved = action.payload;
     },
     approvedFailed: (state) => {
+      state.approved.error = true;
     },
 
   },
