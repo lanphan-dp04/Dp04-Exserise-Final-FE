@@ -40,7 +40,7 @@ function DayOff() {
         setListDayOff(data);
       })
       .catch((error) => {
-        console.log("err", error);
+        return error
       });
   }, []);
 
