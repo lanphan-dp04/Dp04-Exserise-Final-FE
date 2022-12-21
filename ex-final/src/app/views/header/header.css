@@ -73,3 +73,20 @@
 span {
   margin-right: 5px;
 }
+.noti {
+  position: relative;
+}
+.box-noti {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: -10px;
+  right: -15px;
+  padding: 5px;
+  background-color: red;
+  border-radius: 50%;
+}
+.count-noti {
+  margin-top: -2px !important;
+  margin-left: 3px !important;
+}
