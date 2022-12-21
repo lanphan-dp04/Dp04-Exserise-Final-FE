@@ -35,7 +35,7 @@ export default function DetailRequest() {
   const navigate = useNavigate();
 
   const paramIdDayOff = paramId.id;
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const fetchingApprove = useSelector(
     (state) => state.approved.approved.isFetching
@@ -54,18 +54,17 @@ export default function DetailRequest() {
   const formatToDay = Moment(dayOffWithId.toDay).format(formatDate);
   const LINK_API = process.env.REACT_APP_API;
   useEffect(() => {
-    setLoading(true);
     const api = `${LINK_API}/requests/detail/${paramIdDayOff}`;
     axios.get(api).then((res) => {
       setDayOffWithId(res.data);
       setMasterId(res.data.approved);
       requestsDetail(res.data, dispatch, navigate);
-      setTimeout(() => {
-        setLoading(false);
-      }, 500);
     });
   }, [paramIdDayOff, fetchingApprove, fetchingReject, fetchingChange]);
   const approveId = masterId.includes(userId);
+  setTimeout(() => {
+    setLoading(false);
+  }, 500);
 
   const showModal = (id) => {
     setDayOffId(id);
@@ -131,13 +130,13 @@ export default function DetailRequest() {
         onClick={() => showConfirm(dayOffWithId._id, userId)}
         className="item-action-detail"
       >
-        <Button icon={<CheckOutlined />} type="primary"></Button>
+        <Button icon={<CheckOutlined />} type="primary" className="bg-success"></Button>
       </a>
       <a
         onClick={() => showReject(dayOffWithId._id, userId)}
         className="item-action-detail"
       >
-        <Button icon={<CloseOutlined />} type="primary"></Button>
+        <Button icon={<CloseOutlined />} type="primary" danger></Button>
       </a>
       <a className="item-action-detail">
         <Button
@@ -151,7 +150,7 @@ export default function DetailRequest() {
   const renderButtonSatff = (
     <div className={AuthEdit(dayOffWithId, userId)}>
       <Link to={`/requests/edit/${dayOffWithId._id}`}>
-        <Button icon={<EditOutlined />} type="primary"></Button>
+        <Button icon={<EditOutlined />} type="primary" className="bg-warning"></Button>
       </Link>
     </div>
   );

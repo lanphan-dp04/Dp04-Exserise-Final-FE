@@ -61,7 +61,7 @@ tr:nth-child(even) {
 
 .box-histories p {
     color: gray;
-    padding: 0 20px;
+    padding: 2px 20px;
 }
 
 .history-request {

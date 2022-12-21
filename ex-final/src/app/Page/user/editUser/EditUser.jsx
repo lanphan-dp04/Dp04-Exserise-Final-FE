@@ -86,7 +86,7 @@ export default function EditUser() {
                             placeholder="Enter user name..."
                             defaultValue={userName}
                             onChange={e => setUserName(e.target.value)}
-                            ref={register({required:"This is required."})}
+                            required
                             />
                     </div>
                     <div className="form-name-e">

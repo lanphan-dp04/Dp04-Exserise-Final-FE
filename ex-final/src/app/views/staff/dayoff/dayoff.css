@@ -26,14 +26,15 @@
 .table-myrequest {
     text-align: center;
     vertical-align: middle;
-    margin: 40px 20px;
+    margin: 40px 0px;
 }
 
 .table-title {
     background-color:#7287b0;
 }
 .table-action {
-    display: table-cell;
+    display: flex;
+    justify-content: center;
 }
 .table-myrequest tr:nth-child(even) {
     --bs-table-accent-bg: var(--bs-table-striped-bg);}
@@ -80,7 +81,7 @@ td a .svg-inline--fa{
     display: none;
   }
   .display-block {
-    display: block;
+    display: flex;
   }
 .box-filter button:hover {
     
