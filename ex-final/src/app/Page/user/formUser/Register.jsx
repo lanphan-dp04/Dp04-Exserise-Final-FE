@@ -25,6 +25,8 @@ const ERROR_PHONENUMBER = {
 };
 
 export default function Register() {
+  const LINK_API = process.env.REACT_APP_API;
+
   let { id } = useParams();
   const {
     register,
@@ -35,7 +37,7 @@ export default function Register() {
   const onSubmit = (data, e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:5000/user/create", data)
+      .post(`${LINK_API}/user/create`, data)
       .then(() => {
         e.target.reset();
         toast.success("Create new Staff successfully!!!", { autoClose: 1000 })

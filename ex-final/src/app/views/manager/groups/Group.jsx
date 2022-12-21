@@ -17,7 +17,9 @@ export default function ListUser() {
   const [id, setId] = useState("");
   const [dataUser, setDataUser] = useState([]);
   const [loading, setLoading] = useState(false);
-  const apiListData = `http://localhost:5000/group/lists/${userId}`;
+  const LINK_API = process.env.REACT_APP_API;
+
+  const apiListData = `${LINK_API}/group/lists/${userId}`;
 
   async function getUserData() {
     try {
@@ -46,7 +48,7 @@ export default function ListUser() {
   }
 
   const deleteUser = async id => {
-    await axios.delete(`http://localhost:5000/group/delete/${id}`)
+    await axios.delete(`${LINK_API}/group/delete/${id}`)
       .then((res) => {
         setShow(false)
         toast.success("Update Group successfully!!!", { autoClose: 2000 });

@@ -4,11 +4,11 @@ import { changedFailed, changedStart, changedSuccess } from "../reducers/changeR
 
 
 export const changed = async (changed,dispatch, navigate) => {
-  const API_CHANGED_REQUEST = process.env.REACT_APP_API_CHANGED;
+  const LINK_API = process.env.REACT_APP_API;
 
   dispatch(changedStart());
   try {
-    const res = await axios.post(API_CHANGED_REQUEST, changed);
+    const res = await axios.post(`${LINK_API}/requests/change`, changed);
       dispatch(changedSuccess(res.data))
   } catch (error) {
     dispatch(changedFailed());

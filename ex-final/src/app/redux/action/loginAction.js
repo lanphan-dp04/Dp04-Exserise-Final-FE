@@ -14,15 +14,14 @@ const handleErrorLogin = () => {
 };
 
 export const loginUser = async (user, dispatch, navigate) => {
-  const API_LOGIN = process.env.REACT_APP_API_LOGIN ;
-  const API_LOGIN_USER = process.env.REACT_APP_API_LOGIN_USER;
+  const LINK_API = process.env.REACT_APP_API;
  
   dispatch(loginStart());
   try {
-    const res = await axios.post(API_LOGIN, user);
+    const res = await axios.post(`${LINK_API}/login`, user);
     if (res) {
       const token = res.data;
-      const user = await axios.get(API_LOGIN_USER, {
+      const user = await axios.get(`${LINK_API}/user`, {
         headers: { authorization: `Bearer ${token}` },
       });
       dispatch(loginSuccess(user.data));

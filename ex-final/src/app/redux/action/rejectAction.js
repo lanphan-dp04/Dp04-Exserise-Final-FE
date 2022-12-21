@@ -4,10 +4,10 @@ import { rejectedFailed, rejectedStart, rejectedSuccess } from "../reducers/reje
 
 
 export const rejected = async (reject,dispatch, navigate) => {
-  const API_REJECTED = process.env.REACT_APP_API_REJECTED;
+  const LINK_API = process.env.REACT_APP_API;
   dispatch(rejectedStart());
   try {
-    const res = await axios.post(API_REJECTED, reject);
+    const res = await axios.post(`${LINK_API}/requests/reject`, reject);
       dispatch(rejectedSuccess(res.data))
   } catch (error) {
     dispatch(rejectedFailed());

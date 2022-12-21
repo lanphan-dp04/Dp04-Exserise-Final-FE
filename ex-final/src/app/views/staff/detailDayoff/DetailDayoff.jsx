@@ -37,9 +37,9 @@ export default function DetailDayoff() {
 
   const [loading, setLoading] = useState(false);
   const formatDate = "YYYY-MM-DD";
-  const API_DETAIL_REQUEST = process.env.REACT_APP_API_DETAIL_REQUEST;
+  const LINK_API = process.env.REACT_APP_API;
   useEffect(() => {
-    const api = `${API_DETAIL_REQUEST}/${paramId.id}`;
+    const api = `${LINK_API}/requests/detail/${paramId.id}`;
     setLoading(true)
     axios
       .get(api)

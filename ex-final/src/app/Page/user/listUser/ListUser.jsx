@@ -10,9 +10,11 @@ export default function ListUser() {
   const [id, setId] = useState("");
   const [loading, setLoading] = useState(false);
   const [dataUser, setDataUser] = useState([]);
-  const apiListData = "http://localhost:5000/user/list";
+  const LINK_API = process.env.REACT_APP_API;
+  const apiListData = `${LINK_API}/user/list`;
 
   async function getUserData() {
+
     try {
       let response = await axios.get(apiListData);
       let temp = await response.data;
@@ -38,7 +40,7 @@ export default function ListUser() {
   }
 
 const deleteUser = async id => {
-    await axios.delete(`http://localhost:5000/user/${id}/delete`)
+    await axios.delete(`${LINK_API}/user/${id}/delete`)
     .then((res) => setShow(false));
     getUserData();
   }

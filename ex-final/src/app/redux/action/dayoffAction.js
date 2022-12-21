@@ -3,10 +3,10 @@ import { dayOffFailed, dayOffStart, dayOffSuccess } from "../reducers/dayoffRedu
 
 
 export const requestDayOff = async (dayoff, dispatch, navigate) => {
-  const API_CREATED_DAYOFF = process.env.REACT_APP_API_CREATED_DAYOFF;
+  const LINK_API = process.env.REACT_APP_API;
   dispatch(dayOffStart());
   try {
-    const res = await axios.post(API_CREATED_DAYOFF, dayoff);
+    const res = await axios.post(`${LINK_API}/dayoff/create`, dayoff);
     if(res.status === 200) {
       dispatch(dayOffSuccess(res.data))
       navigate('/requests')

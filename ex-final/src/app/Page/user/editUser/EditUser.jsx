@@ -24,6 +24,8 @@ const ERROR_PHONENUMBER = {
 };
 
 export default function EditUser() {
+  const LINK_API = process.env.REACT_APP_API;
+
     const {
         register,
         handleSubmit,
@@ -43,7 +45,7 @@ export default function EditUser() {
     }, []);
 
     const getUserByID = async () => {
-        const response = await axios.get(`http://localhost:5000/user/${id}/edit`);
+        const response = await axios.get(`${LINK_API}/user/${id}/edit`);
         setUserName(response.data.userName);
         setPassword(response.data.password);
         setEmail(response.data.email);
@@ -52,7 +54,7 @@ export default function EditUser() {
     }
 
     const onSubmit = async (e) => {
-        await axios.put(`http://localhost:5000/user/${id}`, {
+        await axios.put(`${LINK_API}/user/${id}`, {
             userName,
             password,
             email,
