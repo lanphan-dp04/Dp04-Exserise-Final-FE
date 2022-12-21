@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Moment from "moment";
-import { Form } from "antd";
+import { Form, Tag } from "antd";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Table from "react-bootstrap/Table";
 import Search from "../../components/search/Search";
@@ -38,6 +38,7 @@ export default function Request() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [dayoffId, setDayOffId] = useState("");
   const [listDayOff, setListDayOff] = useState([]);
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -64,6 +65,10 @@ export default function Request() {
     });
   }, [fetchingApprove, fetchingReject, fetchingChange]);
 
+  setTimeout(() => {
+    setLoading(false);
+  }, 500);
+
   const showConfirm = (dayoffId, userId) => {
     confirm({
       title: "Are you sure?",
@@ -78,7 +83,7 @@ export default function Request() {
         approved(actionApprove, dispatch, navigate);
       },
       onCancel() {
-       },
+      },
     });
   };
   const showReject = (dayoffId, userId) => {
@@ -119,9 +124,26 @@ export default function Request() {
     changed(newNotifies, dispatch, navigate);
   };
 
+  const colorStatus = (status) => {
+    switch (status) {
+      case 'Approved':
+        return "success"
+      case 'Rejected':
+        return "error"
+      case 'Requested':
+        return "blue"
+      case 'Request Change':
+        return "yellow"
+      case 'Cancled':
+        return "default"
+      default:
+        return null;
+    }
+  }
+
   return (
     <div>
-      {Object.keys(listDayOff).length === 0 ? <Loanding /> :
+      {loading ? <Loanding /> :
         <div className="container">
           <div className="header-staff">
             <div className="header-staff-nav">
@@ -140,12 +162,12 @@ export default function Request() {
             <thead>
               <tr className="table-title">
                 <th className="col-index">No </th>
-                <th className="col-2">Request for date</th>
+                <th className="col-3">Request for date</th>
                 <th className="col-1">Quantify</th>
                 <th className="col-2">Requester </th>
                 <th className="col-2">Status</th>
                 <th className="col-2">Request date</th>
-                <th className="col-3">Action</th>
+                <th className="col-2">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -194,15 +216,16 @@ export default function Request() {
                 const renderButtonMaster = (
                   <div className={AuthWith(item, approveId, userId)}>
                     <a onClick={(e) => showConfirm(item._id, userId)}>
-                      <Button icon={<CheckOutlined />} type="primary"></Button>
+                      <Button icon={<CheckOutlined />} type="primary" className="bg-success"></Button>
                       <ToastContainer />
                     </a>
                     <a onClick={(e) => showReject(item._id, userId)}>
-                      <Button icon={<CloseOutlined />} type="primary"></Button>
+                      <Button icon={<CloseOutlined />} type="primary" danger></Button>
                       <ToastContainer />
                     </a>
                     <a>
                       <Button
+                        className="bg-warning"
                         icon={<UndoOutlined />}
                         onClick={() => showModal(item._id)}
                         type="primary"
@@ -232,8 +255,9 @@ export default function Request() {
                     <td>{index + 1}</td>
                     <td> {`${renderDate}`}</td>
                     <td>{item.quantity}</td>
-                    <td>{item.userName}</td>
-                    <td>{item.status}</td>
+                    <td className="text-primary">{item.userName}</td>
+                    {/* <td>{item.status}</td> */}
+                    <td><Tag color={colorStatus(item.status)}>{item.status}</Tag></td>
                     <td>
                       {renderrequestDate.charAt(0).toUpperCase() +
                         renderrequestDate.slice(1)}

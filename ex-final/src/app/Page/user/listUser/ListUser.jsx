@@ -4,6 +4,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Loanding from "../../../components/loading/Loanding";
+import {
+  EyeOutlined,
+  EditOutlined,
+  DeleteOutlined
+} from "@ant-design/icons";
 
 export default function ListUser() {
 
@@ -85,12 +90,12 @@ const deleteUser = async id => {
                     <td className="text-size-m item-data-m">{item?.phoneNumber}</td>
                     <td className="text-size-m item-data-m">
                       <Link className="link-btn" to={`detail/${item._id}`}>
-                        <Button variant="primary">View</Button>{' '}
+                        <Button variant="primary"><EyeOutlined/></Button>{' '}
                       </Link>
                       <Link className="link-btn" to={`edit/${item._id}`}>
-                        <Button variant="warning" onClick={() => setData(dataUser)}>Edit</Button>{' '}
+                        <Button variant="warning" onClick={() => setData(dataUser)}><EditOutlined/></Button>{' '}
                       </Link>
-                      <Button variant="danger" onClick={() => handleClickDeleteUser(item._id)}>Delete</Button>{' '}
+                      <Button variant="danger" onClick={() => handleClickDeleteUser(item._id)}><DeleteOutlined /></Button>{' '}
                     </td>
                   </tr>
                 )

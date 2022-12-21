@@ -15,13 +15,15 @@ export default function Header() {
   const addUser = (
     <div className="box-logoff">
       <div className="box-addnewmember">
-        <Link to="list/form" type="button">
-          <span>
-            {" "}
-            <FontAwesomeIcon icon={faUserPlus} />
-          </span>
-          New Member
-        </Link>
+        <p>
+          <Link to="list/form" type="button">
+            <span>
+              {" "}
+              <FontAwesomeIcon icon={faUserPlus} />
+            </span>
+            New Member
+          </Link>
+        </p>
       </div>
     </div>
   );
@@ -48,13 +50,15 @@ export default function Header() {
         <p>{name}</p>
         <div className="box-logout">
           <div className="logout">
-            <Link to="/login">
-              <span>
-                {" "}
-                <FontAwesomeIcon icon={faRightFromBracket} />
-              </span>
-              Log Out
-            </Link>
+            <p>
+              <Link to="/login">
+                <span>
+                  {" "}
+                  <FontAwesomeIcon icon={faRightFromBracket} />
+                </span>
+                Log Out
+              </Link>
+            </p>
           </div>
         </div>
       </div>

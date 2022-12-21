@@ -12,6 +12,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Loanding from "../../../components/loading/Loanding";
 import { useSelector } from "react-redux";
+import {
+  EyeOutlined,
+  DeleteOutlined
+} from "@ant-design/icons";
+
 export default function ListUser() {
   const userId = useSelector((state) => state.auth.login.currentUser._id);
   const [id, setId] = useState("");
@@ -111,9 +116,9 @@ export default function ListUser() {
                       </td>
                       <td className="text-size-m item-data-m">
                         <Link className="link-btn" to={`/group/detail/${item._id}`}>
-                          <Button variant="primary mb-1">View</Button>{' '}
+                          <Button variant="primary mb-1"><EyeOutlined/></Button>{' '}
                         </Link>
-                        <Button variant="danger" onClick={() => handleClickDeleteUser(item._id)}>Delete</Button>{' '}
+                        <Button variant="danger" onClick={() => handleClickDeleteUser(item._id)}><DeleteOutlined/></Button>{' '}
                       </td>
                     </tr>
                   )

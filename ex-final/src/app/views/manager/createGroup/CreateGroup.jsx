@@ -82,6 +82,8 @@ const CreateGroup = () => {
           <Input style={{ width: '85%' }} placeholder='Group name...' />
         </Form.Item>
         <Form.Item
+          showSearch
+          optionFilterProp="children"
           label="Members"
           name={"memberID"}
           rules={[
@@ -92,9 +94,10 @@ const CreateGroup = () => {
           ]}
         >
           <Select
+            showSearch
+            optionFilterProp="children"
             mode='multiple'
             maxTagTextLength='responsive'
-            placeholder='Choose members...'
             style={{
               width: '85%',
             }}
@@ -122,7 +125,6 @@ const CreateGroup = () => {
           <Select
             mode='multiple'
             maxTagTextLength='responsive'
-            placeholder='Choose members...'
             style={{
               width: '85%',
             }}
