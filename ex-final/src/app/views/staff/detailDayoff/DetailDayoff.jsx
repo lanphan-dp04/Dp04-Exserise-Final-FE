@@ -192,14 +192,14 @@ export default function DetailDayoff() {
             />
           </Form.Item>
           <Form.Item>
-            <Button
-              style={{
-                margin: "0 8px",
-              }}
-              onClick={showModal}
-            >
-              Cancel
-            </Button>
+              <Button
+                style={{
+                  margin: "0 8px",
+                }}
+                onClick={showModal}
+              >
+                Cancel
+              </Button>
             <Button htmlType="submit" type="primary">
               SEND
             </Button>

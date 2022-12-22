@@ -15,7 +15,9 @@ const ERROR_EMAIL = {
 };
 const ERROR_FULLNAME = {
   required: "Fullname is required",
+  pattern: "Fullname cannot have special characters",
 };
+
 const ERROR_PASSWORD = {
   required: "Password is required",
 };
@@ -65,14 +67,18 @@ export default function Register() {
               placeholder="Enter user name..."
               {...register("userName", {
                 required: ERROR_FULLNAME?.required,
+                pattern: /^[^!"`'#%&,:;<>=@{}~\$\(\)\*\+\/\\\?\[\]\^\|]+$/,
                 message: "Fullname is required",
                 minLength: {
-                  value: 8,
-                  message: "Min length is 8",
+                  value: 4,
+                  message: "Min length is 4",
                 },
               })}
             />
             <p className="color-err">{errors.userName?.message}</p>
+            <p className="color-err">
+              {errors.userName?.type === "pattern" ? ERROR_FULLNAME?.pattern : ""}
+            </p>
           </div>
           <div className="form-name">
             {!id && (

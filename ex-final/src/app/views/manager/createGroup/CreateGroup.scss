@@ -2,30 +2,8 @@
     margin-top: 40px;
 }
 
-:where(.css-dev-only-do-not-override-1ij74fp).ant-form-horizontal .ant-form-item-label {
-    flex-grow: 0;
-    width: 20%;
-    padding-right: 10px;
-}
-
-:where(.css-dev-only-do-not-override-1ij74fp)[class^="ant-form"] [class*=" ant-form"],
-:where(.css-dev-only-do-not-override-1ij74fp)[class*=" ant-form"] [class*=" ant-form"] {
-    box-sizing: border-box;
-    padding-top: 3px;
-}
-
-:where(.css-dev-only-do-not-override-1ij74fp).ant-select-multiple .ant-select-selection-item-remove svg {
-    color: red;
-    margin: 0 -8px 2px 5px;
-}
-
-:where(.css-dev-only-do-not-override-1ij74fp).ant-select-multiple .ant-select-selection-overflow {
-    height: 120px;
-    display: inline !important;
-}
-
 .ant-form {
-    padding-top: 40px;
+    padding-top: 0px;
 }
 
 h3 {
@@ -41,15 +19,11 @@ h3 {
 }
 
 .ant-form {
-    padding: 20px 20px 30px 20px;
+    padding: 20px 20px 30px 20px !important;
 }
 
-:where(.css-dev-only-do-not-override-1ij74fp).ant-form-horizontal .ant-form-item-label {
-    margin-top: -8px;
-}
-
-:where(.css-dev-only-do-not-override-1ij74fp).ant-form-item .ant-form-item-label>label {
-    font-size: 18px;
+.ant-select-multiple .ant-select-selection-overflow {
+    height: 50px;
 }
 
 @media only screen and (max-width: 700px) {

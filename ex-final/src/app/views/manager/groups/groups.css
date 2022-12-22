@@ -53,21 +53,11 @@ table th {
 }
 
 .group-boxmember {
-    /* padding: 5px; */
     text-align: center;
 }
 
-/* .member-avatar:hover + .member-content{
-    display: block;
-
+.thead-light {
+    background-color: teal;
+    border: cadetblue;
+    color: white;
 }
-
-.member-content {
-    display: none;
-    padding: 5px 15px;
-    background-color: rgb(19, 184, 101);
-    color: wheat;
-    border-radius: 5px;
-    margin-top: 2px;
-
-} */
