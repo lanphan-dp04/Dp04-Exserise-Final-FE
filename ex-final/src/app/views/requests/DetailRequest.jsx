@@ -14,7 +14,7 @@ import {
 import { Form } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { useDispatch, useSelector } from "react-redux";
-import { AuthEdit, AuthWith } from "../../helpers/common";
+import { AuthEditDetail, AuthWith } from "../../helpers/common";
 import Moment from "moment";
 import { requestsDetail } from "../../redux/action/requestsDetailAction";
 import { approved } from "../../redux/action/approveAction";
@@ -29,13 +29,13 @@ export default function DetailRequest() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [dayoffId, setDayOffId] = useState("");
   const [masterId, setMasterId] = useState([]);
+  const [listMaster, setListMaster] = useState([]);
   const [form] = Form.useForm();
   const paramId = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const paramIdDayOff = paramId.id;
-  console.log('paramIdDayOff',paramIdDayOff);
   const [loading, setLoading] = useState(true);
 
   const fetchingApprove = useSelector(
@@ -49,6 +49,8 @@ export default function DetailRequest() {
   );
 
   const userId = useSelector((state) => state.auth.login.currentUser._id);
+  const role = useSelector((state) => state.auth.login.currentUser.role);
+
 
   const formatDate = "YYYY-MM-DD";
   const formatFromDay = Moment(dayOffWithId.fromDay).format(formatDate);
@@ -57,17 +59,18 @@ export default function DetailRequest() {
   useEffect(() => {
     const api = `${LINK_API}/requests/detail/${paramIdDayOff}`;
     axios.get(api).then((res) => {
-      console.log(res);
       setDayOffWithId(res.data);
-      console.log('res.data.approved',res.data.approved);
       setMasterId(res.data.approved);
+      setListMaster(res.data.listMaster);
       requestsDetail(res.data, dispatch, navigate);
     });
   }, [paramIdDayOff, fetchingApprove, fetchingReject, fetchingChange]);
-  console.log('userId',userId);
-  console.log('masterId',masterId);
+  
   const approveId = masterId.includes(userId);
-  console.log('includes',approveId);
+  const isMaster = listMaster.includes(userId);
+  const isRenderMaster = (isMaster === true) ? true : false;
+
+  const isRender = role === "hr" || role === "manager" ? true : false;
   setTimeout(() => {
     setLoading(false);
   }, 500);
@@ -92,7 +95,7 @@ export default function DetailRequest() {
         };
         approved(actionApprove, dispatch, navigate);
       },
-      onCancel() { },
+      onCancel() {},
     });
   };
   const showReject = (dayoffId, userId) => {
@@ -109,7 +112,7 @@ export default function DetailRequest() {
         };
         rejected(actionReject, dispatch, navigate);
       },
-      onCancel() { },
+      onCancel() {},
     });
   };
   const handleRequestChange = (values) => {
@@ -123,10 +126,9 @@ export default function DetailRequest() {
     };
     changed(newNotifies, dispatch, navigate);
   };
-
   const displayH4Action =
     AuthWith(dayOffWithId, approveId, userId) === "display-none" &&
-      AuthEdit(dayOffWithId, userId) === "display-none"
+    AuthEditDetail(dayOffWithId, userId) === "display-none"
       ? "display-none"
       : "display-block";
 
@@ -136,7 +138,11 @@ export default function DetailRequest() {
         onClick={() => showConfirm(dayOffWithId._id, userId)}
         className="item-action-detail"
       >
-        <Button icon={<CheckOutlined />} type="primary" className="bg-success"></Button>
+        <Button
+          icon={<CheckOutlined />}
+          type="primary"
+          className="bg-success"
+        ></Button>
       </a>
       <a
         onClick={() => showReject(dayOffWithId._id, userId)}
@@ -146,6 +152,7 @@ export default function DetailRequest() {
       </a>
       <a className="item-action-detail">
         <Button
+          className="bg-warning"
           icon={<UndoOutlined />}
           onClick={() => showModal(dayOffWithId._id)}
           type="primary"
@@ -154,9 +161,9 @@ export default function DetailRequest() {
     </div>
   );
   const renderButtonSatff = (
-    <div className={AuthEdit(dayOffWithId, userId)}>
+    <div className={AuthEditDetail(dayOffWithId, userId)}>
       <Link to={`/requests/edit/${dayOffWithId._id}`}>
-        <Button icon={<EditOutlined />} type="primary" ></Button>
+        <Button icon={<EditOutlined />} type="primary"></Button>
       </Link>
     </div>
   );
@@ -166,14 +173,18 @@ export default function DetailRequest() {
       : "";
 
   const displayButtonStaff =
-    AuthEdit(dayOffWithId, userId) === "display-block" ? renderButtonSatff : "";
+    AuthEditDetail(dayOffWithId, userId) === "display-block"
+      ? renderButtonSatff
+      : "";
 
   return (
     <div>
-      {loading ? <Loanding /> :
+      {loading ? (
+        <Loanding />
+      ) : (
         <div className="container">
           <div className="layout-detaildayoff">
-            <div className="detail-dayoff">
+            <div key={1} className="detail-dayoff">
               <h4>Basic Information</h4>
               <table>
                 <tr>
@@ -204,7 +215,19 @@ export default function DetailRequest() {
               <div>
                 <h4 className={`${displayH4Action}`}>Action: </h4>
                 <div className="box-action-detail">
-                  {displayButtonMaster}
+                  {isRenderMaster&&displayButtonMaster}
+                  {isRender && (
+                    <div>
+                      <a className="item-action-detail">
+                        <Button
+                          className="bg-warning"
+                          icon={<UndoOutlined />}
+                          onClick={() => showModal(dayOffWithId._id)}
+                          type="primary"
+                        ></Button>
+                      </a>
+                    </div>
+                  )}
                   {displayButtonStaff}
                 </div>
               </div>
@@ -251,7 +274,7 @@ export default function DetailRequest() {
             </Form>
           </Modal>
         </div>
-        }
+      )}
     </div>
   );
 }

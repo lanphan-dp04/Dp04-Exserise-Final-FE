@@ -22,10 +22,15 @@ function DayOff() {
   const [loading, setLoading] = useState(true);
 
   const userId = useSelector((state) => state.auth.login.currentUser._id);
+  const role = useSelector((state) => state.auth.login.currentUser.role);
+
   const LINK_API = process.env.REACT_APP_API;
+  const requestStaff = `${LINK_API}/requests/${userId}`;
+  const requestAdmin = `${LINK_API}/requests`;
+  const pathRequests = (role === 'staff') ? requestStaff : requestAdmin;
 
   useEffect(() => {
-    const api = `${LINK_API}/requests/${userId}`;
+    const api = `${pathRequests}`;
     axios
       .get(api)
       .then((res) => {
@@ -154,7 +159,7 @@ function DayOff() {
                       {Moment(item.toDay).format(formatDate)}
                     </td>
                     <td>{item.quantity}</td>
-                    <td className="text-primary">{item.userName}</td>
+                    <td className="text-primary">{item.userName || item.userId.userName}</td>
                     <td>
                       <Tag color={colorStatus(item.status)}>{item.status}</Tag>
                     </td>

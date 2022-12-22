@@ -10,6 +10,15 @@ export const AuthWith = (item, approveId, userId) => {
   return checkAuthWith;
 };
 export const AuthEdit = (item, userId) => {
+  const id = (typeof(item.userId) === typeof('')) ? item.userId : item.userId._id;
+  const checkAuthEdit =
+    (id === userId && item.status === "Requested") ||
+    (id === userId && item.status === "Request Change")
+      ? "display-block"
+      : "display-none";
+  return checkAuthEdit;
+};
+export const AuthEditDetail = (item, userId) => {
   const checkAuthEdit =
     (item.userId === userId && item.status === "Requested") ||
     (item.userId === userId && item.status === "Request Change")

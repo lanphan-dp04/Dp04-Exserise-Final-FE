@@ -54,8 +54,11 @@ export default function Request() {
     (state) => state.changed.changed.isFetching
   );
   const LINK_API = process.env.REACT_APP_API;
+  const requestStaff = `${LINK_API}/requests/${userId}`;
+  const requestAdmin = `${LINK_API}/requests`;
+  const pathRequests = (role === 'staff') ? requestStaff : requestAdmin;
   useEffect(() => {
-    const api = `${LINK_API}/requests/${userId}`;
+    const api = `${pathRequests}`;
     axios.get(api).then((res) => {
       const data = res.data.filter((item) => item.status !== "Cancled");
       const resData = [...data].reverse();
@@ -204,11 +207,11 @@ export default function Request() {
                   createdAt.getDate() === nowDate.getDate()
                     ? `${currentDate()}`
                     : `${nextDate()}`;
-
                 const approveId = item.approved.includes(userId);
-
+                const masterId = item.listMaster.includes(userId);
+                const isRender = (masterId === true) ? true : false;
                 const renderButtonMaster = (
-                  <div className={AuthWith(item, approveId, userId)}>
+                  <div className={AuthWith(item, approveId,masterId, userId)}>
                     <a onClick={(e) => showConfirm(item._id, userId)}>
                       <Button
                         icon={<CheckOutlined />}
@@ -251,14 +254,13 @@ export default function Request() {
                   AuthEdit(item, userId) === "display-block"
                     ? renderButtonSatff
                     : "";
-
+                  
                 return (
                   <tr key={index}>
                     <td>{index + 1}</td>
                     <td> {`${renderDate}`}</td>
                     <td>{item.quantity}</td>
-                    <td className="text-primary">{item.userName}</td>
-                    {/* <td>{item.status}</td> */}
+                    <td className="text-primary">{item.userName || item.userId.userName}</td>
                     <td>
                       <Tag color={colorStatus(item.status)}>{item.status}</Tag>
                     </td>
@@ -267,8 +269,7 @@ export default function Request() {
                         renderrequestDate.slice(1)}
                     </td>
                     <td className="table-action">
-                      {displayButtonMaster}
-                      {displayButtonStaff}
+                      {isRender && displayButtonMaster}
                       {renderButtonHr && (
                         <div>
                           <a>
@@ -281,6 +282,7 @@ export default function Request() {
                           </a>
                         </div>
                       )}
+                      {displayButtonStaff}
                       <div>
                         <Link to={`/requests/detail/${item._id}`}>
                           <Button
