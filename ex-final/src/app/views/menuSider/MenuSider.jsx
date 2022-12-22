@@ -4,6 +4,7 @@ import "../header/header.css";
 import { Menu } from "antd";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import logo from '../../assets/logo.svg';
 
 function getItem(label, key, icon, children, type) {
   return {
@@ -32,15 +33,8 @@ const itemsStaff = [
         key: "account3",
         label: <Link to="/dayoff">Day Off</Link>,
       },
-    ],
-  },
-  {
-    key: "manager",
-    icon: "",
-    label: "Manager",
-    children: [
       {
-        key: "manager2",
+        key: "account4",
         label: <Link to="/group">Groups</Link>,
       },
     ],
@@ -129,7 +123,7 @@ const MenuSider = () => {
     <>
       <div className="box-logo">
         <img
-          src="https://stunited.vn/wp-content/uploads/2019/09/stunited-e15650013362301.png"
+          src={logo}
           alt=""
         />
       </div>

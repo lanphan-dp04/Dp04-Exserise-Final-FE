@@ -35,6 +35,7 @@ export default function DetailRequest() {
   const navigate = useNavigate();
 
   const paramIdDayOff = paramId.id;
+  console.log('paramIdDayOff',paramIdDayOff);
   const [loading, setLoading] = useState(true);
 
   const fetchingApprove = useSelector(
@@ -56,12 +57,17 @@ export default function DetailRequest() {
   useEffect(() => {
     const api = `${LINK_API}/requests/detail/${paramIdDayOff}`;
     axios.get(api).then((res) => {
+      console.log(res);
       setDayOffWithId(res.data);
+      console.log('res.data.approved',res.data.approved);
       setMasterId(res.data.approved);
       requestsDetail(res.data, dispatch, navigate);
     });
   }, [paramIdDayOff, fetchingApprove, fetchingReject, fetchingChange]);
+  console.log('userId',userId);
+  console.log('masterId',masterId);
   const approveId = masterId.includes(userId);
+  console.log('includes',approveId);
   setTimeout(() => {
     setLoading(false);
   }, 500);
@@ -150,7 +156,7 @@ export default function DetailRequest() {
   const renderButtonSatff = (
     <div className={AuthEdit(dayOffWithId, userId)}>
       <Link to={`/requests/edit/${dayOffWithId._id}`}>
-        <Button icon={<EditOutlined />} type="primary" className="bg-warning"></Button>
+        <Button icon={<EditOutlined />} type="primary" ></Button>
       </Link>
     </div>
   );

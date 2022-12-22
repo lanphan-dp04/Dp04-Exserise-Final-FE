@@ -24,6 +24,8 @@ const CreateRequest = () => {
   const [form] = Form.useForm();
   const [typeDayOff, setTypeDayOff] = useState('');
   const paramId = useParams();
+  const [from, setFrom] = useState(new Date() - 86400000)
+
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -105,14 +107,15 @@ const CreateRequest = () => {
           rules={[{ required: true, message: "Please enter From Day!" }]}
           label="From"
         >
-          <DatePicker />
+          <DatePicker disabledDate={(current) => current.isBefore(moment().subtract(1,'day'))} 
+          onChange={(e) => setFrom(e.format('YYYY-MM-DD'))} />
         </Form.Item>
         <Form.Item
           name={"toDay"}
           rules={[{ required: true, message: "Please enter To Day!" }]}
           label="To"
         >
-          <DatePicker />
+          <DatePicker disabledDate={(current) => current.isBefore(moment(from))} format='YYYY-MM-DD'  />
         </Form.Item>
         <Form.Item
           name={"partialDay"}

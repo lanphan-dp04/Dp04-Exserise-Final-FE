@@ -11,6 +11,10 @@ body {
   margin: 0;
   font-family: "Open Sans", sans-serif;
 }
+.logo-logoff {
+  width: 100px !important;
+  height: 100px !important;
+}
 
 .fullscreen-container {
   padding: 50px 0;

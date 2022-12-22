@@ -27,8 +27,8 @@ import TextArea from "antd/es/input/TextArea";
 import { changed } from "../../redux/action/changeAction";
 import { AuthEdit, AuthWith } from "../../helpers/common";
 import Loanding from "../../components/loading/Loanding";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const converter = require("number-to-words");
 const { confirm } = Modal;
@@ -43,6 +43,7 @@ export default function Request() {
   const navigate = useNavigate();
 
   const userId = useSelector((state) => state.auth.login.currentUser._id);
+  const role = useSelector((state) => state.auth.login.currentUser.role);
   const fetchingApprove = useSelector(
     (state) => state.approved.approved.isFetching
   );
@@ -56,11 +57,9 @@ export default function Request() {
   useEffect(() => {
     const api = `${LINK_API}/requests/${userId}`;
     axios.get(api).then((res) => {
-      const data = res.data.filter(
-        (item) =>
-          item.status !== "Cancled"
-      );
-      setListDayOff(data);
+      const data = res.data.filter((item) => item.status !== "Cancled");
+      const resData = [...data].reverse();
+      setListDayOff(resData);
       requests(res.data, dispatch, navigate);
     });
   }, [fetchingApprove, fetchingReject, fetchingChange]);
@@ -82,8 +81,7 @@ export default function Request() {
         };
         approved(actionApprove, dispatch, navigate);
       },
-      onCancel() {
-      },
+      onCancel() {},
     });
   };
   const showReject = (dayoffId, userId) => {
@@ -101,7 +99,7 @@ export default function Request() {
         };
         rejected(actionReject, dispatch, navigate);
       },
-      onCancel() { },
+      onCancel() {},
     });
   };
   const showModal = (id) => {
@@ -126,35 +124,31 @@ export default function Request() {
 
   const colorStatus = (status) => {
     switch (status) {
-      case 'Approved':
-        return "success"
-      case 'Rejected':
-        return "error"
-      case 'Requested':
-        return "blue"
-      case 'Request Change':
-        return "yellow"
-      case 'Cancled':
-        return "default"
+      case "Approved":
+        return "success";
+      case "Rejected":
+        return "error";
+      case "Requested":
+        return "blue";
+      case "Request Change":
+        return "yellow";
+      case "Cancled":
+        return "default";
       default:
         return null;
     }
-  }
+  };
+  const renderButtonHr = role === "hr" || role === "manager" ? true : false;
 
   return (
     <div>
-      {loading ? <Loanding /> :
+      {loading ? (
+        <Loanding />
+      ) : (
         <div className="container">
           <div className="header-staff">
             <div className="header-staff-nav">
               <h2>Day Off Request</h2>
-              <Link to={"/request"}>Requests</Link>
-              <Link to={"/create-request"}>Create Request</Link>
-              <Link to={"/dayoff"}>Day Off</Link>
-            </div>
-
-            <div className="search">
-              <Search />
             </div>
           </div>
 
@@ -216,11 +210,19 @@ export default function Request() {
                 const renderButtonMaster = (
                   <div className={AuthWith(item, approveId, userId)}>
                     <a onClick={(e) => showConfirm(item._id, userId)}>
-                      <Button icon={<CheckOutlined />} type="primary" className="bg-success"></Button>
+                      <Button
+                        icon={<CheckOutlined />}
+                        type="primary"
+                        className="bg-success"
+                      ></Button>
                       <ToastContainer />
                     </a>
                     <a onClick={(e) => showReject(item._id, userId)}>
-                      <Button icon={<CloseOutlined />} type="primary" danger></Button>
+                      <Button
+                        icon={<CloseOutlined />}
+                        type="primary"
+                        danger
+                      ></Button>
                       <ToastContainer />
                     </a>
                     <a>
@@ -257,7 +259,9 @@ export default function Request() {
                     <td>{item.quantity}</td>
                     <td className="text-primary">{item.userName}</td>
                     {/* <td>{item.status}</td> */}
-                    <td><Tag color={colorStatus(item.status)}>{item.status}</Tag></td>
+                    <td>
+                      <Tag color={colorStatus(item.status)}>{item.status}</Tag>
+                    </td>
                     <td>
                       {renderrequestDate.charAt(0).toUpperCase() +
                         renderrequestDate.slice(1)}
@@ -265,9 +269,24 @@ export default function Request() {
                     <td className="table-action">
                       {displayButtonMaster}
                       {displayButtonStaff}
+                      {renderButtonHr && (
+                        <div>
+                          <a>
+                            <Button
+                              className="bg-warning"
+                              icon={<UndoOutlined />}
+                              onClick={() => showModal(item._id)}
+                              type="primary"
+                            ></Button>
+                          </a>
+                        </div>
+                      )}
                       <div>
                         <Link to={`/requests/detail/${item._id}`}>
-                          <Button icon={<EyeOutlined />} type="primary"></Button>
+                          <Button
+                            icon={<EyeOutlined />}
+                            type="primary"
+                          ></Button>
                         </Link>
                       </div>
                     </td>
@@ -317,7 +336,7 @@ export default function Request() {
             </Form>
           </Modal>
         </div>
-      }
+      )}
     </div>
   );
 }
