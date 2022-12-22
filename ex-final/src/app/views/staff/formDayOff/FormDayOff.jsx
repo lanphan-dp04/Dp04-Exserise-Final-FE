@@ -12,12 +12,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { requestDayOff } from "../../../redux/action/dayoffAction";
 import { useDispatch, useSelector } from "react-redux";
+import moment from 'moment';
 import { useEffect } from "react";
+import format from "pretty-format";
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 
 const CreateRequest = () => {
   const [typeDayOff, setTypeDayOff] = useState("Day Off");
+  const [from, setFrom] = useState(new Date() - 86400000)
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -74,14 +77,16 @@ const CreateRequest = () => {
           rules={[{ required: true, message: "Please enter From Day!" }]}
           label="From"
         >
-          <DatePicker />
+          <DatePicker disabledDate={(current) => current.isBefore(moment().subtract(1,'day'))} 
+          onChange={(e) => setFrom(e.format('YYYY-MM-DD'))}/>
         </Form.Item>
         <Form.Item
+           format={dateFormat}
           name={"toDay"}
           rules={[{ required: true, message: "Please enter To Day!" }]}
           label="To"
         >
-          <DatePicker />
+          <DatePicker disabledDate={(current) => current.isBefore(moment(from))} format='YYYY-MM-DD'  />
         </Form.Item>
         <Form.Item
           name={"partialDay"}

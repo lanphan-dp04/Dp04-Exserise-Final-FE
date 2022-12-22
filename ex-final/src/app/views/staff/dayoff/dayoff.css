@@ -1,6 +1,6 @@
 
 .header-staff {
-    margin: 20px;
+    margin-top: 20px;
     display: grid;
     grid-template-columns: auto auto;
 }
@@ -60,9 +60,6 @@ td a .svg-inline--fa{
     font-size: 30px;
 }
 
-.box-filter {
-    margin: 20px;
-}
 
 .box-filter button {
     margin: 20px 20px 20px 0;

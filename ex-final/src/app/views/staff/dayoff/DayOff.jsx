@@ -37,10 +37,11 @@ function DayOff() {
             item.status === "Cancled" ||
             item.status === "Reverted"
         );
-        setListDayOff(data);
+        const resData = [...data].reverse();
+        setListDayOff(resData);
       })
       .catch((error) => {
-        return error
+        return error;
       });
   }, []);
 
@@ -50,18 +51,18 @@ function DayOff() {
 
   const colorStatus = (status) => {
     switch (status) {
-      case 'Approved':
-        return "success"
-      case 'Rejected':
-        return "error"
-      case 'Requested':
-        return "warning"
-      case 'Cancled':
-        return "default"
+      case "Approved":
+        return "success";
+      case "Rejected":
+        return "error";
+      case "Requested":
+        return "warning";
+      case "Cancled":
+        return "default";
       default:
         return null;
     }
-  }
+  };
 
   const filteredListDayOff = useMemo(() => {
     if (status === "") return listDayOff;
@@ -69,7 +70,6 @@ function DayOff() {
     const data = listDayOff.filter((item) => item.status === status);
     return data;
   }, [listDayOff, status]);
-
 
   const seeAll = () => {
     setStatus("");
@@ -83,19 +83,18 @@ function DayOff() {
   };
 
   const filterReverted = () => {
-    setStatus("");
+    setStatus("Cancled");
   };
 
   return (
     <div>
-      {loading ? <Loanding /> :
+      {loading ? (
+        <Loanding />
+      ) : (
         <div className="container">
           <div className="header-staff">
             <div className="header-staff-nav">
               <h2>Day Off</h2>
-              <Link to={"/request"}>Requests</Link>
-              <Link to={"/create-request"}>Create Request</Link>
-              <Link to={"/dayoff"}>Day Off</Link>
             </div>
           </div>
 
@@ -156,7 +155,9 @@ function DayOff() {
                     </td>
                     <td>{item.quantity}</td>
                     <td className="text-primary">{item.userName}</td>
-                    <td><Tag color={colorStatus(item.status)}>{item.status}</Tag></td>
+                    <td>
+                      <Tag color={colorStatus(item.status)}>{item.status}</Tag>
+                    </td>
                     <td>{Moment(item.createdAt).format(formatDate)}</td>
                     <td>
                       <Link to={`/dayoff/${item._id}`} type="button">
@@ -169,7 +170,7 @@ function DayOff() {
             </tbody>
           </Table>
         </div>
-      }
+      )}
     </div>
   );
 }

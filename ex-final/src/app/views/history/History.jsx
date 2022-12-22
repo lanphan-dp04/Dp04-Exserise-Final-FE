@@ -24,6 +24,7 @@ function History(props) {
   useEffect(() => {
     const api = `${LINK_API}/history/${props.value}`;
     axios.get(api).then((res) => {
+      console.log(res.data);
       setHistory(res.data);
     });
   }, [
@@ -40,6 +41,7 @@ function History(props) {
         <h6>{item.status}</h6>
         <p>{item.content}</p>
         <div className="history-request">
+          <p>Type Request: {item.typeDayOff}</p>
           <p>From: {moment(item.fromDay).format("YYYY/MM/DD")} </p>
           <p>To: {moment(item.toDay).format("YYYY/MM/DD")}</p>
           <p>Time: {item.time}</p>
@@ -59,6 +61,7 @@ function History(props) {
           <div className="history-request">
             <div className="box-request">
               <div>
+              <p>Type Request: {dataFrist.typeDayOff}</p>
                 <p>From: {moment(dataFrist.fromDay).format("YYYY/MM/DD")}</p>
                 <p>To: {moment(dataFrist.toDay).format("YYYY/MM/DD")}</p>
                 <p>Time: {dataFrist.time}</p>
@@ -71,6 +74,7 @@ function History(props) {
                 </span>
               </div>
               <div>
+                <p>Type Request: {dataLast.typeDayOff}</p>
                 <p>From: {moment(dataLast.fromDay).format("YYYY/MM/DD")}</p>
                 <p>To: {moment(dataLast.toDay).format("YYYY/MM/DD")}</p>
                 <p>Time: {dataLast.time}</p>

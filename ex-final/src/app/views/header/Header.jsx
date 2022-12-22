@@ -42,10 +42,10 @@ export default function Header() {
     }
     sendNoti(data,dispatch, navigate)
   }
-
+  const sortData =  [...data].reverse();
   const items =
-    0 < data.length
-      ? data.map((item, index) => ({
+    0 < sortData.length
+      ? sortData.map((item, index) => ({
           key: index,
           label: <Link to={`requests/detail/${item.dayoffID}`} onClick={() => handleSend(item._id)}>{item.desc}</Link>,
         }))

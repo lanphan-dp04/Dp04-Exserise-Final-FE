@@ -6,6 +6,7 @@ import { loginUser } from "../../redux/action/loginAction";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import "./login.css";
+import logo from '../../assets/logo.svg';
 
 export default function Login({ setToken }) {
   const [email, setEmail] = useState("");
@@ -28,8 +29,8 @@ export default function Login({ setToken }) {
     <div className="fullscreen-container">
       <div className="login-container">
         <div className="login-logo">
-          <img
-            src="https://stunited.vn/wp-content/uploads/2019/09/stunited-e15650013362301.png"
+          <img className="logo-logoff"
+            src={logo}
             alt="stunited"
           />
           <h2 className="header-login-title">Login to your account</h2>
@@ -62,20 +63,6 @@ export default function Login({ setToken }) {
             Login
           </button>
         </form>
-
-        <h3 className="signup-header">Log in with</h3>
-
-        <div className="social-icons">
-          <ul className="social-list">
-            <li className="social-links">
-              <a href="/">
-                <span>
-                  <FontAwesomeIcon icon={faGoogle} />
-                </span>
-              </a>
-            </li>
-          </ul>
-        </div>
       </div>
     </div>
   );
