@@ -24,7 +24,6 @@ function History(props) {
   useEffect(() => {
     const api = `${LINK_API}/history/${props.value}`;
     axios.get(api).then((res) => {
-      console.log(res.data);
       setHistory(res.data);
     });
   }, [
