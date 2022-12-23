@@ -49,9 +49,9 @@ export default function ListUser() {
   const deleteUser = async (id) => {
     await axios.delete(`${LINK_API}/group/delete/${id}`).then((res) => {
       setShow(false);
-      toast.success("Update Group successfully!!!", { autoClose: 2000 });
       getUserData();
     });
+    toast.success("Delete Group successfully!!!", { autoClose: 1500 });
   };
   const role = useSelector((state) => state.auth.login.currentUser.role);
   const buttonCreateGroup = (
@@ -95,7 +95,7 @@ export default function ListUser() {
                 </tr>
               </thead>
               <tbody>
-                {dataUser.map((item, index) => {
+                {dataUser.length > 0 ? (dataUser.map((item, index) => {
                   return (
                     <tr key={item._id}>
                       <td className="text-size-m item-data-m">
@@ -148,11 +148,14 @@ export default function ListUser() {
                           >
                             <DeleteOutlined />
                           </Button>{" "}
+                          <ToastContainer />
                         </td>
                       )}
                     </tr>
                   );
-                })}
+                })) : <tr>
+                  <td>No Data</td>
+                </tr>}
               </tbody>
             </Table>
           </div>

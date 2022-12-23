@@ -17,6 +17,8 @@ import DetailUser from "../../Page/user/detailUser/DetailUser";
 import DetailRequest from "../requests/DetailRequest";
 import FormEditDayOff from "../requests/FormEditDayOff";
 import CreateGroup from "../manager/createGroup/CreateGroup";
+import Page404 from "../../Page/error/Page404";
+import Page403 from "../../Page/error/Page403";
 
 function Router() {
   const { Content, Sider } = Layout;
@@ -57,6 +59,9 @@ function Router() {
               <Route path="/group/" element={<Group />} />
               <Route path="/group/create" element={<CreateGroup />} />
               <Route path="/group/detail/:id" element={<GroupDetail />} />
+
+              <Route path="/error-404" element={<Page404 />} />
+              <Route path="/error-403" element={<Page403 />} />
             </Routes>
           </div>
         </Content>

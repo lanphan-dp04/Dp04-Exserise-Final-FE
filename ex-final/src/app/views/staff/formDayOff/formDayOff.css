@@ -20,8 +20,8 @@
 
 .button-box {
     position: absolute;
-    bottom: 10px;
-    left: 175px;
+    bottom: 2px;
+    left: 130px;
 }
 .button-sendrequest {
     background-color: rgb(44, 81, 109);

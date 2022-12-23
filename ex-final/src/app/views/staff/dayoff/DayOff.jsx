@@ -149,7 +149,7 @@ function DayOff() {
               </tr>
             </thead>
             <tbody>
-              {filteredListDayOff.map((item, index) => {
+              {filteredListDayOff.length > 0 ? (filteredListDayOff.map((item, index) => {
                 const formatDate = "YYYY-MM-DD";
                 return (
                   <tr>
@@ -171,7 +171,9 @@ function DayOff() {
                     </td>
                   </tr>
                 );
-              })}
+              })) : <tr>
+                <td colSpan={12}>No Data</td>
+              </tr>}
             </tbody>
           </Table>
         </div>
