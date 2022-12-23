@@ -1,28 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:700);
 
-*,
-*:before,
-*:after {
-    box-sizing: border-box;
-}
-
-html {
-    height: 100%;
-}
-
-.body {
-    font-family: 'Raleway', sans-serif;
-    background-color: #342643;
-    height: 100%;
-    padding: 10px;
-    height: 100vh;
-}
-
-a:hover {
-    color: #FFFFFF !important;
-    text-decoration: none;
-}
-
 .text-wrapper {
     height: 100%;
     display: flex;
@@ -72,7 +49,7 @@ a:hover {
 }
 
 /* page 404 */
-.text-size {
+.text-size-err {
     font-size: 70px;
     margin-top: 10px;
     color: black;
