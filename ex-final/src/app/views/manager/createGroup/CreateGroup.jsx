@@ -70,7 +70,8 @@ const CreateGroup = () => {
         labelCol={{span: 3}}
         wrapperCol={{span:10}}
         style={{
-          marginTop:"40px"
+          marginTop:"40px",
+          backgroundColor:"white"
         }}
       >
         <Form.Item
