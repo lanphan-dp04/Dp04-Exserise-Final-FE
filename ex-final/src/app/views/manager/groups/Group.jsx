@@ -95,7 +95,7 @@ export default function ListUser() {
                 </tr>
               </thead>
               <tbody>
-                {dataUser.map((item, index) => {
+                {dataUser.length > 0 ? (dataUser.map((item, index) => {
                   return (
                     <tr key={item._id}>
                       <td className="text-size-m item-data-m">
@@ -148,12 +148,14 @@ export default function ListUser() {
                           >
                             <DeleteOutlined />
                           </Button>{" "}
-                          <ToastContainer/>
+                          <ToastContainer />
                         </td>
                       )}
                     </tr>
                   );
-                })}
+                })) : <tr>
+                  <td>No Data</td>
+                </tr>}
               </tbody>
             </Table>
           </div>

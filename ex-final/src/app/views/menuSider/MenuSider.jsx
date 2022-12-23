@@ -79,28 +79,13 @@ const itemsAdmin = [
         children: [
           {
             key: "manager3-1",
-            label: <Link to="/noti-slack">Slack</Link>,
+            label: <Link to="error-404">Slack</Link>,
           },
           {
             key: "manager3-2",
-            label: <Link to="/noti-browser">Browser</Link>,
+            label: <Link to="error-404">Browser</Link>,
           },
         ],
-      },
-      {
-        key: "manager4",
-        label: <Link to="/sync">Sync</Link>,
-      },
-    ],
-  },
-  {
-    key: "admin",
-    icon: "",
-    label: "Administation",
-    children: [
-      {
-        key: "admin1",
-        label: <Link to="/administation">Administation</Link>,
       },
     ],
   },
