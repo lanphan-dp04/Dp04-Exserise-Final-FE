@@ -27,7 +27,6 @@ export default function ListUser() {
     try {
       let response = await axios.get(apiListData);
       let temp = await response.data;
-      console.log('temp', temp);
       const resData = temp.filter(item => (item._id !== isId))
       setDataUser(resData);
       setTimeout(() => {
