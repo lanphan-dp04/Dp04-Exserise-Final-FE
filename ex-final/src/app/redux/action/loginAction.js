@@ -30,11 +30,9 @@ export const loginUser = async (user, dispatch, navigate) => {
         case 'admin':
           navigate("/admin");
           break;
-        case 'staff':
-          navigate("/");
-          break;  
+       
         default:
-          navigate("/404");
+          navigate("/");
       }
     }
   } catch (error) {

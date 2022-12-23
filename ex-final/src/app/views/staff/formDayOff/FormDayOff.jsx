@@ -45,9 +45,6 @@ const CreateRequest = () => {
       <div className="header-staff">
         <div className="header-staff-nav">
           <h2>Day Off</h2>
-          <Link to={"/request"}>Requests</Link>
-          <Link to={"/create-request"}>Create Request</Link>
-          <Link to={"/dayoff"}>Day Off</Link>
         </div>
       </div>{" "}
       <Form 

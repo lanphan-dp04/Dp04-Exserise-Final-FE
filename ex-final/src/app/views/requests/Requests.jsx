@@ -56,7 +56,7 @@ export default function Request() {
   const LINK_API = process.env.REACT_APP_API;
   const requestStaff = `${LINK_API}/requests/${userId}`;
   const requestAdmin = `${LINK_API}/requests`;
-  const pathRequests = (role === 'staff') ? requestStaff : requestAdmin;
+  const pathRequests = role === "staff" ? requestStaff : requestAdmin;
   useEffect(() => {
     const api = `${pathRequests}`;
     axios.get(api).then((res) => {
@@ -84,7 +84,7 @@ export default function Request() {
         };
         approved(actionApprove, dispatch, navigate);
       },
-      onCancel() { },
+      onCancel() {},
     });
   };
   const showReject = (dayoffId, userId) => {
@@ -102,7 +102,7 @@ export default function Request() {
         };
         rejected(actionReject, dispatch, navigate);
       },
-      onCancel() { },
+      onCancel() {},
     });
   };
   const showModal = (id) => {
@@ -141,7 +141,6 @@ export default function Request() {
         return null;
     }
   };
-  const renderButtonHr = role === "hr" || role === "manager" ? true : false;
 
   return (
     <div>
@@ -168,8 +167,8 @@ export default function Request() {
               </tr>
             </thead>
             <tbody>
-              {listDayOff.length > 0 ?
-                (listDayOff.map((item, index) => {
+              {listDayOff.length > 0 ? (
+                listDayOff.map((item, index) => {
                   const formatDate = "YYYY-MM-DD";
                   const fromDay = new Date(item.fromDay);
                   const toDay = new Date(item.toDay);
@@ -210,9 +209,18 @@ export default function Request() {
                       : `${nextDate()}`;
                   const approveId = item.approved.includes(userId);
                   const masterId = item.listMaster.includes(userId);
-                  const isRender = (masterId === true) ? true : false;
+                  const isRender = masterId === true ? true : false;
+                  const renderButtonHr =
+                    (role === "hr" || role === "manager") &&
+                    item.status !== "Approved" &&
+                    item.status !== "Rejected" &&
+                    isRender !== true
+                      ? true
+                      : false;
                   const renderButtonMaster = (
-                    <div className={AuthWith(item, approveId, masterId, userId)}>
+                    <div
+                      className={AuthWith(item, approveId, masterId, userId)}
+                    >
                       <a onClick={(e) => showConfirm(item._id, userId)}>
                         <Button
                           icon={<CheckOutlined />}
@@ -242,7 +250,11 @@ export default function Request() {
                   const renderButtonSatff = (
                     <div className={AuthEdit(item, userId)}>
                       <Link to={`/requests/edit/${item._id}`}>
-                        <Button icon={<EditOutlined />} type="primary" className="bg-warning"></Button>
+                        <Button
+                          icon={<EditOutlined />}
+                          type="primary"
+                          className="bg-warning"
+                        ></Button>
                       </Link>
                     </div>
                   );
@@ -261,9 +273,13 @@ export default function Request() {
                       <td>{index + 1}</td>
                       <td> {`${renderDate}`}</td>
                       <td>{item.quantity}</td>
-                      <td className="text-primary">{item.userName || item.userId.userName}</td>
+                      <td className="text-primary">
+                        {item.userName || item.userId.userName}
+                      </td>
                       <td>
-                        <Tag color={colorStatus(item.status)}>{item.status}</Tag>
+                        <Tag color={colorStatus(item.status)}>
+                          {item.status}
+                        </Tag>
                       </td>
                       <td>
                         {renderrequestDate.charAt(0).toUpperCase() +
@@ -295,10 +311,12 @@ export default function Request() {
                       </td>
                     </tr>
                   );
-                })) :
+                })
+              ) : (
                 <tr>
                   <td colSpan={12}>No Data</td>
-                </tr>}
+                </tr>
+              )}
             </tbody>
           </Table>
 
