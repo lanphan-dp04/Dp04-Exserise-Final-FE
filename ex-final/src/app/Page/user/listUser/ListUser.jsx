@@ -1,4 +1,6 @@
 import "./ListUser.scss";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 import {Button, Modal, Table} from 'react-bootstrap';
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -9,6 +11,7 @@ import {
   EditOutlined,
   DeleteOutlined
 } from "@ant-design/icons";
+import { useSelector } from "react-redux";
 
 export default function ListUser() {
 
@@ -17,13 +20,16 @@ export default function ListUser() {
   const [dataUser, setDataUser] = useState([]);
   const LINK_API = process.env.REACT_APP_API;
   const apiListData = `${LINK_API}/user/list`;
+  const isId = useSelector((state) => state.auth.login.currentUser._id);
 
   async function getUserData() {
 
     try {
       let response = await axios.get(apiListData);
       let temp = await response.data;
-      setDataUser(temp);
+      console.log('temp', temp);
+      const resData = temp.filter(item => (item._id !== isId))
+      setDataUser(resData);
       setTimeout(() => {
         setLoading(false);
       }, 500);
@@ -48,6 +54,7 @@ const deleteUser = async id => {
     await axios.delete(`${LINK_API}/user/${id}/delete`)
     .then((res) => setShow(false));
     getUserData();
+    toast.success("Delete member successfully!!!", { autoClose: 1500 });
   }
 
   const setData = (data) => {
@@ -68,7 +75,7 @@ const deleteUser = async id => {
           <h2>User Table</h2>
         </div>
         <div className="container"> 
-          <Table striped bordered hover className="table">
+          <Table striped bordered hover>
             <thead className="thead-light">
               <tr>
                 <th className="text-size col-1">STT</th>
@@ -96,6 +103,7 @@ const deleteUser = async id => {
                         <Button variant="warning" onClick={() => setData(dataUser)}><EditOutlined/></Button>{' '}
                       </Link>
                       <Button variant="danger" onClick={() => handleClickDeleteUser(item._id)}><DeleteOutlined /></Button>{' '}
+                      <ToastContainer/>
                     </td>
                   </tr>
                 )
@@ -116,6 +124,7 @@ const deleteUser = async id => {
               <Button variant="danger" onClick={() => {deleteUser(id)}}>
                 Deleted
               </Button>
+              <ToastContainer/>
             </Modal.Footer>
           </Modal>
         </div>

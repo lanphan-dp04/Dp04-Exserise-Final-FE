@@ -53,11 +53,11 @@ export default function Register() {
   return (
     <div className="container-register">
       <div className="main-register">
+        <h2 className="text-create-user">Create an User</h2>
         <form className="form-group container" onSubmit={handleSubmit(onSubmit)}>
-          <h2 className="text-center text-create-user">Create an User</h2>
           <div className="form-name ">
             <label className="form-lable" htmlFor="inputFullname">
-              Full Name <span className="text-color-red">*</span>
+             <span className="text-color-red">* </span>  Full Name:
             </label>
             <input
               className="form-control input-name"
@@ -84,7 +84,7 @@ export default function Register() {
             {!id && (
               <>
                 <label className="form-lable" htmlFor="inputPassword4">
-                  Password <span className="text-color-red">*</span>
+                <span className="text-color-red">* </span>Password:
                 </label>
                 <input
                   type="password"
@@ -100,14 +100,13 @@ export default function Register() {
                     },
                   })}
                 ></input>
-                <p className="color-err">{errors.password?.message}</p>
               </>
             )}
+            <p className="color-err">{errors.password?.message}</p>
           </div>
-
           <div className="form-name">
             <label className="form-lable" htmlFor="inputEmail">
-              Email <span className="text-color-red">*</span>
+            <span className="text-color-red">*</span>Email:
             </label>
             <input
               className="form-control input-name"
@@ -126,7 +125,7 @@ export default function Register() {
           </div>
           <div className="form-name ">
             <label className="form-lable" htmlFor="inputFullname">
-              Number Phone <span className="text-color-red">*</span>
+            <span className="text-color-red">*</span>Number Phone:
             </label>
             <input
               className="form-control input-name"
@@ -151,10 +150,12 @@ export default function Register() {
             <p className="color-err">{errors.phoneNumber?.message}</p>
           </div>
           <div className="form-name">
-            <label className="form-lable" htmlFor="inputPassword4">Role <span className="text-color-red">*</span></label>
-            <Form.Select aria-label="Default select example" type="text" name="role" id="role" className="input-name" disabled
+            <label className="form-lable" htmlFor="role"><span className="text-color-red">*</span>Role:</label>
+            <Form.Select aria-label="Default select example" type="text" name="role" id="role" className="input-name"
               {...register("role")}>
               <option value="staff">Staff</option>
+              <option value="hr">Hr</option>
+              <option value="manager">Manager</option>
             </Form.Select>
           </div>
           <div className="content-btn">

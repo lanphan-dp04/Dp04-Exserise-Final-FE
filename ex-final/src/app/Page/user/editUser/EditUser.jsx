@@ -24,7 +24,7 @@ const ERROR_PHONENUMBER = {
 };
 
 export default function EditUser() {
-  const LINK_API = process.env.REACT_APP_API;
+    const LINK_API = process.env.REACT_APP_API;
 
     const {
         register,
@@ -72,11 +72,11 @@ export default function EditUser() {
     return (
         <div className="container-register">
             <div className="main-register">
+                <h2 className="text-start text-create-user">Edit an User</h2>
                 <form className="form-group container" onSubmit={handleSubmit(onSubmit)}>
-                    <h2 className="text-center text-create-user">Edit an User</h2>
                     <div className="form-name-e ">
                         <label className="form-lable" htmlFor="inputFullname">
-                            Full Name <span className="text-color-red">*</span>
+                        <span className="text-color-red">*</span>Full Name:
                         </label>
                         <input
                             className="form-control input-name"
@@ -87,11 +87,11 @@ export default function EditUser() {
                             defaultValue={userName}
                             onChange={e => setUserName(e.target.value)}
                             required
-                            />
+                        />
                     </div>
                     <div className="form-name-e">
                         <label className="form-lable" htmlFor="inputPassword4">
-                            Password <span className="text-color-red">*</span>
+                        <span className="text-color-red">*</span>Password:
                         </label>
                         <input
                             required
@@ -106,7 +106,7 @@ export default function EditUser() {
                     </div>
                     <div className="form-name-e ">
                         <label className="form-lable" htmlFor="inputFullname">
-                            Number Phone <span className="text-color-red">*</span>
+                        <span className="text-color-red">*</span>Number Phone:
                         </label>
                         <input
                             required
@@ -121,7 +121,7 @@ export default function EditUser() {
                     </div>
                     <div className="form-name-e">
                         <label className="form-lable" htmlFor="inputEmail">
-                            Email <span className="text-color-red">*</span>
+                        <span className="text-color-red">*</span>Email:
                         </label>
                         <input
                             required

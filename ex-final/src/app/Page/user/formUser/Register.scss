@@ -3,13 +3,13 @@
     height: 100vh;
 
     .main-register {
-        padding: 40px 12%;
+        padding: 40px 5%;
     }
 
     .form-group {
         box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.3);
         background-color: white;
-        padding: 30px 7%;
+        padding: 30px 2%;
         border-radius: 5px;
         display: flex;
         flex-wrap: wrap;
@@ -19,13 +19,19 @@
 
 .form-name {
     width: 100%;
-
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
 }
 
 .form-lable {
-    font-weight: 500;
+    display: flex;
+    justify-content: flex-end;
+    font-weight: 400 !important;
     margin-bottom: 5px;
     font-size: 16px;
+    width: 140px;
+    padding-right: 10px;
 }
 
 .color-err {
@@ -36,7 +42,8 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: end;
+    justify-content: start;
+    margin-left: 130px;
 }
 
 .content-btn-left {
@@ -59,7 +66,7 @@
 
 .input-name {
     border: none;
-    width: 100% !important;
+    width: 40% !important;
     outline: none !important;
     border-radius: 0;
     box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.4);
@@ -85,7 +92,33 @@
 
 @media only screen and (max-width: 1024px) {
     .container-register .main-register {
-        padding: 40px 10%;
+        padding: 40px 2% !important;
+    }
+
+    .container-register .form-group {
+        padding: 40px 5% !important;
+    }
+
+    .input-name {
+        width: 380px !important;
+    }
+
+    .form-name {
+        display: block;
+        margin-bottom: 0;
+    }
+
+    .form-lable {
+        display: block;
+    }
+
+    .content-btn {
+        margin-left: 0 !important;
+
+        .btn {
+            margin-left: 0;
+            margin-right: 15px;
+        }
     }
 }
 
