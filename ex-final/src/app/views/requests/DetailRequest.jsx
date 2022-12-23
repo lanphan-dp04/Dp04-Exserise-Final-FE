@@ -70,10 +70,13 @@ export default function DetailRequest() {
   const isMaster = listMaster.includes(userId);
   const isRenderMaster = (isMaster === true) ? true : false;
 
-  const isRender = role === "hr" || role === "manager" ? true : false;
+  const isRender =  (role === "hr" || role === "manager") &&
+  (dayOffWithId.status !== "Approved" && dayOffWithId.status !== "Rejected" && isMaster !== true)
+    ? true
+    : false;
   setTimeout(() => {
     setLoading(false);
-  }, 500);
+  }, 1000);
   
   const showModal = (id) => {
     setDayOffId(id);
