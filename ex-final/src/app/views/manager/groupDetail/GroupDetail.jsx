@@ -84,18 +84,22 @@ export default function GroupDetail() {
     <div>
       {loading ? <Loanding /> :
         <div className="container group-container">
+          <div className="box-title">
+                <h3 className="d-flex justify-content-start">Group Detail</h3>
+              </div>
           <Form
             form={form}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
+            labelCol={{span: 3}}
+            wrapperCol={{span:10}}
+            style={{
+              marginTop:"40px"
+        }}
           >
-            <Form.Item>
-              <div className="box-title">
-                <h3>Group Detail </h3>
-              </div>
-            </Form.Item>
             <Form.Item
+              className="form-item"
               label="Groupname"
               name='nameGroup'
               rules={[
@@ -104,11 +108,14 @@ export default function GroupDetail() {
                   message: 'Please input your username!',
                 },
               ]}
+              style={{
+                marginTop:"20px"
+              }}
             >
-              
-              <Input style={{ width: '85%' }} />
+              <Input />
             </Form.Item>
             <Form.Item
+              className="form-item"
               label="Members"
               name={"memberID"}
               rules={[
@@ -122,20 +129,17 @@ export default function GroupDetail() {
                 showSearch
                 optionFilterProp="children"
                 mode='multiple'
-                maxTagTextLength='responsive'
-                style={{
-                  width: '85%',
-                }}
-              >
+                maxTagCount='responsive'
+                >
                 {memberName?.map((option) => (
-                  <Select.Option 
-                  key={option._id} value={option._id}>
-                    {option.userName}
+                  <Select.Option key={option._id} value={option._id}>
+                    <span><FontAwesomeIcon icon={faUser} /></span>{option.userName}
                   </Select.Option>
                 ))}
               </Select>
             </Form.Item>
             <Form.Item
+            className="form-item"
               label="Masters"
               name={["masterID"]}
               rules={[
@@ -149,21 +153,19 @@ export default function GroupDetail() {
                 showSearch
                 optionFilterProp="children"
                 mode='multiple'
-                maxTagTextLength='responsive'
-                style={{
-                  width: '85%',
-                }}
+                maxTagCount='responsive' 
               >
                 {memberName?.map((option) => (
                   <Select.Option key={option._id} value={option._id}>
-                    {option.userName}
+                    <span><FontAwesomeIcon icon={faUser} /></span>{option.userName}
                   </Select.Option>
                 ))}
               </Select>
             </Form.Item>
             <Form.Item
+              wrapperCol={{span:'6'}}
             >
-              <div className="btn-bottom">
+              <div className="btn-bottom btn-bottom-gr">
                 <Button className="btn btn-success" type="submit">
                   Send
                 </Button>

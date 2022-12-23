@@ -1,12 +1,12 @@
 
 .group-container {
-    margin-top: 30px;
+    margin-top: 40px;
 }
 
 .group-container .box-title {
     margin-bottom: 30px;
     margin-left: 20px;
-    color: #776e63;
+    margin-top: -30px;
 }
 
 .box-groupdetail p{
@@ -75,4 +75,14 @@
 .box-groupdetail .item-user-detail:hover {
     cursor: pointer;
     color: wheat;
+}
+
+.form-item {
+    height: 50px;
+    margin-left: 0%;
+}
+
+.btn-bottom-gr {
+    margin-top: 50px;
+    margin-bottom: 0;
 }

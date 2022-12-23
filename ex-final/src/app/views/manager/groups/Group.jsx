@@ -85,7 +85,7 @@ export default function ListUser() {
           </div>
           <div className="container">
             <Table striped bordered hover>
-              <thead>
+              <thead className="thead-light">
                 <tr>
                   <th className="text-size col-1">STT</th>
                   <th className="text-size col-2">Group Name</th>

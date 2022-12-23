@@ -22,6 +22,8 @@ import { rejected } from "../../redux/action/rejectAction";
 import { changed } from "../../redux/action/changeAction";
 import History from "../history/History";
 import Loanding from "../../components/loading/Loanding";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const { confirm } = Modal;
 
 export default function DetailRequest() {
@@ -47,10 +49,8 @@ export default function DetailRequest() {
   const fetchingChange = useSelector(
     (state) => state.changed.changed.isFetching
   );
-
-  const userId = useSelector((state) => state.auth.login.currentUser._id);
   const role = useSelector((state) => state.auth.login.currentUser.role);
-
+  const userId = useSelector((state) => state.auth.login.currentUser._id);
 
   const formatDate = "YYYY-MM-DD";
   const formatFromDay = Moment(dayOffWithId.fromDay).format(formatDate);
@@ -74,7 +74,7 @@ export default function DetailRequest() {
   setTimeout(() => {
     setLoading(false);
   }, 500);
-
+  
   const showModal = (id) => {
     setDayOffId(id);
     setIsModalOpen(!isModalOpen);
@@ -89,6 +89,7 @@ export default function DetailRequest() {
       icon: <ExclamationCircleFilled />,
       okText: "Approve",
       onOk() {
+        toast.success("Successful approval!!!", { autoClose: 2000 });
         const actionApprove = {
           masterId: userId,
           dayoffId: dayoffId,
@@ -106,6 +107,7 @@ export default function DetailRequest() {
       okType: "danger",
 
       onOk() {
+        toast.success("Successful reject!!!", { autoClose: 2000 });
         const actionReject = {
           masterId: userId,
           dayoffId: dayoffId,
@@ -124,6 +126,7 @@ export default function DetailRequest() {
       dayoffId: dayoffId,
       masterId: userId,
     };
+    toast.success("Successful reject!!!", { autoClose: 2000 });
     changed(newNotifies, dispatch, navigate);
   };
   const displayH4Action =
@@ -138,17 +141,15 @@ export default function DetailRequest() {
         onClick={() => showConfirm(dayOffWithId._id, userId)}
         className="item-action-detail"
       >
-        <Button
-          icon={<CheckOutlined />}
-          type="primary"
-          className="bg-success"
-        ></Button>
+        <Button icon={<CheckOutlined />} type="primary" className="bg-success"></Button>
+        <ToastContainer />
       </a>
       <a
         onClick={() => showReject(dayOffWithId._id, userId)}
         className="item-action-detail"
       >
         <Button icon={<CloseOutlined />} type="primary" danger></Button>
+        <ToastContainer />
       </a>
       <a className="item-action-detail">
         <Button
@@ -157,13 +158,14 @@ export default function DetailRequest() {
           onClick={() => showModal(dayOffWithId._id)}
           type="primary"
         ></Button>
+        <ToastContainer />
       </a>
     </div>
   );
   const renderButtonSatff = (
     <div className={AuthEditDetail(dayOffWithId, userId)}>
       <Link to={`/requests/edit/${dayOffWithId._id}`}>
-        <Button icon={<EditOutlined />} type="primary"></Button>
+        <Button variant="warning" icon={<EditOutlined />} type="primary" className="bg-warning"></Button>
       </Link>
     </div>
   );

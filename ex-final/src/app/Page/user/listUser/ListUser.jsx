@@ -68,8 +68,8 @@ const deleteUser = async id => {
           <h2>User Table</h2>
         </div>
         <div className="container"> 
-          <Table striped bordered hover>
-            <thead>
+          <Table striped bordered hover className="table">
+            <thead className="thead-light">
               <tr>
                 <th className="text-size col-1">STT</th>
                 <th className="text-size col-1">Role</th>

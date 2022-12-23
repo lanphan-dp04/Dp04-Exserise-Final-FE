@@ -158,7 +158,9 @@ const CreateRequest = () => {
         </Form.Item>
 
         <div className="button-box">
-          <Button className="button-cancel">CANCEL</Button>
+          <Link className="link-btn" to={`/requests`}>
+            <Button className="button-cancel">CANCEL</Button>
+          </Link>
           <Button htmlType="submit" className="button-sendrequest">
             SUBMIT
           </Button>
