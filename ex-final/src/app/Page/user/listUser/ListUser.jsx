@@ -29,7 +29,7 @@ export default function ListUser() {
     try {
       let response = await axios.get(apiListData);
       let temp = await response.data;
-      const resData = temp.filter(item => (item._id !== isId))
+      const resData = temp.filter(item => (item._id !== isId && item.role !== "admin"))
       setDataUser(resData);
       setTimeout(() => {
         setLoading(false);

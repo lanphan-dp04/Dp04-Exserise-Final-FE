@@ -155,7 +155,6 @@ export default function Register() {
               {...register("role")}>
               <option value="staff">Staff</option>
               <option value="hr">Hr</option>
-              <option value="manager">Manager</option>
             </Form.Select>
           </div>
           <div className="content-btn">

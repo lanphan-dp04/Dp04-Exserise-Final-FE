@@ -79,17 +79,6 @@ export default function Header() {
     </div>
   );
 
-  const widgetMenu = (
-    <Menu>
-      <Menu.Item>
-        profile
-      </Menu.Item>
-      <Menu.Item>
-        sign out
-      </Menu.Item>
-    </Menu>
-  );
-
   const renderAddNewNumber =
     role === "admin" || role === "manager" ? addUser : "";
   return (
@@ -125,23 +114,6 @@ export default function Header() {
           <p className="count-noti">{data.length}</p>
         </div>
       </div>
-      {/* <div className="box-user">
-        <img src={avatar} alt="avatar" className="avatar-img" />
-        <p>{name}</p>
-        <div className="box-logout">
-          <div className="logout">
-            <p>
-              <Link to="/login">
-                <span>
-                  {" "}
-                  <FontAwesomeIcon icon={faRightFromBracket} />
-                </span>
-                Log Out
-              </Link>
-            </p>
-          </div>
-        </div>
-      </div> */}
       <div className="box-user">
         <Dropdown overlay={
           <Menu>
