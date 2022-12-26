@@ -14,7 +14,7 @@ import {
 import { Form } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { useDispatch, useSelector } from "react-redux";
-import { AuthEditDetail, AuthWith } from "../../helpers/common";
+import { AuthEditDetail, AuthWith, getData, listKey } from "../../helpers/common";
 import Moment from "moment";
 import { requestsDetail } from "../../redux/action/requestsDetailAction";
 import { approved } from "../../redux/action/approveAction";
@@ -49,8 +49,10 @@ export default function DetailRequest() {
   const fetchingChange = useSelector(
     (state) => state.changed.changed.isFetching
   );
-  const role = useSelector((state) => state.auth.login.currentUser.role);
-  const userId = useSelector((state) => state.auth.login.currentUser._id);
+  // const role = useSelector((state) => state.auth.login.currentUser.role);
+  // const userId = useSelector((state) => state.auth.login.currentUser._id);
+  const role = getData(listKey.user).role;
+  const userId = getData(listKey.user)._id;
 
   const formatDate = "YYYY-MM-DD";
   const formatFromDay = Moment(dayOffWithId.fromDay).format(formatDate);

@@ -14,7 +14,7 @@ import {
   ExclamationCircleFilled,
   CloseCircleOutlined,
 } from "@ant-design/icons";
-import { AuthRevert, AuthWithRevert } from "../../../helpers/common";
+import { AuthRevert, AuthWithRevert, getData, listKey } from "../../../helpers/common";
 import { useDispatch, useSelector } from "react-redux";
 import { reverted } from "../../../redux/action/revertAction";
 import { requestsDetail } from "../../../redux/action/requestsDetailAction";
@@ -30,7 +30,8 @@ export default function DetailDayoff() {
   const { confirm } = Modal;
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userId = useSelector((state) => state.auth.login.currentUser._id);
+  // const userId = useSelector((state) => state.auth.login.currentUser._id);
+  const userId = getData(listKey.user)._id;
   const fetchingRevert = useSelector(
     (state) => state.revert.reverted.isFetching
   );

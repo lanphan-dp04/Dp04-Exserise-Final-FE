@@ -25,7 +25,7 @@ import { approved } from "../../redux/action/approveAction";
 import { rejected } from "../../redux/action/rejectAction";
 import TextArea from "antd/es/input/TextArea";
 import { changed } from "../../redux/action/changeAction";
-import { AuthEdit, AuthWith } from "../../helpers/common";
+import { AuthEdit, AuthWith, getData, listKey } from "../../helpers/common";
 import Loanding from "../../components/loading/Loanding";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -42,8 +42,10 @@ export default function Request() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const userId = useSelector((state) => state.auth.login.currentUser._id);
-  const role = useSelector((state) => state.auth.login.currentUser.role);
+  const userId = getData(listKey.user)._id;
+  const role = getData(listKey.user).role;
+  // const userId = useSelector((state) => state.auth.login.currentUser._id);
+  // const role = useSelector((state) => state.auth.login.currentUser.role);
   const fetchingApprove = useSelector(
     (state) => state.approved.approved.isFetching
   );

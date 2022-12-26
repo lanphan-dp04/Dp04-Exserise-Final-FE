@@ -14,15 +14,20 @@ import { useEffect } from "react";
 import axios from "axios";
 import { sendNoti } from "../../redux/action/sendNotiAction";
 import { notification } from "../../redux/action/notiAction";
+import { getData, listKey } from "../../helpers/common";
 
 export default function Header() {
   const [data, setData] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const avatar = useSelector((state) => state.auth.login.currentUser.avatar);
-  const name = useSelector((state) => state.auth.login.currentUser.userName);
-  const id = useSelector((state) => state.auth.login.currentUser._id);
-  const role = useSelector((state) => state.auth.login.currentUser.role);
+  // const avatar = useSelector((state) => state.auth.login.currentUser.avatar);
+  // const name = useSelector((state) => state.auth.login.currentUser.userName);
+  // const id = useSelector((state) => state.auth.login.currentUser._id);
+  // const role = useSelector((state) => state.auth.login.currentUser.role);
+  const avatar = getData(listKey.user).avatar
+  const name = getData(listKey.user).userName
+  const id = getData(listKey.user)._id
+  const role = getData(listKey.user).role
   const LINK_API = process.env.REACT_APP_API;
   const fetchingNoti = useSelector(
     (state) => state.sendNoti.sendNoti.isFetching

@@ -11,9 +11,11 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Loanding from "../../../components/loading/Loanding";
 import { useSelector } from "react-redux";
 import { EyeOutlined, DeleteOutlined } from "@ant-design/icons";
+import { getData, listKey } from "../../../helpers/common";
 
 export default function ListUser() {
-  const userId = useSelector((state) => state.auth.login.currentUser._id);
+  // const userId = useSelector((state) => state.auth.login.currentUser._id);
+  const userId = getData(listKey.user)._id;
   const [id, setId] = useState("");
   const [dataUser, setDataUser] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -53,7 +55,8 @@ export default function ListUser() {
     });
     toast.success("Delete Group successfully!!!", { autoClose: 1500 });
   };
-  const role = useSelector((state) => state.auth.login.currentUser.role);
+  // const role = useSelector((state) => state.auth.login.currentUser.role);
+   const role = getData(listKey.user).role
   const buttonCreateGroup = (
     <div className="box-addnewmember">
       <p>

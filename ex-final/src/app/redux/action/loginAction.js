@@ -1,4 +1,5 @@
 import axios from "axios";
+import { listKey, setData } from "../../helpers/common";
 import { loginFailed, loginStart, loginSuccess, loginToken } from "../reducers/authSlice";
 
 const handleErrorLogin = () => {
@@ -20,10 +21,12 @@ export const loginUser = async (user, dispatch, navigate) => {
   try {
     const res = await axios.post(`${LINK_API}/login`, user);
     if (res) {
+      setData(listKey.token, res.data)
       const token = res.data;
       const user = await axios.get(`${LINK_API}/user`, {
         headers: { authorization: `Bearer ${token}` },
       });
+      setData(listKey.user, user.data)
       dispatch(loginSuccess(user.data));
       dispatch(loginToken(token));
       switch (user.data.role) {

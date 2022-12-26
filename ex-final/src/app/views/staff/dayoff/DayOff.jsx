@@ -15,15 +15,18 @@ import { Button, Tag } from "antd";
 import Moment from "moment";
 import { EyeOutlined } from "@ant-design/icons";
 import Loanding from "../../../components/loading/Loanding";
+import { getData, listKey } from "../../../helpers/common";
 
 function DayOff() {
   const [listDayOff, setListDayOff] = useState([]);
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(true);
 
-  const userId = useSelector((state) => state.auth.login.currentUser._id);
-  const role = useSelector((state) => state.auth.login.currentUser.role);
-
+  // const userId = useSelector((state) => state.auth.login.currentUser._id);
+  // const role = useSelector((state) => state.auth.login.currentUser.role);
+  const userId = getData(listKey.user)._id;
+  const role = getData(listKey.user).role;
+  
   const LINK_API = process.env.REACT_APP_API;
   const requestStaff = `${LINK_API}/requests/${userId}`;
   const requestAdmin = `${LINK_API}/requests`;

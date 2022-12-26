@@ -5,6 +5,7 @@ import { Menu } from "antd";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import logo from '../../assets/logo.svg';
+import { getData, listKey } from "../../helpers/common";
 
 function getItem(label, key, icon, children, type) {
   return {
@@ -91,7 +92,8 @@ const itemsAdmin = [
   },
 ];
 const MenuSider = () => {
-  const role = useSelector((state) => state.auth.login.currentUser.role);
+  const role = getData(listKey.user.role)
+  //const role = useSelector((state) => state.auth.login.currentUser.role);
   const renderNav =
     role === "admin" || role === "manager" 
       ? itemsAdmin
