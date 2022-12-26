@@ -47,6 +47,7 @@ tr:nth-child(even) {
 .histories {
     border-left: solid 1px #8989e1;
     padding-left: 20px;
+    overflow: scroll;
 }
 
 .box-histories h6 {
