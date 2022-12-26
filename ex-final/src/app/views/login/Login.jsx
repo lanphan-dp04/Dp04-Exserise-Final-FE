@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import "./login.css";
 import logo from '../../assets/logo.svg';
+import { listKey, setData } from "../../helpers/common";
 
 export default function Login({ setToken }) {
   const [email, setEmail] = useState("");
@@ -24,9 +25,12 @@ export default function Login({ setToken }) {
 
     loginUser(newUser, dispatch, navigate);
   };
-
+  const handleSetLogin = () => {
+    setData(listKey.token,null);
+    setData(listKey.user, null);
+  }
   return (
-    <div className="fullscreen-container">
+    <div className="fullscreen-container" onLoad={handleSetLogin} >
       <div className="login-container">
         <div className="login-logo">
           <img className="logo-logoff"

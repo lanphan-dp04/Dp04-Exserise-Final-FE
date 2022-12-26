@@ -16,6 +16,7 @@ import axios from "axios";
 import moment from "moment";
 import dayjs from "dayjs";
 import { updateDayOff } from "../../redux/action/updateDayOffAction";
+import { getData, listKey } from "../../helpers/common";
 const { RangePicker } = DatePicker;
 
 const { TextArea } = Input;
@@ -30,15 +31,16 @@ const CreateRequest = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const userId = useSelector((state) => state.auth.login.currentUser._id);
+  // const userId = useSelector((state) => state.auth.login.currentUser._id);
+  const userId = getData(listKey.user)._id;
   const formatDate = "YYYY/MM/DD";
   const LINK_API = process.env.REACT_APP_API
   const API_DATA = `${LINK_API}/dayoff/${paramId.id}`;
 
   useEffect(() => {
-    getData();
+    getDataApi();
   }, [paramId]);
-  const getData = async () => {
+  const getDataApi = async () => {
     const response = await axios.get(API_DATA);
     const data = response.data;
     setTypeDayOff(data.typeDayOff)

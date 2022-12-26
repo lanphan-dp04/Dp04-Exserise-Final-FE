@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import moment from 'moment';
 import { useEffect } from "react";
 import format from "pretty-format";
+import { getData, listKey } from "../../../helpers/common";
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 
@@ -24,7 +25,8 @@ const CreateRequest = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isId = useSelector((state) => state.auth.login.currentUser._id);
+  // const isId = useSelector((state) => state.auth.login.currentUser._id);
+  const isId = getData(listKey.user)._id;
   const dateFormat = "YYYY/MM/DD";
   const handleOnFinish = (values) => {
     const newRequestDayOff = {

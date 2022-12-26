@@ -45,3 +45,15 @@ export const AuthRevert = (item, userId) => {
       : "display-none";
   return checkAuthRevert;
 };
+export const listKey = {
+  user: "user",
+  token: "token",
+}
+export function setData(listKey,data) {
+  return window.localStorage.setItem(listKey, JSON.stringify(data));
+}
+
+export function getData(listKey) {
+  const data = window.localStorage.getItem(listKey);
+  return JSON.parse(data);
+}

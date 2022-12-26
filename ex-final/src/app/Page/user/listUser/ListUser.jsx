@@ -12,6 +12,7 @@ import {
   DeleteOutlined
 } from "@ant-design/icons";
 import { useSelector } from "react-redux";
+import { getData, listKey } from "../../../helpers/common";
 
 export default function ListUser() {
 
@@ -20,7 +21,8 @@ export default function ListUser() {
   const [dataUser, setDataUser] = useState([]);
   const LINK_API = process.env.REACT_APP_API;
   const apiListData = `${LINK_API}/user/list`;
-  const isId = useSelector((state) => state.auth.login.currentUser._id);
+  // const isId = useSelector((state) => state.auth.login.currentUser._id);
+  const isId = getData(listKey.user)._id;
 
   async function getUserData() {
 
