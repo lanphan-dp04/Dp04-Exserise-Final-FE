@@ -47,7 +47,7 @@ export default function DetailUser() {
             <div className="view-detail ">
               <div className="lable-infor">
                 <div className="row row-detail">
-                  <span className="col-2">USer Name:</span>
+                  <span className="col-2">User Name:</span>
                   <span className="col-10">{userName}</span>
                 </div>
                 <div className="row row-detail">

@@ -92,7 +92,7 @@ const itemsAdmin = [
   },
 ];
 const MenuSider = () => {
-  const role = getData(listKey.user.role)
+  const role = getData(listKey.user).role;
   //const role = useSelector((state) => state.auth.login.currentUser.role);
   const renderNav =
     role === "admin" || role === "manager" 

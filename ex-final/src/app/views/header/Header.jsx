@@ -20,6 +20,7 @@ export default function Header() {
   const [data, setData] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [showNoti, setShowNoti] = useState(true)
   // const avatar = useSelector((state) => state.auth.login.currentUser.avatar);
   // const name = useSelector((state) => state.auth.login.currentUser.userName);
   // const id = useSelector((state) => state.auth.login.currentUser._id);
@@ -33,13 +34,14 @@ export default function Header() {
     (state) => state.sendNoti.sendNoti.isFetching
   );
 
+  let timer = setTimeout(() => setShowNoti(true), 2000)
   useEffect(() => {
     const api = `${LINK_API}/notifies/${id}`;
     axios.get(api).then((res) => {
       setData(res.data);
       notification(res.data, dispatch, navigate)
     });
-  }, [id,fetchingNoti]);
+  }, [id,fetchingNoti,timer]);
 
   const handleSend = (id) => {
     const data = {
