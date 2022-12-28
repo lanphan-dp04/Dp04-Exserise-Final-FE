@@ -7,7 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Dropdown } from "antd";
+import { Button, Dropdown, Menu } from "antd";
 import { BellOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -47,21 +47,21 @@ export default function Header() {
     const data = {
       id: id,
     }
-    sendNoti(data,dispatch, navigate)
+    sendNoti(data, dispatch, navigate)
   }
-  const sortData =  [...data].reverse();
+  const sortData = [...data].reverse();
   const items =
     0 < sortData.length
       ? sortData.map((item, index) => ({
-          key: index,
-          label: <Link to={`requests/detail/${item.dayoffID}`} onClick={() => handleSend(item._id)}>{item.desc}</Link>,
-        }))
+        key: index,
+        label: <Link to={`requests/detail/${item.dayoffID}`} onClick={() => handleSend(item._id)}>{item.desc}</Link>,
+      }))
       : [
-          {
-            key: "0",
-            label: "You don't have any notification yet",
-          },
-        ];
+        {
+          key: "0",
+          label: "You don't have any notification yet",
+        },
+      ];
 
   const addUser = (
     <div className="box-logoff">
@@ -115,21 +115,26 @@ export default function Header() {
         </div>
       </div>
       <div className="box-user">
-        <img src={avatar} alt="avatar" className="avatar-img" />
-        <p>{name}</p>
-        <div className="box-logout">
-          <div className="logout">
-            <p>
-              <Link to="/login">
-                <span>
-                  {" "}
-                  <FontAwesomeIcon icon={faRightFromBracket} />
-                </span>
-                Log Out
-              </Link>
-            </p>
+        <Dropdown overlay={
+          <Menu>
+            <Menu.Item key="mode">
+              <div className="box-logout">
+                <div className="logout">
+                  <p>
+                    <Link to="/login">
+                        <FontAwesomeIcon  style={{ paddingRight: '10px'}} icon={faRightFromBracket} />
+                          Log Out
+                    </Link>
+                  </p>
+                </div>
+              </div>
+            </Menu.Item>
+          </Menu>}>
+          <div className="box-user">
+            <img src={avatar} alt="avatar" className="avatar-img" />
+            <p>{name}</p>
           </div>
-        </div>
+        </Dropdown>
       </div>
     </div>
   );
