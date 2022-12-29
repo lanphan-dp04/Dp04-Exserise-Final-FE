@@ -40,7 +40,6 @@ function DayOff() {
         const data = res.data.filter(
           (item) =>
             item.status === `Approved` ||
-            item.status === "Rejected" ||
             item.status === "Requested" ||
             item.status === "Cancled" ||
             item.status === "Reverted"
