@@ -118,7 +118,7 @@ function History(props) {
           item.status === "Approved" ||
           item.status === "Rejected" ||
           item.status === "Request Change" ||
-          item.status === "Cancled" ||
+          item.status === "Canceled" ||
           item.status === "Day Off"
             ? renderAprrovedHistroy(item, index)
             : "";
