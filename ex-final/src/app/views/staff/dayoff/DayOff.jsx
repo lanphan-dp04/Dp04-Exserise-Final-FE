@@ -41,7 +41,7 @@ function DayOff() {
           (item) =>
             item.status === `Approved` ||
             item.status === "Rejected" ||
-            item.status === "Cancled" ||
+            item.status === "Canceled" ||
             item.status === "Reverted"
         );
         const resData = [...data].reverse();
@@ -64,7 +64,7 @@ function DayOff() {
         return "error";
       case "Requested":
         return "warning";
-      case "Cancled":
+      case "Canceled":
         return "default";
       default:
         return null;
@@ -90,7 +90,7 @@ function DayOff() {
   };
 
   const filterReverted = () => {
-    setStatus("Cancled");
+    setStatus("Canceled");
   };
 
   return (

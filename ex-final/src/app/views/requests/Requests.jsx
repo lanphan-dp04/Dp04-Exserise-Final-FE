@@ -62,7 +62,7 @@ export default function Request() {
   useEffect(() => {
     const api = `${pathRequests}`;
     axios.get(api).then((res) => {
-      const data = res.data.filter((item) => item.status !== "Cancled");
+      const data = res.data.filter((item) => item.status !== "Canceled");
       const resData = [...data].reverse();
       setListDayOff(resData);
       requests(res.data, dispatch, navigate);
@@ -137,7 +137,7 @@ export default function Request() {
         return "blue";
       case "Request Change":
         return "yellow";
-      case "Cancled":
+      case "Canceled":
         return "default";
       default:
         return null;
